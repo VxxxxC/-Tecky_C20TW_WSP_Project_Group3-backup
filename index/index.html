@@ -5,6 +5,9 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" type="text/css" href="index.css">
   <title>Home</title>
 </head>
@@ -16,8 +19,8 @@
       <div class="left-selection website-name">
         <div class="left-selection-box-content">ABC Website</div>
       </div>
-      <div class="left-selection post-button">
-        <div class="left-selection-box-content left-selection-button">刊登創作</div>
+      <div class="left-selection post">
+        <div class="left-selection-box-content">刊登創作</div>
       </div>
     </div>
 
@@ -53,53 +56,45 @@
       </div>
       <div class="navbar-inner">
         <div class="nav-searchbar">
-          <input type="search" placeholder="搜尋" style="border: 1px solid rgba(0, 0, 0, 0.25); height: 30px" />
+          <input type="search" placeholder="搜尋"
+            style="border: 1px solid rgba(0, 0, 0, 0.25);border-radius: 5px; height: 30px" />
           <i class="search-icon">🔍</i>
         </div>
       </div>
     </div>
 
     <div class="content">
+
+      <!-- TODO: below content is hardcoded -->
       <div class="content-box cnt1">
-        <div class="inner-upper-content">content image area</div>
+        <div class="inner-upper-content">
+          <i class="upper-content-top-icon fa-solid fa-eye"></i>
+          <img class="content-img"
+            src="https://docs.microsoft.com/en-us/shows/hello-world/media/helloworld_383x215.png">
+          <i class="upper-content-bottom-icon fa-solid fa-heart"></i>
+        </div>
         <div class="inner-center-content">content title
           <div class="content-tag">hashtag</div>
-          <p class="content">hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello
-            world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello
-            world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello
-            world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello
-            world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello
-            world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello
-            world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello
-            world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello
-            world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello
-            world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello
-            world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello
-            world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello
-            world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello
-            world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello
-            world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello
-            world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello
-            world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello
-            world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello
-            world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello
-            world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello
-            world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello
-            world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello
-            world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello
-            world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello
-            world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello
-            world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello
-            world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello
-            world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!hello world!!!</p>
+          <p class="content">Hello world!!Hello world!!Hello world!!Hello world!!Hello world!!Hello world!!Hello
+            world!!Hello world!!Hello world!!Hello world!!Hello world!!Hello world!!Hello world!!Hello world!!Hello
+            world!!Hello world!!Hello world!!Hello world!!Hello world!!Hello world!!Hello world!!Hello world!!Hello
+            world!!Hello world!!Hello world!!Hello world!!Hello world!!Hello world!!Hello world!!Hello world!!Hello
+            world!!Hello world!!Hello world!!Hello world!!Hello world!!Hello world!!Hello world!!Hello world!!Hello
+            world!!Hello world!!Hello world!!Hello world!!Hello world!!Hello world!!Hello world!!Hello world!!Hello
+            world!!Hello world!!</p>
         </div>
         <div class="inner-bottom-content">
-          <div class="user-pic"></div>
+          <img class="user-pic"
+            src="https://dvg5hr78c8hf1.cloudfront.net/2016/06/21/15/37/47/4b0b2595-20dc-40bc-a963-e8e53b2fd5bf/1*2cAvoDuXZp_dy49WqNVVrA.jpeg">
           <div class="userid-postdate"></div>
         </div>
       </div>
       <div class="content-box cnt2">
-        <div class="inner-upper-content">content image area</div>
+        <div class="inner-upper-content">
+          <i class="upper-content-top-icon fa-solid fa-eye"></i>
+          <div class="content-img">content image area</div>
+          <i class="upper-content-bottom-icon fa-solid fa-heart"></i>
+        </div>
         <div class="inner-center-content">content title
           <div class="content-tag">hashtag</div>
           <p class="content"></p>
@@ -110,7 +105,11 @@
         </div>
       </div>
       <div class="content-box cnt3">
-        <div class="inner-upper-content">content image area</div>
+        <div class="inner-upper-content">
+          <i class="upper-content-top-icon fa-solid fa-eye"></i>
+          <div class="content-img">content image area</div>
+          <i class="upper-content-bottom-icon fa-solid fa-heart"></i>
+        </div>
         <div class="inner-center-content">content title
           <div class="content-tag">hashtag</div>
           <p class="content"></p>
@@ -121,7 +120,11 @@
         </div>
       </div>
       <div class="content-box cnt4">
-        <div class="inner-upper-content">content image area</div>
+        <div class="inner-upper-content">
+          <i class="upper-content-top-icon fa-solid fa-eye"></i>
+          <div class="content-img">content image area</div>
+          <i class="upper-content-bottom-icon fa-solid fa-heart"></i>
+        </div>
         <div class="inner-center-content">content title
           <div class="content-tag">hashtag</div>
           <p class="content"></p>
@@ -132,7 +135,11 @@
         </div>
       </div>
       <div class="content-box cnt5">
-        <div class="inner-upper-content">content image area</div>
+        <div class="inner-upper-content">
+          <i class="upper-content-top-icon fa-solid fa-eye"></i>
+          <div class="content-img">content image area</div>
+          <i class="upper-content-bottom-icon fa-solid fa-heart"></i>
+        </div>
         <div class="inner-center-content">content title
           <div class="content-tag">hashtag</div>
           <p class="content"></p>
@@ -143,7 +150,11 @@
         </div>
       </div>
       <div class="content-box cnt6">
-        <div class="inner-upper-content">content image area</div>
+        <div class="inner-upper-content">
+          <i class="upper-content-top-icon fa-solid fa-eye"></i>
+          <div class="content-img">content image area</div>
+          <i class="upper-content-bottom-icon fa-solid fa-heart"></i>
+        </div>
         <div class="inner-center-content">content title
           <div class="content-tag">hashtag</div>
           <p class="content"></p>
@@ -153,15 +164,24 @@
           <div class="userid-postdate"></div>
         </div>
       </div>
+
+
     </div>
 
     <div class="pagebutton-group">
-      <div class="pagebutton return-first-page-button">≪</div>
-      <div class="pagebutton page-button-1">1</div>
-      <div class="pagebutton last-page-button">≫</div>
+      <div class="pagebutton previous-page-button">≪ Prev</div>
+
+      <div class="page-button-1">1</div>
+      <!-- TODO: 等javascript DOM後績工作 -->
+      <!-- 暫時hardcode, suppose應該叫"pagebutton current-page" 然後實色代表當前頁面 -->
+
+      <div class="pagebutton page-button-2">2</div>
+      <div class="pagebutton next-page-button">Next ≫</div>
     </div>
+    <script src="index.js"></script>
 
   </div>
+
 </body>
 
 </html>
