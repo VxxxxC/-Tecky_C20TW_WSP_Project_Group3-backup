@@ -1,0 +1,145 @@
+body {
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.background {
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+
+  height: 360px;
+  width: 360px;
+
+  position: absolute;
+  top: 20%;
+  bottom: 20%;
+}
+
+.text {
+  position: absolute;
+  top: 16%;
+  left: 32%;
+
+  font-family: arial;
+  font-size: 36px;
+}
+
+.moving {
+  position: relative;
+  top: 35%;
+  color: black;
+  height: 60px;
+  font-size: 60px;
+}
+
+.road2 {
+  animation-name: moving-road;
+  animation-duration: 0.2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-fill-mode: both;
+}
+
+@keyframes moving-road {
+  0% {
+    right: 0;
+  }
+
+  25% {
+    right: 10px;
+  }
+
+  50% {
+    right: 20px;
+  }
+
+  75% {
+    right: 30px;
+  }
+
+  100% {
+    right: 40px;
+  }
+}
+
+.loading-box {
+  z-index: 1;
+  margin: 0;
+  padding: 0;
+  left: 25%;
+  top: 30%;
+  position: absolute;
+}
+
+.loading-box:before {
+  content: '';
+  /* 必須加上，否則無法顯示 */
+  top: 100px;
+  left: 50px;
+  width: 80px;
+  height: 80px;
+  border-radius: 5px;
+  background: linear-gradient(50deg, rgb(80, 80, 250), rgb(0, 100, 45));
+  /* 兩種顏色漸變效果 */
+  position: absolute;
+
+  animation-name: jumpingbox;
+  animation-iteration-count: infinite;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  /* 線性效果，減少動畫卡頓感 */
+}
+
+.loading-box:after {
+  content: '';
+  top: 150px;
+  left: 65px;
+  width: 65px;
+  height: 5px;
+  border-radius: 99%;
+  background: rgb(90, 90, 90);
+  position: absolute;
+
+  animation-name: shadow;
+  animation-iteration-count: infinite;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+}
+
+@keyframes jumpingbox {
+  0% {
+    top: 50px;
+    transform: rotate(0deg);
+  }
+
+  50% {
+    border-bottom-radius: 25px;
+    top: 1px;
+    transform: rotate(180deg);
+
+  }
+
+  100% {
+    top: 50px;
+    transform: rotate(360deg);
+  }
+
+
+}
+
+@keyframes shadow {
+
+  0%,
+  100% {
+    width: 55px;
+    height: 6px;
+  }
+
+  50% {
+    left: 60px;
+    width: 65px;
+    height: 2px;
+  }
+}

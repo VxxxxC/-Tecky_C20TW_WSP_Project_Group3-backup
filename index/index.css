@@ -29,7 +29,7 @@ body {
 .left-selection {
   display: flex;
   margin: 10px;
-  width: 100px;
+  width: 120px;
   height: 40px;
 
   border-radius: 5px;
@@ -40,7 +40,6 @@ body {
 
 .left-selection-box-content {
   text-align: center;
-
   font-family: arial, "cwTeXYen";
 }
 
@@ -64,12 +63,15 @@ body {
 }
 
 .post:hover {
-  width: 100px;
+  width: 120px;
   height: 40px;
-
   border-radius: 5px;
   background: rgba(46, 129, 46, 1);
   transform: skewX(0deg);
+}
+
+.post-icon {
+  margin: 3px;
 }
 
 .right-header {
@@ -155,8 +157,8 @@ body {
   align-items: center;
 
   position: absolute;
-  left: 15%;
-  right: 5%;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
 .navbar {
@@ -215,6 +217,10 @@ body {
   align-items: center;
 }
 
+.search-icon{
+  margin: 3px;
+}
+
 .content {
   margin: 10px;
   display: flex;
@@ -223,8 +229,8 @@ body {
 
 .content-box {
   margin: 5px;
-  width: 250px;
-  height: 450px;
+  width: 300px;
+  height: 550px;
   background: rgba(128, 128, 128, 0.15);
   border: 1px solid rgba(68, 25, 25, 0.15);
   border-radius: 10px;
@@ -244,7 +250,7 @@ body {
   text-align: center;
   font-size: 30px;
   margin: 0;
-  height: 200px;
+  height: 250px;
 
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   position: relative;
@@ -291,7 +297,7 @@ body {
 .inner-upper-content:hover .upper-content-top-icon {
   visibility: visible;
 
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.6);
   font-size: 18px;
   position: absolute;
   top: 0;
@@ -310,7 +316,7 @@ body {
 .inner-upper-content:hover .upper-content-bottom-icon {
   visibility: visible;
 
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.6);
   font-size: 18px;
   position: absolute;
   bottom: 0;
@@ -326,11 +332,23 @@ body {
   border-radius: 10px;
 }
 
+.inner-upper-content:hover .upper-content-top-icon:hover {
+  visibility: visible;
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(128, 128, 128, 0.7);
+}
+
+.inner-upper-content:hover .upper-content-bottom-icon:hover {
+  visibility: visible;
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(128, 128, 128, 0.7);
+}
+
 .content-img {
   position: relative;
   Z-index: 0;
-  width: 250px;
-  height: 200px;
+  width: 300px;
+  height: 250px;
 
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -338,7 +356,7 @@ body {
 
 .inner-center-content {
   margin: 10px;
-  height: 150px;
+  height: 200px;
   font-family: arial, "cwTeXYen";
   font-size: 1.5rem;
 
@@ -420,6 +438,10 @@ body {
   width: 100px;
 }
 
+
+
+/*  FIXME: 等javascript DOM後績工作 - */
+/* 暫時hardcode, suppose應該叫"pagebutton current-page" 然後實色代表當前頁面  */
 .page-button-1 {
   font-family: arial, "cwTeXYen";
   font-size: 16px;
@@ -436,5 +458,3 @@ body {
   align-items: center;
 }
 
-/*  TODO: 等javascript DOM後績工作 - */
-/* 暫時hardcode, suppose應該叫"pagebutton current-page" 然後實色代表當前頁面  */
