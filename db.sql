@@ -56,3 +56,7 @@ create table views(
   post_id integer,
   foreign key (post_id) references post(id)
 );
+
+
+-- below code for reset post ID serial primary key
+-- alter sequence post_id_seq restart with 1000;
