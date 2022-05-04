@@ -63,6 +63,7 @@ quill.on("text-change", () => {
 //----------------title image value-----------
 let titleImg = document.querySelector(".title-img");
 
+//--------------submit content to server--------------
 document
   .querySelector(".submit-button")
   .addEventListener("click", async (event) => {
@@ -85,9 +86,11 @@ document
       });
   });
 
-// const formData = new FormData();
+//-------------TODO: upload image work in progress....---------
 
-// formData.append("title image", titleImg.value);
+//   const formData = new FormData();
+
+//   formData.append("title image", titleImg.value);
 
 // await fetch("/post", {
 //   method: "POST",

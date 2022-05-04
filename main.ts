@@ -74,9 +74,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 //-----------------submit content到server, 然後從server發送到database--------------- TODO: 暫時只有text content, image進行中..
-app.post("/post", (req, res) => {
+app.post("/post", async (req, res) => {
   console.log(req.body)
-  res.json(`receive post`)
+  res.json(`server received post`)
 
   let title = req.body.title
   console.log(title)
@@ -88,20 +88,20 @@ app.post("/post", (req, res) => {
     'content': content,
   }
 
-  client.query('insert into post (title,content,created_at,updated_at) values ($1,$2,now(),now())', [input.title, input.content])
+  await client.query('insert into post (title,content,created_at,updated_at) values ($1,$2,now(),now())', [input.title, input.content])
+  res.status(200).json({ message: 'post created!' })
 })
 //------------------從database抓取data到server----------------------------
-app.get('/content', (req, res) => {
-  const result = client.query('select * from post')
-  result.then(res => {
-    let title: string = res.rows[0].title;
-    let content: string = res.rows[0].content;
 
-    console.log(title, content)
-  })
-
-
+app.get('/post', async (req, res) => {
+  let result = await client.query('select * from post;')
+  let posts = result.rows
+  res.json({ posts })
 })
+
+
+
+
 // app.post('/post', (req, res) => {
 //   console.log(req.body)
 //   form.parse(req, (err, fields, files) => {
