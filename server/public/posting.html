@@ -37,7 +37,7 @@
 
     <!-- TODO: 等May May搞掂login, reset password page -->
 
-    <a class="right-header">
+    <div class="right-header">
       <!-- <a href="reset" style="text-decoration:none"> -->
       <div class="right-selection reset-password">
         <div class="right-selection-box-content">Reset Password</div>
@@ -49,7 +49,7 @@
         <div class="right-selection-box-content">Login</div>
       </div>
       <!-- </a> -->
-  </div>
+    </div>
   </div>
 </header>
 <div class="isolate"></div>
@@ -58,15 +58,15 @@
 
 
   <div class="container">
-    <form class="post-content" method="post" action="/">
+    <form class="post-content" method="post" action="/posting">
       <!--TODO: 加上標題鍵入欄  -->
-      <input type="text" placeholder="輸入標題..."
+      <input type="text" class="post-title" placeholder="輸入標題..."
         style="font-weight: bold; font-size: 24px; width: 375px; height: 100px; border:none">
       <div class="text-container">
         <div class="editor" style="width:750px"></div>
       </div>
-      <input class="submit-button" type="submit" value="發布" style="border: none">
-      <input class="delete-button" type="submit" value="刪除文章" style="border: none">
+      <div class="submit-button">發布</div>
+      <div class="delete-button">刪除文章</div>
     </form>
   </div>
 

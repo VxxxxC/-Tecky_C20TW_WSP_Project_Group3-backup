@@ -1,12 +1,6 @@
-document.querySelector(".post").addEventListener("click", () => {
-  console.log(`刊登文章 clicked!`)
-  ;
-});
+const socket = io.connect();
 
-document.querySelector(".reset-password").addEventListener("click", () => {
-  console.log(`Reset password clicked`);
+socket.on("toClient", (msg) => {
+  console.log(msg);
 });
-
-document.querySelector(".login").addEventListener("click", () => {
-  console.log(`Login clicked!`);
-});
+socket.emit("toServer", "client side respond to backend server");

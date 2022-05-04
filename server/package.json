@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npx ts-node-dev main.ts",
+    "start": "ts-node-dev main.ts",
+    "dev": "ts-node-dev main.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -17,10 +18,13 @@
     "@types/pg": "^8.6.5",
     "dotenv": "^16.0.0",
     "express": "^4.18.1",
+    "listening-on": "^2.0.7",
     "pg": "^8.7.3",
     "socket.io": "^4.5.0",
     "ts-node": "^10.7.0",
-    "ts-node-dev": "^1.1.8",
     "typescript": "^4.6.4"
+  },
+  "devDependencies": {
+    "ts-node-dev": "^1.1.8"
   }
 }

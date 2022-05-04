@@ -157,7 +157,7 @@ body {
   align-items: center;
 
   position: relative;
-  
+
 }
 
 
@@ -189,7 +189,7 @@ body {
   transition: 0.5s;
 }
 
-.submit-button:hover{
+.submit-button:hover {
   background: rgba(0, 70, 70, 0.8);
 }
 
@@ -224,6 +224,6 @@ body {
   transition: 0.5s;
 }
 
-.delete-button:hover{
+.delete-button:hover {
   background: rgba(255, 0, 0, 0.8);
 }
