@@ -15,12 +15,14 @@ async function getPost() {
   console.log(result);
   let posts = result.posts;
   for (let post of posts) {
+    console.log(post);
+
     console.log("adding post...");
     postsContainer.innerHTML += `<div class="content-box cnt${post.id}">
     <div class="inner-upper-content">
       <i class="upper-content-top-icon fa-solid fa-eye"></i>
       <img class="content-img"
-        src="https://docs.microsoft.com/en-us/shows/hello-world/media/helloworld_383x215.png">
+        src="${"/img/" + post.image}">
       <i class="upper-content-bottom-icon fa-solid fa-heart"></i>
     </div>
     <div class="inner-center-content">${post.title}
