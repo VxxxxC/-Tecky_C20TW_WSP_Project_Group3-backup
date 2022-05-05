@@ -3,7 +3,7 @@ import {env} from './env'
 
 declare module 'express-session'{
     interface SessionData {
-        counter?:number
+        counter?:number,
         user?:{
             id:number
             usernames:string

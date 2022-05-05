@@ -1,5 +1,5 @@
 
-
+//-- ensure all input are filled------
 function validateForm() {
     let a = document.forms["Form"]["username"].value;
     let b = document.forms["Form"]["password"].value;
@@ -10,6 +10,7 @@ function validateForm() {
     }
   }
 
+  //--login method----
 
   fetch('/session')
   .then(res => res.json())
@@ -38,7 +39,6 @@ function validateForm() {
     user_id = json.id
     if (json.username) {
       loadUserStyle()
-      checkAllMemoOwnership()
     }
   })
 
@@ -100,7 +100,6 @@ function validateForm() {
       }
       user_id = json.id
       loadUserStyle()
-      checkAllMemoOwnership()
     },
   })
 
@@ -123,7 +122,6 @@ function validateForm() {
       }
       user_id = json.id
       loadUserStyle()
-      checkAllMemoOwnership()
     },
   })
-  
+

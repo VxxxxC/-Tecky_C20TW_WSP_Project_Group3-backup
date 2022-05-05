@@ -1,12 +1,15 @@
-import express, { NextFunction } from "express";
+import express, { NextFunction,Request,Response } from "express";
 import { resolve } from "path";
 import { client } from "./db";
 import {catchError} from "./error"
 import { print } from 'listening-on'
 import'./session'
+import { sessionMiddleware } from "./session";
+
 
 export let userRoutes = express.Router()
 userRoutes.use(express.urlencoded({extended:false}))
+userRoutes.use(sessionMiddleware)
 
 export type user = {
     usesnames: string
@@ -49,8 +52,8 @@ userRoutes.post('/signin',(req,res)=>{
 
 
 userRoutes.post('/login',(req,res)=>{
-    let {usernames,password} = req.body
-    if(!usernames){
+    let {username,password} = req.body
+    if(!username){
         res.status(400).json({error:"missing username(login)"})
         return
     }
@@ -61,40 +64,31 @@ userRoutes.post('/login',(req,res)=>{
     client
       .query(
           /**sql */`
-          select id,password,usernames from users
-          where usernames =$1
-          `,
-          [usernames],
+          select * from users where usernames ='${username}'
+          `
       )
       .then((result:any) =>{
-          let usernames = result.row[0].usernames
-          if(!usernames){
+          console.log(result.rows)
+          let username = result.rows[0].usernames
+          if(!username){
             res.status(400).json({error:"users not found"})
             return
           }
-          let password =result.row[0].password
+          let password =result.rows[0].passwords
           if(!password){
             res.status(400).json({error:"password not found"})
             return
           }
           req.session.user={
-              id:result.row[0].id,
-              usernames,
+              id:result.rows[0].id,
+              usernames:username,
           }
-          res.json({id:result.row[0].id})
-          res.redirect('./index')
+          res.json({id:result.rows[0].id})
       })
       .catch(catchError(res))
      
 })
 
-userRoutes.get('/session',(req,res)=>{
-    if(req.session?.user){
-        res.json(req.session.user)
-    }else{
-        res.json({})
-    }
-})
 
 //logout
 userRoutes.post('/logout',(req,res)=>{
@@ -107,6 +101,7 @@ userRoutes.post('/logout',(req,res)=>{
     })
 })
 
+//--role--
 userRoutes.get('/role',(req,res)=>{
     if(req.session?.user){
         res.json({role:'admin'})
@@ -116,5 +111,12 @@ userRoutes.get('/role',(req,res)=>{
 })
 
 
+userRoutes.get('/session',(req,res)=>{
+    if(req.session?.user){
+        res.json(req.session.user)
+    }else{
+        res.json({})
+    }
+})
 
 
