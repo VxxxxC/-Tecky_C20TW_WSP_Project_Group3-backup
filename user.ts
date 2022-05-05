@@ -3,26 +3,24 @@ import { resolve } from "path";
 import { client } from "./db";
 import {catchError} from "./error"
 import { print } from 'listening-on'
-
 import'./session'
 
-export let userRouter = express.Router()
-
-// userRouter.use(express.urlencoded({extend:true}))
+export let userRoutes = express.Router()
+userRoutes.use(express.urlencoded({extended:false}))
 
 export type user = {
     usesnames: string
     password: string
 }
 
-userRouter.post('/signin',(req,res)=>{
+userRoutes.post('/signin',(req,res)=>{
     let {usernames,password} = req.body
     if(!usernames){
-        res.status(400).json({error:"missing username"})
+        res.status(400).json({error:"missing username(sigin)"})
         return
     }
     if(!password){
-        res.status(400).json({error:"missing password"})
+        res.status(400).json({error:"missing password(sigin)"})
         return 
     }
     client.
@@ -50,14 +48,14 @@ userRouter.post('/signin',(req,res)=>{
 })
 
 
-userRouter.post('/login',(req,res)=>{
+userRoutes.post('/login',(req,res)=>{
     let {usernames,password} = req.body
     if(!usernames){
-        res.status(400).json({error:"missing username"})
+        res.status(400).json({error:"missing username(login)"})
         return
     }
     if(!password){
-        res.status(400).json({error:"missing password"})
+        res.status(400).json({error:"missing password(login)"})
         return 
     }
     client
@@ -90,7 +88,7 @@ userRouter.post('/login',(req,res)=>{
      
 })
 
-userRouter.get('/session',(req,res)=>{
+userRoutes.get('/session',(req,res)=>{
     if(req.session?.user){
         res.json(req.session.user)
     }else{
@@ -99,7 +97,7 @@ userRouter.get('/session',(req,res)=>{
 })
 
 //logout
-userRouter.post('/logout',(req,res)=>{
+userRoutes.post('/logout',(req,res)=>{
     req.session.destroy(error=>{
         if(error){
             console.error('logout',error)
@@ -109,7 +107,7 @@ userRouter.post('/logout',(req,res)=>{
     })
 })
 
-userRouter.get('/role',(req,res)=>{
+userRoutes.get('/role',(req,res)=>{
     if(req.session?.user){
         res.json({role:'admin'})
     }else{

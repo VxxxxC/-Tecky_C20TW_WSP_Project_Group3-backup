@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 import { Server as ServerIO } from 'socket.io';
 import http from 'http';
 import { print } from 'listening-on'
-import { userRouter } from './user';
+import { userRoutes } from './user';
 import { join, resolve } from 'path';
 import formidable from 'formidable'
 import fs from 'fs';
@@ -74,7 +74,7 @@ const form = formidable({
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(userRouter);
+app.use(userRoutes);
 
 
 //-------------------404 pages-----------------------------
@@ -122,7 +122,14 @@ app.get('/post', async (req, res) => {
 // })
 
 
-app.get('./post', (req, res) => {
+ //app.get('./post', (req, res) => {
+ //   let {title,content} = req.body
+ // if(!title){
+ //   res.status(404).json({error:'wrong title'})
+ // }
+ // if(!content){
+ //   res.status(404).json({error:'wrong content'})
+ // }
 
-})
+ //  })
 

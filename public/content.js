@@ -37,6 +37,10 @@ function next(direction){
 
 }
 
+let text = document.querySelector('.text')
+let title = document.querySelector('title-holder')
+let slide = document.querySelector('slider')
+
 function checkData() {
      var txtCheck = document.formName;
        if(txtCheck.textarea.value == "")  {
@@ -46,10 +50,51 @@ function checkData() {
        }
    }
 
-fetch('./post')
-.then.(res=>res.json()))
-.catch(error =>({error:String(error)}))
-.then(json =>{
+   title.addEventListener('load', loadTitle());
 
-})
+   function loadTitle(){
+    fetch(`/post/${post.title}`),{
+      method:'GET',
+      headers:{'Contnet-Type':'application/json'},
+      body:JSON.stringify({Title:title.value})
+    }
+   }
+
+text.addEventListener('load',loadContent());
+
+function loadContent(){
+  fetch(`/post/${post.loadContent}`),{
+    method:'GET',
+    headers:{'Contnet-Type':'application/json'},
+    body:JSON.stringify({Content:content})
+  }
+ }
+
+
+ slide.addEventListener('laod',loadImage());
+
+let img =slide.querySelector('img')
+if(img){
+  img.src = '/uplodas/' + image
+}else{
+  img.remove()
+}
+
+ function loadImage(){
+  fetch(`/post/${post.image}`),{
+    method:'GET',
+    headers:{'Contnet-Type':'application/json'},
+    body:JSON.stringify({Image})
+  }
+ }
+
+let content = document.querySelector('content')
+function checkOwnership(content){
+  let content_user_id = + DataTransferItem.user_id
+  if(content_user_id === user_id){
+    content.classList.add('owner')
+  }else{
+    content.classList.remove()
+  }
+}
 
