@@ -16,9 +16,8 @@ export type user = {
     password: string
 }
 
-userRoutes.post('/signin',(req,res)=>{
+userRoutes.post('/signin',async (req,res)=>{
     let {username,password} = req.body
-console.log(req.body)
     if(!username){
         res.status(400).json({error:"missing username(signin)"})
         return
@@ -27,27 +26,42 @@ console.log(req.body)
         res.status(400).json({error:"missing password(signin)"})
         return 
     }
-    client.
+    let result = await client.
     query(
         /*sql*/`
-        insert into users(usernames, passwords) value ($1,$2) returing id
+       select * from users where usernames = $1;
+
         `,
-        [username,password],
-    ).then((result:any) =>{
-        console.log(result)
-        let id = result.rows[0].id
-        req.session.user = {
-            id:result.rows[0].id,
-            usernames:username,}
-    })
-    .catch((error:Error) =>{
-        if(String(Error).includes(`unique`)){
-            throw`this username is already in use`
-        }
-        throw Error 
-    })
-    .catch(catchError(res))
-  
+        [username],
+    )
+let foundUser = result.rows[0]
+    console.log(result.rows[0]);
+    if (password == foundUser.passwords) {
+                req.session.user = {
+            id:foundUser.id,
+            usernames:foundUser.usernames}
+
+    console.log(req.session.user)
+
+        res.json({loginStatus: 'successful'})
+        return
+    }
+
+    res.json({message:'hi'})
+    // .then((result:any) =>{
+    //     let id = result.rows[0].id
+    //     req.session.user = {
+    //         id:result.rows[0].id,
+    //         usernames:username,}
+    //         res.json({id})
+    // })
+    // .catch((error:Error) => {
+    //     if(String(Error).includes(`unique`)){
+    //         throw`this username is already in use`
+    //     }
+    //     throw Error 
+    // })
+    // .catch(catchError(res))
 })
 
 
