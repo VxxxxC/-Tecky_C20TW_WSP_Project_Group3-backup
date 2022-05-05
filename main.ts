@@ -5,13 +5,10 @@ import dotenv from 'dotenv';
 import { Server as ServerIO } from 'socket.io';
 import http from 'http';
 import { print } from 'listening-on'
-<<<<<<< HEAD
 import { userRouter } from './user';
 import { join, resolve } from 'path';
-=======
 import formidable from 'formidable'
 import fs from 'fs';
->>>>>>> 7df0210fe618f2132931600859ed34e13245637d
 
 const port = 8001;
 const app = express();
@@ -79,14 +76,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(userRouter);
 
-<<<<<<< HEAD
 
 //-------------------404 pages-----------------------------
-app.use((req,res)=>{
-  console.log('404',req.method,req.url)
-  res.sendFile(resolve(join('public','404.html')))
+app.use((req, res) => {
+  console.log('404', req.method, req.url)
+  res.sendFile(resolve(join('public', '404.html')))
 })
-=======
 //-----------------submit content到server, 然後從server發送到database--------------- TODO: 暫時只有text content, image進行中..
 app.post("/post", async (req, res) => {
   console.log(req.body)
@@ -96,7 +91,6 @@ app.post("/post", async (req, res) => {
   console.log(title)
   let content = req.body.content
   console.log(content)
->>>>>>> 7df0210fe618f2132931600859ed34e13245637d
 
   const input = {
     'title': title,
@@ -108,10 +102,8 @@ app.post("/post", async (req, res) => {
 })
 //------------------從database抓取data到server----------------------------
 
-<<<<<<< HEAD
 // app.post("/posting", (req, res) => {
 // }
-=======
 app.get('/post', async (req, res) => {
   let result = await client.query('select * from post;')
   let posts = result.rows
@@ -128,10 +120,9 @@ app.get('/post', async (req, res) => {
 //     res.json({ err, fields, files })
 //   })
 // })
->>>>>>> 7df0210fe618f2132931600859ed34e13245637d
 
 
-app.get('./post',(req,res)=>{
-  
+app.get('./post', (req, res) => {
+
 })
 
