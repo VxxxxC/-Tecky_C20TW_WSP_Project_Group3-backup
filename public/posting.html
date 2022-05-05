@@ -58,11 +58,10 @@
 
 
   <div class="container">
-    <form id="post-content" method="post" action="/">
+    <form id="post-content" method="POST" action="/post">
       <input type="text" class="post-title" name="title" placeholder="輸入標題..."
         style="font-weight: bold; font-size: 24px; width: 375px; height: 100px; border:none">
-      <input type="file" class="title-img" name="img" accept="image/*" value="載入標題圖檔..." action="/post" method="POST"
-        enctype="multipart/form-data">
+      <input type="file" class="title-img" name="img" accept="image/*" value="載入標題圖檔...">
       <div class="text-container">
         <div class="editor" style="width:750px"></div>
       </div>

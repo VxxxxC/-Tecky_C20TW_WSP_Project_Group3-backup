@@ -2,7 +2,6 @@ create user veper with password 'abc123' superuser;
 
 create database blog;
 
-<<<<<<< HEAD
 CREATE TABLE users(
     id SERIAL primary key,
     usernames VARCHAR(255) not null,
@@ -17,7 +16,6 @@ INSERT INTO users (id,usernames ,passwords ,create_at,updated_at,is_admin) VALUE
 INSERT INTO users (id,usernames ,passwords ,create_at,updated_at,is_admin) VALUES (2,'BEN','12243',(CURRENT_TIMESTAMP),(CURRENT_TIMESTAMP),FALSE);
 INSERT INTO users (id,usernames ,passwords ,create_at,updated_at,is_admin) VALUES (3,'peter','12253',(CURRENT_TIMESTAMP),(CURRENT_TIMESTAMP),FALSE);
 INSERT INTO users (id,usernames ,passwords ,create_at,updated_at,is_admin) VALUES (4,'BEN','1523',(CURRENT_TIMESTAMP),(CURRENT_TIMESTAMP),FALSE);
-=======
 create table users (
   id serial primary key,
   username varchar(255) not null unique,
@@ -76,4 +74,3 @@ create table views(
 
 -- below code for reset post ID serial primary key
 -- alter sequence post_id_seq restart with 1000;
->>>>>>> 7df0210fe618f2132931600859ed34e13245637d

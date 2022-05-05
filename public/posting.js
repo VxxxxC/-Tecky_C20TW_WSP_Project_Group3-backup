@@ -77,35 +77,37 @@ let titleImg = document.querySelector(".title-img");
 document
   .querySelector(".submit-button")
   .addEventListener("click", async (event) => {
+    // let form = document.querySelector("#post-content");
     event.preventDefault();
+    let formData = new FormData();
 
-    fetch("/post", {
+    formData.append("image", titleImg.files[0]);
+    formData.append("title", title.value);
+    formData.append("content", content);
+
+    for (const entry of formData.entries()) {
+      console.log(entry);
+    }
+
+    await fetch("/post", {
       method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({
-        title: title.value,
-        content: content,
-      }),
-    })
-      .then((res) => res.json())
-      .catch((err) => ({ error: string(err) }))
-      .then((json) => {
-        console.log(json);
-      });
+      // headers: { "Content-Type": "multipart/form-data" },
+      body: formData,
+    });
+    console.log("posting...");
   });
 
-//-------------TODO: upload image work in progress....---------
-
-//   const formData = new FormData();
-
-//   formData.append("title image", titleImg.value);
+//--------------------------------------------------
 
 // await fetch("/post", {
 //   method: "POST",
-//   headers: { "Content-Type": "multipart/form-data" },
-//   body: formData,
+//   headers: {
+//     "content-type": "application/json",
+//   },
+//   body: JSON.stringify({
+//     title: title.value,
+//     content: content,
+//   }),
 // })
 //   .then((res) => res.json())
 //   .catch((err) => ({ error: string(err) }))
