@@ -78,9 +78,9 @@ app.use(userRouter);
 
 
 //-------------------404 pages-----------------------------
-app.use((req,res)=>{
-  console.log('404',req.method,req.url)
-  res.sendFile(resolve(join('public','404.html')))
+app.use((req, res) => {
+  console.log('404', req.method, req.url)
+  res.sendFile(resolve(join('public', '404.html')))
 })
 //-----------------submit content到server, 然後從server發送到database--------------- TODO: 暫時只有text content, image進行中..
 app.post("/post", async (req, res) => {
@@ -122,7 +122,7 @@ app.get('/post', async (req, res) => {
 // })
 
 
-app.get('./post',(req,res)=>{
-  
+app.get('./post', (req, res) => {
+
 })
 
