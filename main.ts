@@ -10,6 +10,7 @@ import { join, resolve } from 'path';
 import formidable from 'formidable'
 import fs from 'fs';
 import { client } from './db';
+import path from 'path';
 
 const port = 8001;
 const app = express();
@@ -66,7 +67,10 @@ fs.mkdirSync(uploadDir, { recursive: true })
 //----------------------Express server-------------------
 
 app.use(express.static('public'))
+app.use("/img",express.static('upload'))
+
 app.use(express.urlencoded({ extended: true }));
+
 app.use(express.json());
 app.use(userRouter);
 
@@ -112,15 +116,23 @@ app.post('/post', async (req, res) => {
     filter: file => file.mimetype?.startsWith('image/') || false,
   })
   // console.log(req.body)
-  form.parse(req, async (err, fields, files) => {
+  form.parse(req, async (err, fields, files: any) => {
     if (err) console.log(err)
 
+    // console.log({
+    //   'fields': fields,
+    //   'files': files
+    // })
+
     let title = fields.title
-    console.log(title)
+    // console.log(title)
     let content = fields.content
-    console.log(content)
-    let image = fields.image
+    // console.log(content)
+    let image = files.image.newFilename
     console.log(image)
+
+
+
 
     const input = {
       'title': title,
