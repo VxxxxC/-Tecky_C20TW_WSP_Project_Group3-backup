@@ -1,5 +1,3 @@
-
-
 function validateForm() {
     let a = document.forms["Form"]["username"].value;
     let b = document.forms["Form"]["password"].value;
@@ -11,7 +9,8 @@ function validateForm() {
   }
 
 
-  fetch('/session')
+
+fetch('/session')
   .then(res => res.json())
   .catch(error => ({ error: String(error) }))
   .then(json => {
@@ -42,23 +41,7 @@ function validateForm() {
     }
   })
 
-
-  function loadAdminStyle() {
-    let link = document.createElement('link')
-    link.id = 'index-style'
-    link.rel = 'stylesheet'
-    link.href = '/index/admin.css'
-    document.head.appendChild(link)
-  }
-
-  function unloadAdminStyle() {
-     let link = document.querySelector('#admin.style')
-     if (link){
-       link.remove()
-     }
-
-  }
-   
+  
   function ajaxForm(options) {
     const { form, getBody, cb } = options
     form.addEventListener('submit', event => {
@@ -80,21 +63,23 @@ function validateForm() {
     })
   }
   
-
-
+  
   ajaxForm({
-    form: loginForm,
+    form: signupForm,
     getBody() {
+      if (signupForm.password.value !== signupForm.password2.value) {
+        throw 'password not matched'
+      }
       return {
-        username: loginForm.username.value,
-        password: loginForm.password.value,
+        username: signupForm.username.value,
+        password: signupForm.password.value,
       }
     },
     cb: json => {
       if (json.error) {
         Swal.fire({
           icon: 'error',
-          title: 'Failed to login: ' + json.error,
+          title: 'Failed to signup: ' + json.error,
         })
         return
       }
@@ -103,27 +88,3 @@ function validateForm() {
       checkAllMemoOwnership()
     },
   })
-
-  
-  ajaxForm({
-    form: loginForm,
-    getBody() {
-      return {
-        username: loginForm.username.value,
-        password: loginForm.password.value,
-      }
-    },
-    cb: json => {
-      if (json.error) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Failed to login: ' + json.error,
-        })
-        return
-      }
-      user_id = json.id
-      loadUserStyle()
-      checkAllMemoOwnership()
-    },
-  })
-  
