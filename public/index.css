@@ -391,10 +391,11 @@ body {
 .inner-bottom-content {
   margin: 0;
   height: 100px;
+  display: flex;
 }
 
 .user-pic {
-  margin-left: 25px;
+  margin-left: 15px;
   margin-top: 15px;
   margin-bottom: 20px;
   width: 45px;
@@ -456,4 +457,16 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.userid-postdate {
+  font-family: arial, "cwTeXYen";
+  font-size: 16px;
+  font-weight: bold;
+
+  width: 220px;
+  height: 50px;
+
+  margin-left: 10px;
+  margin-top: 40px;
 }

@@ -67,7 +67,7 @@ fs.mkdirSync(uploadDir, { recursive: true })
 //----------------------Express server-------------------
 
 app.use(express.static('public'))
-app.use("/img",express.static('upload'))
+app.use("/img", express.static('upload'))
 
 app.use(express.urlencoded({ extended: true }));
 
@@ -101,8 +101,8 @@ app.use(userRoutes);
 // })
 
 
-//-----------------submit text & image content到server, 然後從server發送到database--------------- FIXME:
-app.post('/post', async (req, res) => {
+//-----------------submit text & image content到server, 然後從server發送到database--------------- 
+app.post('/post', async (req, res, next) => {
   console.log('someone posting...');
   // const form = formidable({ multiples: true });
 
@@ -119,44 +119,63 @@ app.post('/post', async (req, res) => {
   form.parse(req, async (err, fields, files: any) => {
     if (err) console.log(err)
 
-    // console.log({
-    //   'fields': fields,
-    //   'files': files
-    // })
-
-    let title = fields.title
-    // console.log(title)
-    let content = fields.content
-    // console.log(content)
-    let image = files.image.newFilename
-    console.log(image)
+    console.log({
+      'fields': fields,
+      'files': files
+    })
 
 
+    if (fields.image === 'undefined') {
+
+      let title = fields.title
+      let content = fields.content
+
+      const input = {
+        'title': title,
+        'content': content,
+      }
+
+      await client.query('insert into post (title,content,created_at,updated_at) values ($1,$2,now(),now() );', [input.title, input.content])
+      res.status(200).json({ message: 'post created!' })
+      return
+
+    } else {
 
 
-    const input = {
-      'title': title,
-      'content': content,
-      'image': image,
+      let title = fields.title
+      let content = fields.content
+      let image = files.image.newFilename
+
+      const input = {
+        'title': title,
+        'content': content,
+        'image': image,
+      }
+
+      await client.query('insert into post (title,content,image,created_at,updated_at) values ($1,$2,$3,now(),now());', [input.title, input.content, input.image])
+      res.status(200).json({ message: 'post created!' })
     }
 
-    await client.query('insert into post (title,content,image,created_at,updated_at) values ($1,$2,$3,now(),now());', [input.title, input.content, input.image])
-    res.status(200).json({ message: 'post created!' })
   })
-
 })
 
-//------------------從database抓取data到server----------------------------
+//----------------after posting , redirect to main page---------------
 
+// app.post('/post', (req, res) => {
+//   res.redirect('/index.html')
+
+// })
+
+
+
+
+//------------------從database抓取data到server----------------------------
 
 app.get('/post', async (req, res) => {
   let result = await client.query('select * from post;')
   let posts = result.rows
   res.json({ posts })
 })
-
-
-
 
 
  //app.get('./post', (req, res) => {
