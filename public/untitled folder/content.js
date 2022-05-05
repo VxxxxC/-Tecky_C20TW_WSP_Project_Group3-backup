@@ -46,7 +46,10 @@ function checkData() {
        }
    }
 
-fetch('./posting')
+fetch('./post')
 .then.(res=>res.json()))
-.catch(error =>({error:String}))
+.catch(error =>({error:String(error)}))
+.then(json =>{
+
+})
 

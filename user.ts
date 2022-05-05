@@ -1,6 +1,6 @@
 import express, { NextFunction } from "express";
 import { resolve } from "path";
-import { Client } from "./db";
+import { client } from "./db";
 import {catchError} from "./error"
 
 import'./session'
@@ -24,21 +24,21 @@ userRouter.post('/signin',(req,res)=>{
         res.status(400).json({error:"missing password"})
         return 
     }
-    Client.
+    client.
     query(
         /*sql*/`
         insert into users(usernames, password) value ($1,$2)
         returing id
         `,
         [usernames,password],
-    ).then(result =>{
+    ).then((result:any) =>{
         let id = result.row[0].id
-        req.session.user = {}
+        req.session.user = {
             id,
-            usernames,
+            usernames,}
             res.redirect('/.index')
-    }
-    .catch(error =>{
+    })
+    .catch((error:Error) =>{
         if(String(Error).includes(`unique`)){
             throw`this username is already in use`
         }
@@ -50,7 +50,7 @@ userRouter.post('/signin',(req,res)=>{
 
 
 userRouter.post('/login',(req,res)=>{
-    let {usernames,password,email} = req.body
+    let {usernames,password} = req.body
     if(!usernames){
         res.status(400).json({error:"missing username"})
         return
@@ -59,30 +59,30 @@ userRouter.post('/login',(req,res)=>{
         res.status(400).json({error:"missing password"})
         return 
     }
-    Client
+    client
       .query(
           /**sql */`
-          select id,password,email from users
+          select id,password,usernames from users
           where usernames =$1
           `,
           [usernames],
       )
-      .then(result =>{
-          let usernames = result.row[0]
+      .then((result:any) =>{
+          let usernames = result.row[0].usernames
           if(!usernames){
             res.status(400).json({error:"users not found"})
             return
           }
-          let password =result.row[1]
+          let password =result.row[0].password
           if(!password){
             res.status(400).json({error:"password not found"})
             return
           }
-          req.session.user{
-              id:user.id,
+          req.session.user={
+              id:result.row[0].id,
               usernames,
           }
-          res.json({id:user.id})
+          res.json({id:result.row[0].id})
           res.redirect('./index')
       })
       .catch(catchError(res))
@@ -90,7 +90,7 @@ userRouter.post('/login',(req,res)=>{
 })
 
 userRouter.get('/session',(req,res)=>{
-    if(req.session?user){
+    if(req.session?.user){
         res.json(req.session.user)
     }else{
         res.json({})
@@ -104,7 +104,7 @@ userRouter.post('/logout',(req,res)=>{
             console.error('logout',error)
         }
         res.json({role:'guest'})
-        res.redirect(./index)
+        res.redirect('/index')
     })
 })
 

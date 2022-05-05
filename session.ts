@@ -6,7 +6,7 @@ declare module 'express-session'{
         counter?:number
         user?:{
             id:number
-            username:string
+            usernames:string
         }
     }
 }
