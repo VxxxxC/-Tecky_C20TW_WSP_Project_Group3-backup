@@ -8,7 +8,7 @@ export let env = {
     DB_USER: '',
     DB_PASSWORD: '',
     SESSION_SECRET: '',
-    PORT: 8100,
+    PORT: 8001,
   }
   
 
