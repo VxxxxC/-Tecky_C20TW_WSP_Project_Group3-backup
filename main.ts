@@ -5,6 +5,8 @@ import dotenv from 'dotenv';
 import { Server as ServerIO } from 'socket.io';
 import http from 'http';
 import { print } from 'listening-on'
+import { userRouter } from './user';
+import { join, resolve } from 'path';
 
 const port = 8001;
 const app = express();
@@ -57,9 +59,16 @@ server.listen(port, () => {
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(userRouter);
+
+
+//-------------------404 pages-----------------------------
+app.use((req,res)=>{
+  console.log('404',req.method,req.url)
+  res.sendFile(resolve(join('public','404.html')))
+})
+
 
 // app.post("/posting", (req, res) => {
-// })
-
-
+// }
 

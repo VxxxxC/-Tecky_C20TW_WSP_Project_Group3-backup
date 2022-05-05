@@ -5,11 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>404</title>
+    
     <style>
-
+h1, p{
+    text-align: center;
+}
     </style>
 </head>
 <body>
-    404 page not found
+    <h1>404 page not found</h1>
+    <p>Current Url: <code id="url"></code></p>
+    <script>
+        let code = document.querySelector('#url')
+        code.textContent = lcoation.pathname
+    </script>
 </body>
 </html>
