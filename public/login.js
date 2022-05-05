@@ -32,7 +32,7 @@ function validateForm() {
     })
     console.error('failed to check role:', json.error)
     return
-  }
+  },
   users_id = json.id
   if(json.username){
     loadAdminstyle()

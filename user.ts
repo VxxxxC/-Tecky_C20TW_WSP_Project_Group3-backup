@@ -2,6 +2,7 @@ import express, { NextFunction } from "express";
 import { resolve } from "path";
 import { client } from "./db";
 import {catchError} from "./error"
+import { print } from 'listening-on'
 
 import'./session'
 

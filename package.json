@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node-dev main.ts",
-    "dev": "ts-node-dev main.ts",
+    "start": "ts-node-dev user.ts",
+    "dev": "ts-node-dev user.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
