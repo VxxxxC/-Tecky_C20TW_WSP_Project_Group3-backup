@@ -3,10 +3,7 @@ const socket = io.connect();
 socket.on("toClient", (msg) => {
   console.log(msg);
 });
-socket.emit(
-  "toServer",
-  "client side at home page respond to backend server"
-);
+socket.emit("toServer", "client side at home page respond to backend server");
 
 //----------------get content data from server, and post to main page content preview-------------
 
