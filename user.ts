@@ -17,28 +17,28 @@ export type user = {
 }
 
 userRoutes.post('/signin',(req,res)=>{
-    let {usernames,password} = req.body
-    if(!usernames){
-        res.status(400).json({error:"missing username(sigin)"})
+    let {username,password} = req.body
+console.log(req.body)
+    if(!username){
+        res.status(400).json({error:"missing username(signin)"})
         return
     }
     if(!password){
-        res.status(400).json({error:"missing password(sigin)"})
+        res.status(400).json({error:"missing password(signin)"})
         return 
     }
     client.
     query(
         /*sql*/`
-        insert into users(usernames, password) value ($1,$2)
-        returing id
+        insert into users(usernames, passwords) value ($1,$2) returing id
         `,
-        [usernames,password],
+        [username,password],
     ).then((result:any) =>{
-        let id = result.row[0].id
+        console.log(result)
+        let id = result.rows[0].id
         req.session.user = {
-            id,
-            usernames,}
-            res.redirect('/.index')
+            id:result.rows[0].id,
+            usernames:username,}
     })
     .catch((error:Error) =>{
         if(String(Error).includes(`unique`)){
@@ -64,11 +64,10 @@ userRoutes.post('/login',(req,res)=>{
     client
       .query(
           /**sql */`
-          select * from users where usernames ='${username}'
+          select id, usernames,passwords from users where usernames ='${username}'
           `
       )
       .then((result:any) =>{
-          console.log(result.rows)
           let username = result.rows[0].usernames
           if(!username){
             res.status(400).json({error:"users not found"})
@@ -83,7 +82,8 @@ userRoutes.post('/login',(req,res)=>{
               id:result.rows[0].id,
               usernames:username,
           }
-          res.json({id:result.rows[0].id})
+          //res.json({id:result.rows[0].id})
+          res.redirect('/')
       })
       .catch(catchError(res))
      
