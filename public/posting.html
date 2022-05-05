@@ -58,10 +58,11 @@
 
 
   <div class="container">
-    <form class="post-content" method="post" action="/posting">
-      <!--TODO: 加上標題鍵入欄  -->
-      <input type="text" class="post-title" placeholder="輸入標題..."
+    <form id="post-content" method="post" action="/">
+      <input type="text" class="post-title" name="title" placeholder="輸入標題..."
         style="font-weight: bold; font-size: 24px; width: 375px; height: 100px; border:none">
+      <input type="file" class="title-img" name="img" accept="image/*" value="載入標題圖檔..." action="/post" method="POST"
+        enctype="multipart/form-data">
       <div class="text-container">
         <div class="editor" style="width:750px"></div>
       </div>
@@ -70,6 +71,9 @@
     </form>
   </div>
 
+  <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"
+    integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous">
+  </script>
   <script src="posting.js"></script>
 
 </body>

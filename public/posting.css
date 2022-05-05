@@ -168,7 +168,7 @@ body {
 
 .submit-button {
   position: relative;
-  top: 50px;
+  top: 70px;
 
   display: flex;
   justify-content: center;
@@ -202,7 +202,7 @@ body {
 /* FIXME: 暫時hardcoded，supposed應該user已經登入同修改文章先會出現Delete button */
 .delete-button {
   position: relative;
-  top: 15px;
+  top: 35px;
   left: 82%;
 
   display: flex;

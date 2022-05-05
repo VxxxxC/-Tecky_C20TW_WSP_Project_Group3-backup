@@ -45,3 +45,8 @@ function checkData() {
          return false;
        }
    }
+
+fetch('./posting')
+.then.(res=>res.json()))
+.catch(error =>({error:String}))
+

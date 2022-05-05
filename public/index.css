@@ -217,11 +217,11 @@ body {
   align-items: center;
 }
 
-.search-icon{
+.search-icon {
   margin: 3px;
 }
 
-.content {
+#all-post-container {
   margin: 10px;
   display: flex;
   flex-wrap: wrap;
@@ -457,4 +457,3 @@ body {
   justify-content: center;
   align-items: center;
 }
-
