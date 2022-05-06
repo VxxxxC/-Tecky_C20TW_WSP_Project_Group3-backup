@@ -15,8 +15,6 @@ async function getPost() {
   console.log(result);
   let posts = result.posts;
   for (let post of posts) {
-    console.log(post);
-
     console.log("adding post...");
     postsContainer.innerHTML += `<div class="content-box cnt${post.id}">
     <div class="inner-upper-content">
