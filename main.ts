@@ -174,12 +174,16 @@ app.post('/post', async (req, res, next) => {
 
 //------------------從database抓取data到server----------------------------
 
-app.get('/post', async (req, res) => {
-  let result = await client.query('select * from post;')
+app.post('/main', async (req, res) => {
+  console.log(req.body);
+
+  const { contentIndex } = req.body
+  let result = await client.query('select * from post offset $1 fetch first 8 rows only', [contentIndex])
   let posts = result.rows
   res.json({ posts })
 })
 
+<<<<<<< HEAD
 // transfer post title , content, image from /post/ to content pages
 app.get('/post/:id', async(req,res)=>{
   // console.log(req.params.id);
@@ -187,11 +191,29 @@ app.get('/post/:id', async(req,res)=>{
   let result = await client.query('select id, title,content,image from post where id = $1', [id])
   let post = result.rows[0]
   res.json({post})
+=======
+
+
+
+// transfer post title , content, image to content pages
+app.get('/post',(req,res)=>{
+  client.query (/*sql*/
+  "select id,title, content,image from post order by created_at desc;",)
+  .then((result:any)=>{
+    res.json(result.rows)
+  })
+  .catch(error=>{
+    res.status(500).json({error:String(error)})
+  })
+>>>>>>> 1787499b809002ad4c9fbf96766362cb28f324f7
 })
 
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 1787499b809002ad4c9fbf96766362cb28f324f7
  //app.get('./post', (req, res) => {
  //   let {title,content} = req.body
  // if(!title){
@@ -200,3 +222,8 @@ app.get('/post/:id', async(req,res)=>{
  // if(!content){
  //   res.status(404).json({error:'wrong content'})
  // }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 1787499b809002ad4c9fbf96766362cb28f324f7

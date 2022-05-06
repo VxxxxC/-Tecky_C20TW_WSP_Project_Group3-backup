@@ -413,7 +413,8 @@ body {
   justify-content: center;
 }
 
-.pagebutton {
+.pagebutton,
+.other-page {
   font-family: arial, "cwTeXYen";
   font-size: 16px;
   margin: 10px;
@@ -434,16 +435,14 @@ body {
   background: rgba(128, 128, 128, 0.25);
 }
 
-.previous-page-button,
-.next-page-button {
+.previous-page,
+.next-page {
   width: 100px;
 }
 
-
-
 /*  FIXME: 等javascript DOM後績工作 - */
 /* 暫時hardcode, suppose應該叫"pagebutton current-page" 然後實色代表當前頁面  */
-.page-button-1 {
+.current-page {
   font-family: arial, "cwTeXYen";
   font-size: 16px;
   margin: 10px;
