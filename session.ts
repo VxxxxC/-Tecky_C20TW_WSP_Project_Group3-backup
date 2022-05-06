@@ -19,4 +19,8 @@ export let sessionMiddleware = expressSession({
     secret : env.SESSION_SECRET,
     resave : true,
     saveUninitialized : true,
+<<<<<<< HEAD
+ })
+=======
 })
+>>>>>>> 3e7f16cafad386cc01c25f64b4e46466cd465640

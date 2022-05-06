@@ -1,100 +1,71 @@
+const { ftruncate } = require("fs");
 const { textChangeRangeIsUnchanged } = require("typescript");
 
-var slides=document.querySelector('.slider-items').children;
- var nextSlide=document.querySelector(".right-slide");
-var prevSlide=document.querySelector(".left-slide");
-var totalSlides=slides.length;
-var index=0;
+var slides = document.querySelector(".slider-items").children;
+var nextSlide = document.querySelector(".right-slide");
+var prevSlide = document.querySelector(".left-slide");
+var totalSlides = slides.length;
+var index = 0;
 
-nextSlide.onclick=function () {
-     next("next");
-}
-prevSlide.onclick=function () {
-     next("prev");
-}
+nextSlide.onclick = function () {
+  next("next");
+};
+prevSlide.onclick = function () {
+  next("prev");
+};
 
-function next(direction){
-
-   if(direction=="next"){
-      index++;
-       if(index==totalSlides){
-        index=0;
-       }
-   } 
-   else{
-           if(index==0){
-            index=totalSlides-1;
-           }
-           else{
-            index--;
-           }
+function next(direction) {
+  if (direction == "next") {
+    index++;
+    if (index == totalSlides) {
+      index = 0;
     }
-
-  for(i=0;i<slides.length;i++){
-          slides[i].classList.remove("active");
+  } else {
+    if (index == 0) {
+      index = totalSlides - 1;
+    } else {
+      index--;
+    }
   }
-  slides[index].classList.add("active");     
 
+  for (i = 0; i < slides.length; i++) {
+    slides[i].classList.remove("active");
+  }
+  slides[index].classList.add("active");
 }
-
-let text = document.querySelector('.text')
-let title = document.querySelector('title-holder')
-let slide = document.querySelector('slider')
 
 function checkData() {
-     var txtCheck = document.formName;
-       if(txtCheck.textarea.value == "")  {
-         alert("Please enter information in the textarea");
-         txtCheck.textarea.focus();
-         return false;
-       }
-   }
-
-   title.addEventListener('load', loadTitle());
-
-   function loadTitle(){
-    fetch(`/post/${post.title}`),{
-      method:'GET',
-      headers:{'Contnet-Type':'application/json'},
-      body:JSON.stringify({Title:title.value})
-    }
-   }
-
-text.addEventListener('load',loadContent());
-
-function loadContent(){
-  fetch(`/post/${post.loadContent}`),{
-    method:'GET',
-    headers:{'Contnet-Type':'application/json'},
-    body:JSON.stringify({Content:content})
-  }
- }
-
-
- slide.addEventListener('laod',loadImage());
-
-let img =slide.querySelector('img')
-if(img){
-  img.src = '/uplodas/' + image
-}else{
-  img.remove()
-}
-
- function loadImage(){
-  fetch(`/post/${post.image}`),{
-    method:'GET',
-    headers:{'Contnet-Type':'application/json'},
-    body:JSON.stringify({Image})
-  }
- }
-
-let content = document.querySelector('content')
-function checkOwnership(content){
-  let content_user_id = + DataTransferItem.user_id
-  if(content_user_id === user_id){
-    content.classList.add('owner')
-  }else{
-    content.classList.remove()
+  var txtCheck = document.formName;
+  if (txtCheck.textarea.value == "") {
+    alert("Please enter information in the textarea");
+    txtCheck.textarea.focus();
+    return false;
   }
 }
 
+let content = document.querySelector("content");
+
+async function getPost() {
+  let res = await fetch("/post");
+  let result = await res.json();
+  console.log(result);
+  let post = result.posts;
+  for (let post of posts) {
+    console.log("post");
+
+    content.innerHTML += `<div class="title-holder${post.title}">
+       <div class="slide">
+       <div class="slide-item">
+       <div class="item-active" src="${"/img/" + post.image}">  </div>
+       <div class="item  src="${"/img/" + post.image}""> </div>
+       </div>
+       <div class="left-slide"><</div>
+       <div class="right-slide">></div>
+       <div class="text${post.content}">
+       </div>
+       </div>
+       </div>
+       `;
+  }
+}
+getPost();

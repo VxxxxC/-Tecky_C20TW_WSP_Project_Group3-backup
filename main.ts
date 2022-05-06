@@ -181,6 +181,24 @@ app.post('/main', async (req, res) => {
 })
 
 
+<<<<<<< HEAD
+
+
+// transfer post title , content, image to content pages
+app.get('/post',(req,res)=>{
+  client.query (/*sql*/
+  "select id,title, content,image from post order by created_at desc;",)
+  .then((result:any)=>{
+    res.json(result.rows)
+  })
+  .catch(error=>{
+    res.status(500).json({error:String(error)})
+  })
+})
+
+
+
+=======
  //app.get('./post', (req, res) => {
  //   let {title,content} = req.body
  // if(!title){
@@ -189,6 +207,6 @@ app.post('/main', async (req, res) => {
  // if(!content){
  //   res.status(404).json({error:'wrong content'})
  // }
+>>>>>>> 3e7f16cafad386cc01c25f64b4e46466cd465640
 
- //  })
 
