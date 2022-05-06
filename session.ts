@@ -15,8 +15,8 @@ declare module 'express-session' {
 
 // FIXME: 開server有error: [express-session deprecated req.secret; provide secret option]
 
-// export let sessionMiddleware = expressSession({
-//     secret : env.SESSION_SECRET,
-//     resave : true,
-//     saveUninitialized : true,
-// })
+export let sessionMiddleware = expressSession({
+    secret : env.SESSION_SECRET,
+    resave : true,
+    saveUninitialized : true,
+ })

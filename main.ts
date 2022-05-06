@@ -158,15 +158,19 @@ app.get('/post', async (req, res) => {
 
 
 
+// transfer post title , content, image to content pages
+app.get('/post',(req,res)=>{
+  client.query (/*sql*/
+  "select id,title, content,image from post order by created_at desc;",)
+  .then((result:any)=>{
+    res.json(result.rows)
+  })
+  .catch(error=>{
+    res.status(500).json({error:String(error)})
+  })
+})
 
- //app.get('./post', (req, res) => {
- //   let {title,content} = req.body
- // if(!title){
- //   res.status(404).json({error:'wrong title'})
- // }
- // if(!content){
- //   res.status(404).json({error:'wrong content'})
- // }
 
- //  })
+
+
 
