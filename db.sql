@@ -22,12 +22,8 @@ DELETE FROM users WHERE id = 4;
 INSERT INTO users (id,usernames ,passwords ,create_at,updated_at,is_admin) VALUES (1,'mary','1223',(CURRENT_TIMESTAMP),(CURRENT_TIMESTAMP),TRUE);
 INSERT INTO users (id,usernames ,passwords ,create_at,updated_at,is_admin) VALUES (2,'BEN','12243',(CURRENT_TIMESTAMP),(CURRENT_TIMESTAMP),FALSE);
 INSERT INTO users (id,usernames ,passwords ,create_at,updated_at,is_admin) VALUES (3,'peter','12253',(CURRENT_TIMESTAMP),(CURRENT_TIMESTAMP),FALSE);
-<<<<<<< HEAD
-INSERT INTO users (id,usernames ,passwords ,create_at,updated_at,is_admin) VALUES (4,'ken','1523',(CURRENT_TIMESTAMP),(CURRENT_TIMESTAMP),FALSE);
-=======
 =======
 INSERT INTO users (id,usernames ,passwords ,create_at,updated_at,is_admin) VALUES (4,'BEN','1523',(CURRENT_TIMESTAMP),(CURRENT_TIMESTAMP),FALSE);
->>>>>>> 7f97a67491b9c4bdbc6200f0180a0e264a32785a
 create table users (
   id serial primary key,
   username varchar(255) not null unique,
@@ -44,7 +40,7 @@ create table post (
   id serial primary key,
   title text not null,
   content text not null,
-  image bytea,
+  image varchar(255),
   created_at timestamp default current_timestamp,
   updated_at timestamp default current_timestamp,
 
@@ -84,5 +80,9 @@ create table views(
 );
 
 
--- below code for reset post ID serial primary key
+-- below code for reset post ID serial primary key :
 -- alter sequence post_id_seq restart with 1000;
+
+
+-- below code 搵由OFFSET開始計 8行嘅DATA :
+-- select * from post offset 0 fetch first 8 rows only;

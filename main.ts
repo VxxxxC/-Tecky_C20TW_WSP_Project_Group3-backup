@@ -171,8 +171,11 @@ app.post('/post', async (req, res, next) => {
 
 //------------------從database抓取data到server----------------------------
 
-app.get('/post', async (req, res) => {
-  let result = await client.query('select * from post;')
+app.post('/main', async (req, res) => {
+  console.log(req.body);
+
+  const { contentIndex } = req.body
+  let result = await client.query('select * from post offset $1 fetch first 8 rows only', [contentIndex])
   let posts = result.rows
   res.json({ posts })
 })
