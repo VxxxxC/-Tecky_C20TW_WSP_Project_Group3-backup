@@ -1,4 +1,4 @@
-
+let loginForm = document.querySelector('#login-form')
 //-- ensure all input are filled------
 function validateForm() {
     let a = document.forms["Form"]["username"].value;
@@ -43,7 +43,7 @@ function validateForm() {
   })
 
 
-  function loadAdminStyle() {
+  function loadUserStyle() {
     let link = document.createElement('link')
     link.id = 'index-style'
     link.rel = 'stylesheet'
@@ -51,13 +51,13 @@ function validateForm() {
     document.head.appendChild(link)
   }
 
-  function unloadAdminStyle() {
-     let link = document.querySelector('#admin.style')
-     if (link){
-       link.remove()
-     }
+ // function unloadUserStyle() {
+  //   let link = document.querySelector('#admin.style')
+   //  if (link){
+   //    link.remove()
+   //  }
 
-  }
+   // }
    
   function ajaxForm(options) {
     const { form, getBody, cb } = options

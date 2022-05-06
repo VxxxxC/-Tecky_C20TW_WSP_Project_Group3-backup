@@ -11,6 +11,7 @@ import formidable from 'formidable'
 import fs from 'fs';
 import { client } from './db';
 import path from 'path';
+import { sessionMiddleware } from './session';
 
 const port = 8001;
 const app = express();
@@ -65,6 +66,8 @@ fs.mkdirSync(uploadDir, { recursive: true })
 
 
 //----------------------Express server-------------------
+
+app.use(sessionMiddleware)
 
 app.use(express.static('public'))
 app.use("/img", express.static('upload'))
@@ -177,25 +180,18 @@ app.get('/post', async (req, res) => {
   res.json({ posts })
 })
 
-
-<<<<<<< HEAD
-
-
-// transfer post title , content, image to content pages
-app.get('/post',(req,res)=>{
-  client.query (/*sql*/
-  "select id,title, content,image from post order by created_at desc;",)
-  .then((result:any)=>{
-    res.json(result.rows)
-  })
-  .catch(error=>{
-    res.status(500).json({error:String(error)})
-  })
+// transfer post title , content, image from /post/ to content pages
+app.get('/post/:id', async(req,res)=>{
+  // console.log(req.params.id);
+  let id = req.params.id
+  let result = await client.query('select id, title,content,image from post where id = $1', [id])
+  let post = result.rows[0]
+  res.json({post})
 })
 
 
 
-=======
+
  //app.get('./post', (req, res) => {
  //   let {title,content} = req.body
  // if(!title){
@@ -204,6 +200,3 @@ app.get('/post',(req,res)=>{
  // if(!content){
  //   res.status(404).json({error:'wrong content'})
  // }
->>>>>>> 3e7f16cafad386cc01c25f64b4e46466cd465640
-
-

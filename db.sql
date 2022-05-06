@@ -19,6 +19,10 @@ DELETE FROM users WHERE id = 4;
 
 DROP INDEX passwords on users;
 
+DROP TABLE post;
+
+ALTER TABLE post DROP ROW (bytea);
+
 INSERT INTO users (id,usernames ,passwords ,create_at,updated_at,is_admin) VALUES (1,'mary','1223',(CURRENT_TIMESTAMP),(CURRENT_TIMESTAMP),TRUE);
 INSERT INTO users (id,usernames ,passwords ,create_at,updated_at,is_admin) VALUES (2,'BEN','12243',(CURRENT_TIMESTAMP),(CURRENT_TIMESTAMP),FALSE);
 INSERT INTO users (id,usernames ,passwords ,create_at,updated_at,is_admin) VALUES (3,'peter','12253',(CURRENT_TIMESTAMP),(CURRENT_TIMESTAMP),FALSE);
@@ -44,7 +48,7 @@ create table post (
   id serial primary key,
   title text not null,
   content text not null,
-  image bytea,
+  image text,
   created_at timestamp default current_timestamp,
   updated_at timestamp default current_timestamp,
 

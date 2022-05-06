@@ -1,9 +1,8 @@
-const socket = io.connect();
 
-socket.on("toClient", (msg) => {
-  console.log(msg);
-});
-socket.emit("toServer", "client side at home page respond to backend server");
+// socket.on("toClient", (msg) => {
+//   console.log(msg);
+// });
+// socket.emit("toServer", "client side at home page respond to backend server");
 
 //----------------get content data from server, and post to main page content preview-------------
 
@@ -32,8 +31,14 @@ async function getPost() {
         src="https://dvg5hr78c8hf1.cloudfront.net/2016/06/21/15/37/47/4b0b2595-20dc-40bc-a963-e8e53b2fd5bf/1*2cAvoDuXZp_dy49WqNVVrA.jpeg">
       <div class="userid-postdate">${post.created_at}</div>
     </div>
+    <a href="/content-page.html?id=${post.id}">more detail</a>
   </div>`;
   }
 }
 
 getPost();
+
+
+
+
+

@@ -19,7 +19,7 @@
                     <h1>Log in</h1>
                     <div style="height: 100%;  display: flex; text-align: center; justify-content: center;">
                         <div>
-                            <form method="post" name="Form" onsubmit="validateForm()" action="/login">
+                            <form id="login-form" method="post" name="Form" onsubmit="validateForm()" action="/login">
                                 <h4> Username </h4>
                                 <div class="fields">
                                     <input type="text" class="inpute"  placeholder="Username" name="username">
@@ -44,7 +44,7 @@
       
         </div>
 
-
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="login.js"></script>
    
 </body>

@@ -9,6 +9,7 @@ function validateForm() {
   }
 
 
+let signupForm = document.querySelector('#sign-form');
 
 fetch('/session')
   .then(res => res.json())

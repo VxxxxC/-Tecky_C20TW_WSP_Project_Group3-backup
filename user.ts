@@ -4,11 +4,11 @@ import { client } from "./db";
 import { catchError } from "./error";
 import { print } from "listening-on";
 import "./session";
-import { sessionMiddleware } from "./session";
+// import { sessionMiddleware } from "./session";
 
 export let userRoutes = express.Router();
 userRoutes.use(express.urlencoded({ extended: false }));
-userRoutes.use(sessionMiddleware);
+// userRoutes.use(sessionMiddleware);
 
 export type user = {
   usesnames: string;
@@ -56,7 +56,7 @@ userRoutes.post("/signup", async (req, res) => {
       id: newUser.rows[0].id,
       usernames: username,
     };
-    console.log(req.session.user);
+     // console.log(req.session.user);
     res.json({ id: newUser.rows[0].id });
   } catch (error) {
     res.status(500).json({ error: String(error) });
@@ -66,12 +66,18 @@ userRoutes.post("/signup", async (req, res) => {
 });
 
 userRoutes.post("/login", (req, res) => {
+  console.log(req.body);
+  
   let { username, password } = req.body;
   if (!username) {
+   // console.log('missing username');
+    
     res.status(400).json({ error: "missing username(login)" });
     return;
   }
   if (!password) {
+   // console.log('missing password');
+
     res.status(400).json({ error: "missing password(login)" });
     return;
   }
@@ -83,20 +89,31 @@ userRoutes.post("/login", (req, res) => {
     )
     .then((result: any) => {
       let username = result.rows[0].usernames;
+   //   console.log(username);
+      
       if (!username) {
+ //   console.log('user not found');
+
         res.status(400).json({ error: "users not found" });
         return;
       }
       let password = result.rows[0].passwords;
       if (!password) {
+  //      console.log('password not found');
+        
         res.status(400).json({ error: "password not found" });
         return;
       }
+  //    console.log('係呢到啦！');
+
       req.session.user = {
         id: result.rows[0].id,
         usernames: username,
       };
-      //res.json({id:result.rows[0].id})
+
+ //     console.log(req.session.user)
+      
+    //  res.json({id:result.rows[0].id})
       res.redirect("/");
     })
     .catch(catchError(res));
