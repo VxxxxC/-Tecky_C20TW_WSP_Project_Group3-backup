@@ -181,7 +181,6 @@ app.post('/main', async (req, res) => {
 })
 
 
-<<<<<<< HEAD
 
 
 // transfer post title , content, image to content pages
@@ -198,7 +197,6 @@ app.get('/post',(req,res)=>{
 
 
 
-=======
  //app.get('./post', (req, res) => {
  //   let {title,content} = req.body
  // if(!title){
@@ -207,6 +205,5 @@ app.get('/post',(req,res)=>{
  // if(!content){
  //   res.status(404).json({error:'wrong content'})
  // }
->>>>>>> 3e7f16cafad386cc01c25f64b4e46466cd465640
 
 
