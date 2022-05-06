@@ -413,8 +413,7 @@ body {
   justify-content: center;
 }
 
-.pagebutton,
-.other-page {
+.pagebutton {
   font-family: arial, "cwTeXYen";
   font-size: 16px;
   margin: 10px;

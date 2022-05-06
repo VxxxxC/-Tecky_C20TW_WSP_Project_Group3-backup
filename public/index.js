@@ -1,4 +1,3 @@
-
 // socket.on("toClient", (msg) => {
 //   console.log(msg);
 // });
@@ -22,8 +21,12 @@ async function getPost() {
   let result = await res.json();
   let posts = result.posts;
   console.log(posts);
+
   for (let post of posts) {
-    postsContainer.innerHTML += `<div class="content-box cnt${post.id}">
+    postsContainer.innerHTML += `<a href="/content-page.html?id=${
+      post.id
+    }" style="text-decoration:none; color:black">
+    <div class="content-box cnt${post.id}">
     <div class="inner-upper-content">
       <i class="upper-content-top-icon fa-solid fa-eye"></i>
       <img class="content-img"
@@ -38,23 +41,17 @@ async function getPost() {
       <img class="user-pic"
         src="https://dvg5hr78c8hf1.cloudfront.net/2016/06/21/15/37/47/4b0b2595-20dc-40bc-a963-e8e53b2fd5bf/1*2cAvoDuXZp_dy49WqNVVrA.jpeg">
       <div class="userid-postdate">${post.created_at}</div>
-    </div>
-    <a href="/content-page.html?id=${post.id}">more detail</a>
-  </div>`;
+    </div>    
+  </div>
+  </a>`;
   }
 }
 getPost();
 
-<<<<<<< HEAD
-
-
-
-
-=======
 //-----------------FIXME: pagination----------------------------
 
 // async function pagination() {
-//   let pageBtn = document.querySelector(".pagebutton.page");
+//   let pageBtn = document.querySelector("#page");
 //   let preBtn = document.querySelector(".previous-page");
 //   let nextBtn = document.querySelector(".next-page");
 
@@ -72,12 +69,7 @@ getPost();
 //         totalPage += post.id / 8;
 //         for (let i = 1; i < totalPage; i++) {
 //           console.log({ i: i });
-//           let pagebutton = document.querySelector(".pagebutton.page");
 
-//           let page = document.createElement("div");
-//           page.setAttribute("class", "page");
-//           page.textContent += i;
-//           pagebutton.appendChild(page);
 //         }
 //       }
 //     }
@@ -89,7 +81,7 @@ getPost();
 
 //---------------choosing page data from database-----------
 let selectPage = document
-  .querySelector(".pagebutton.page")
+  .querySelector("#page")
   .addEventListener("click", (event) => {
     console.log(event.target.innerHTML);
 
@@ -128,4 +120,5 @@ let selectPage = document
     }
     changePage();
   });
->>>>>>> 1787499b809002ad4c9fbf96766362cb28f324f7
+
+
