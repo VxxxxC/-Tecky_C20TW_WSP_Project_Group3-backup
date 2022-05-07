@@ -1,3 +1,4 @@
+//----------------Socket.IO client side--------------------
 const socket = io.connect();
 
 socket.on("toClient", (msg) => {
@@ -8,6 +9,7 @@ socket.emit(
   "client side at posting page respond to backend server"
 );
 
+//-------------------text editor------------------------
 let toolbarOptions = [
   [
     {

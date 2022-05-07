@@ -228,6 +228,7 @@ body {
 }
 
 .content-box {
+  z-index: 5;
   margin: 5px;
   width: 300px;
   height: 550px;
@@ -240,9 +241,10 @@ body {
 }
 
 .content-box:hover {
+  z-index: 10;
   background: rgba(128, 128, 128, 0.6);
 
-  transform: scale(1.15);
+  transform: scale(1.1);
 
 }
 
@@ -358,7 +360,7 @@ body {
   margin: 10px;
   height: 200px;
   font-family: arial, "cwTeXYen";
-  font-size: 1.5rem;
+  font-size: 2rem;
 
 
   overflow: clip;
@@ -385,7 +387,7 @@ body {
 }
 
 .content {
-  font-size: 12px;
+  font-size: 16px;
 }
 
 .inner-bottom-content {
@@ -406,14 +408,14 @@ body {
 
 
 
-.pagebutton-group {
-  margin: 20px;
+.button-group {
+  margin-top: 70px;
 
   display: flex;
   justify-content: center;
 }
 
-.pagebutton {
+.button {
   font-family: arial, "cwTeXYen";
   font-size: 16px;
   margin: 10px;
@@ -430,9 +432,11 @@ body {
   transition: 0.5s;
 }
 
-.pagebutton:hover {
+.button:hover {
   background: rgba(128, 128, 128, 0.25);
 }
+
+
 
 .previous-page,
 .next-page {
