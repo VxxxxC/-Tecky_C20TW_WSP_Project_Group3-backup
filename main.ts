@@ -172,7 +172,7 @@ app.post('/post', async (req, res, next) => {
 
 
 
-//------------------從database抓取data到server----------------------------
+//------------------從frontend request到database抓取data----------------------------
 
 app.post('/main', async (req, res) => {
   console.log(req.body);
@@ -183,13 +183,22 @@ app.post('/main', async (req, res) => {
   res.json({ posts })
 })
 
+//----------------below app.get'/main' is for pagination in index.js-------------
+app.get('/main', async (req, res) => {
+  console.log(req.body);
+
+  let result = await client.query('select * from post;')
+  let posts = result.rows
+  res.json({ posts })
+})
+
 // transfer post title , content, image from /post/ to content pages
-app.get('/post/:id', async(req,res)=>{
+app.get('/post/:id', async (req, res) => {
   // console.log(req.params.id);
   let id = req.params.id
   let result = await client.query('select id, title,content,image from post where id = $1', [id])
   let post = result.rows[0]
-  res.json({post})
+  res.json({ post })
 })
 
 

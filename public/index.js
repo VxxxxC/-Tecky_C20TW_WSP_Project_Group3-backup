@@ -7,8 +7,9 @@ socket.on("toClient", (msg) => {
 socket.emit("toServer", "client side at home page respond to backend server");
 
 //---------querySelector area-----------------
-let pageBtn = document.querySelector("#page");
-let pageNumber = pageBtn.textContent;
+let buttonList = document.querySelector(".button-list");
+let pageNumber = document.querySelector("#page-number");
+let pageNumberText = pageNumber.textContent;
 let preBtn = document.querySelector(".previous-page");
 let nextBtn = document.querySelector(".next-page");
 
@@ -23,9 +24,9 @@ function equalOfPage(pageNum, contentInd) {
 }
 
 function checkCurrentPage() {
-  if (equalOfPage(pageNumber, contentIndex) === true) {
-    pageBtn.style.background = "rgba(40, 40, 40, 0.8)";
-    pageBtn.style.color = "white";
+  if (equalOfPage(pageNumberText, contentIndex) === true) {
+    pageNumber.style.background = "rgba(40, 40, 40, 0.8)";
+    pageNumber.style.color = "white";
   }
 }
 
@@ -71,58 +72,67 @@ async function getPost() {
   </div>
   </a>`;
   }
-  checkCurrentPage();  // FIXME: 功能正常，但還有判斷不足
+  checkCurrentPage(); // FIXME: 功能正常，但未能準確判斷
 }
 getPost();
 
-//-----------------FIXME: pagination----------------------------
+//-----------------TODO: FIXME: pagination----------------------------
 
-// async function pagination() {
+async function pagination() {
+  pageNumber.innerHTML = "";
 
-//   let res = await fetch("/post");
-//   let result = await res.json();
-//   let posts = result.posts;
-//   for (let post of posts) {
-//     // console.log(post.id);
+  let res = await fetch("/main");
+  let result = await res.json();
+  let posts = result.posts;
+  for (let post of posts) {
+    console.log(post.id);
 
-//     function createPageButton() {
-//       if (post.id % 8 === 0) {
-//         totalPage += post.id / 8;
-//         for (let i = 1; i < totalPage; i++) {
-//           console.log({ i: i });
-//         }
-//       }
-//     }
-//     createPageButton();
-//   }
-// }
+    if (post.id % 8 === 0) {
+      let buttonNum = 0;
+      buttonNum++;
 
+      let newPageButton = document.createElement("div");
+      newPageButton.classList.add("page-number");
+      newPageButton.textContent += buttonNum;
+
+      document.body.appendChild(newPageButton);
+    }
+
+    // function createPageButton() {
+    //   if (post.id % 8 === 0) {
+    //     totalPage += post.id / 8;
+    //     for (let i = 1; i < totalPage; i++) {
+    //       console.log({ i: i });
+    //     }
+    //   }
+    // }
+    // createPageButton();
+  }
+}
 // pagination();
 
 //---------------choosing page data from database-----------
-let selectPage = document
-  .querySelector("#page")
-  .addEventListener("click", (event) => {
-    console.log(event.target.innerHTML);
+buttonList.addEventListener("click", (event) => {
+  console.log(event.target.innerHTML);
 
-    contentIndex = (event.target.innerText - 1) * 8;
-    console.log({ contentIndex: contentIndex });
+  contentIndex = (event.target.innerText - 1) * 8;
+  console.log({ contentIndex: contentIndex });
 
-    async function changePage() {
-      postsContainer.innerHTML = "";
+  async function changePage() {
+    postsContainer.innerHTML = "";
 
-      let res = await fetch("/main", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ contentIndex }),
-      });
+    let res = await fetch("/main", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ contentIndex }),
+    });
 
-      let result = await res.json();
-      let posts = result.posts;
-      for (let post of posts) {
-        postsContainer.innerHTML += `<a href="/content-page.html?id=${
-          post.id
-        }" style="text-decoration:none; color:black">
+    let result = await res.json();
+    let posts = result.posts;
+    for (let post of posts) {
+      postsContainer.innerHTML += `<a href="/content-page.html?id=${
+        post.id
+      }" style="text-decoration:none; color:black">
         <div class="content-box cnt${post.id}">
     <div class="inner-upper-content">
       <i class="upper-content-top-icon fa-solid fa-eye"></i>
@@ -141,11 +151,11 @@ let selectPage = document
     </div>
   </div>
   </a>`;
-      }
     }
-    checkCurrentPage(); // FIXME: 功能正常，但還有判斷不足
-    changePage();
-  });
+  }
+  checkCurrentPage(); // FIXME: 功能正常，但未能準確判斷
+  changePage();
+});
 
 // let pageBtn = document.querySelector("#page");
 // let newPage = pageBtn.cloneNode(true);

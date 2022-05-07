@@ -419,10 +419,38 @@ body {
   font-family: arial, "cwTeXYen";
   font-size: 16px;
   margin: 10px;
-  width: 55px;
   height: 35px;
   background: rgba(128, 128, 128, 0.05);
 
+  border-radius: 10px;
+
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  transition: 0.5s;
+}
+
+.previous-page:hover {
+  background: rgba(128, 128, 128, 0.25);
+}
+
+.next-page:hover {
+  background: rgba(128, 128, 128, 0.25);
+}
+
+.previous-page,
+.next-page {
+  width: 100px;
+}
+
+/*  FIXME: 一直未能將page button分隔一小距離...仲未搵到bug - */
+#page-number {
+  font-family: arial, "cwTeXYen";
+  font-size: 16px;
+  width: 55px;
+  height: 35px;
+  margin: 5px;
   border-radius: 10px;
 
   display: flex;
@@ -432,33 +460,8 @@ body {
   transition: 0.5s;
 }
 
-.button:hover {
+#page-number:hover {
   background: rgba(128, 128, 128, 0.25);
-}
-
-
-
-.previous-page,
-.next-page {
-  width: 100px;
-}
-
-/*  FIXME: 等javascript DOM後績工作 - */
-/* 暫時hardcode, suppose應該叫"pagebutton current-page" 然後實色代表當前頁面  */
-.current-page {
-  font-family: arial, "cwTeXYen";
-  font-size: 16px;
-  margin: 10px;
-  width: 55px;
-  height: 35px;
-  color: white;
-  background: rgba(40, 40, 40, 0.8);
-
-  border-radius: 10px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .userid-postdate {
