@@ -4,13 +4,143 @@
 }
 
 
-.header{
-    background-color: green;
-    height: 48px;
-    max-width: 100%;
-    padding-top: 30px;
-}
+.header-container {
+    height: 60px;
+    background: white;
+  
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .left-header {
+    display: flex;
+  }
+  
+  .left-selection {
+    display: flex;
+    margin: 10px;
+    width: 120px;
+    height: 40px;
+  
+    border-radius: 5px;
+    -webkit-transition: 0.2s;
+    transition: 0.2s;
+  }
+  
+  
+  .left-selection-box-content {
+    text-align: center;
+    font-family: arial, "cwTeXYen";
+  }
+  
+  .website-name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+  }
+  
+  .post {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    background: rgba(46, 129, 46, 0.6);
+    transition: 1s;
+    transform: skewX(-20deg);
+    cursor: pointer;
+  }
+  
+  .post:hover {
+    width: 120px;
+    height: 40px;
+    border-radius: 5px;
+    background: rgba(46, 129, 46, 1);
+    transform: skewX(0deg);
+  }
+  
+  .post-icon {
+    margin: 3px;
+  }
+  
+  .right-header {
+    display: flex;
+  }
+  
+  .right-selection {
+    margin: 15px;
+    width: 100px;
+    height: 35px;
+  
+    border-radius: 5px;
+    -webkit-transition: 0.2s;
+    transition: 0.2s;
+  }
+  
+  .left-box {
+    font-family: arial, "cwTeXYen";
+    font-size: 15px;
+    color: rgba(0, 0, 0, 0.5)
+  }
+  
+  .left-box:hover {
+    color: rgba(0, 0, 0, 1);
+    font-family: arial, "cwTeXYen";
+    font-size: 15px;
+  }
+  
+  .reset-password {
+    font-family: arial, "cwTeXYen";
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.4);
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    transition: 0.5s;
+    cursor: pointer;
+  }
+  
+  .reset-password:hover {
+    font-family: arial, "cwTeXYen";
+    font-size: 13px;
+    color: rgba(0, 0, 0, 0.7);
+    width: 100px;
+    height: 35px;
+  
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.085)
+  }
+  
+  .login {
+    font-family: arial, "cwTeXYen";
+    font-size: 15px;
+    color: rgba(0, 0, 0, 2.5);
+    background: rgba(0, 0, 0, 0.05);
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    transition: 0.5s;
+    cursor: pointer;
+  }
+  
+  .right-selection.login:hover {
+    width: 100px;
+    height: 35px;
+  
+    border-radius: 5px;
+    background: rgba(0, 200, 0, 0.5)
+  }
 
+  .isolate {
+    height: 2px;
+    background: rgba(0, 0, 0, 0.5);
+  }
+  
 
 
 .login-form h1{
