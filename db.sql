@@ -74,8 +74,6 @@ create table tags(
   id serial primary key,
   tag varchar(255) not null,
 
-  post_id integer,
-  foreign key (post_id) references post(id)
 );
 
 create table views(
@@ -87,7 +85,14 @@ create table views(
   foreign key (post_id) references post(id)
 );
 
+create table post_tag(
+  id serial primary key,
 
+  post_id integer,
+  foreign key (post_id) references post(id),
+  tags_id integer,
+  foreign key (tags_id) references tags(id)
+);
 -- below code for reset post ID serial primary key :
 -- alter sequence post_id_seq restart with 1000;
 
