@@ -17,24 +17,24 @@ let nextBtn = document.querySelector(".next-page");
 
 //----------------TODO: FIXME: check current page function-------------
 
-function equalOfPage(pageNum, contentInd) {
-  if (pageNum % 1 === 0 && contentInd % 8 === 0) {
-    return true;
-  } else {
-    return false;
-  }
-}
+// function equalOfPage(pageNum, contentInd) {
+//   if (pageNum % 1 === 0 && contentInd % 8 === 0) {
+//     return true;
+//   } else {
+//     return false;
+//   }
+// }
 
-function checkCurrentPage() {
-  if (equalOfPage(pageNumberText, contentIndex) === false) {
-    console.log({ equalOfPage: false });
-    return;
-  } else {
-    console.log({ equalOfPage: true });
-    pageNumber.style.background = "rgba(40, 40, 40, 0.8)";
-    pageNumber.style.color = "white";
-  }
-}
+// function checkCurrentPage() {
+//   if (equalOfPage(pageNumberText, contentIndex) === false) {
+//     console.log({ equalOfPage: false });
+//     return;
+//   } else {
+//     console.log({ equalOfPage: true });
+//     pageNumber.style.background = "rgba(40, 40, 40, 0.8)";
+//     pageNumber.style.color = "white";
+//   }
+// }
 
 //----------------get content data from server, and post to main page content preview-------------
 let contentIndex = 0;
@@ -75,7 +75,6 @@ async function getPost() {
         src="https://dvg5hr78c8hf1.cloudfront.net/2016/06/21/15/37/47/4b0b2595-20dc-40bc-a963-e8e53b2fd5bf/1*2cAvoDuXZp_dy49WqNVVrA.jpeg">
       <div class="userid-postdate">${post.created_at}</div>
     </div>    
-    <a href="/content-page.html?id=${post.id}">more detail</a>
   </div>
   </a>`;
   }
@@ -172,22 +171,8 @@ fetch("/is_admin")
   .then((json) => {
     let admin = document.querySelector("#admin");
 
-<<<<<<< HEAD
-fetch('/is_admin')
-.then(res => res.json())
-.catch(error => ({ error: String(error) }))
-.then(json => {
-
-  let admin = document.querySelector('.admin')
-  
-  admin.textContent = json.role === 'admin' ? 'Admin' : 'Member';
-
-})
-
-=======
     admin.textContent = json.role === "admin" ? "Admin" : "Member";
   });
->>>>>>> 1a801c3e77492d133a22c0d887f475fdf6ac2bce
 
 //   function ajaxForm(options) {
 //     const { form, getBody, cb } = options
@@ -248,20 +233,6 @@ fetch('/is_admin')
 //   },
 // })
 
-<<<<<<< HEAD
-
-
-
-// fetch('/logout')
-// .then(res=>res.JSON())
-// .catch(error => ({ error: String(error) }))
-// .then(json=>{
-//   let logout = document.querySelector('#logout')
-//   logout.textContent = 'login';
-// })
-
-
-=======
 // function loadAdminStyle() {
 //   let link = document.createElement('link')
 //   link.id = 'admin-style'
@@ -276,4 +247,3 @@ fetch('/is_admin')
 //   link.remove()
 //  }
 // }
->>>>>>> 1a801c3e77492d133a22c0d887f475fdf6ac2bce

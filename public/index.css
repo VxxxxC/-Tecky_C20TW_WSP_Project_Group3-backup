@@ -86,21 +86,7 @@ body {
   border-radius: 5px;
   -webkit-transition: 0.2s;
   transition: 0.2s;
-}
 
-.left-box {
-  font-family: arial, "cwTeXYen";
-  font-size: 15px;
-  color: rgba(0, 0, 0, 0.5)
-}
-
-.left-box:hover {
-  color: rgba(0, 0, 0, 1);
-  font-family: arial, "cwTeXYen";
-  font-size: 15px;
-}
-
-.reset-password {
   font-family: arial, "cwTeXYen";
   font-size: 12px;
   color: rgba(0, 0, 0, 0.4);
@@ -113,7 +99,7 @@ body {
   cursor: pointer;
 }
 
-.reset-password:hover {
+.right-selection:hover {
   font-family: arial, "cwTeXYen";
   font-size: 13px;
   color: rgba(0, 0, 0, 0.7);
@@ -122,6 +108,18 @@ body {
 
   border-radius: 5px;
   background: rgba(0, 0, 0, 0.085)
+}
+
+.left-box {
+  font-family: arial, "cwTeXYen";
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.5)
+}
+
+.left-box:hover {
+  color: rgba(0, 0, 0, 1);
+  font-family: arial, "cwTeXYen";
+  font-size: 15px;
 }
 
 .login {
@@ -144,6 +142,14 @@ body {
 
   border-radius: 5px;
   background: rgba(0, 200, 0, 0.5)
+}
+
+.right-selection.logout:hover {
+  width: 100px;
+  height: 35px;
+
+  border-radius: 5px;
+  background: rgba(200, 0, 0, 0.5)
 }
 
 .isolate {
