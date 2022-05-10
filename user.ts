@@ -5,6 +5,9 @@ import { catchError } from "./error";
 import { print } from "listening-on";
 import "./session";
 import { type } from "os";
+import fetch from 'node-fetch'
+import { adminGuard } from "./guard";
+// import { grantMiddleware } from "./grant";
 // import { sessionMiddleware } from "./session";
 
 export let userRoutes = express.Router();
@@ -55,7 +58,7 @@ userRoutes.post("/signup", async (req, res) => {
     // console.log(id.rows[0])
     req.session.user = {
       id: newUser.rows[0].id,
-      usernames: username,
+      usernames: username,is_admin:true
     };
      // console.log(req.session.user);
     res.json({ id: newUser.rows[0].id });
@@ -85,7 +88,7 @@ userRoutes.post("/login", (req, res) => {
   client
     .query(
       /**sql */ `
-          select id, usernames,passwords from users where usernames ='${username}'
+          select id, usernames,passwords,is_admin from users where usernames ='${username}'
           `
     )
     .then((result: any) => {
@@ -110,6 +113,7 @@ userRoutes.post("/login", (req, res) => {
       req.session.user = {
         id: result.rows[0].id,
         usernames: username,
+        is_admin:result.rows[0].is_admin
       };
 
  //     console.log(req.session.user)
@@ -120,22 +124,32 @@ userRoutes.post("/login", (req, res) => {
     .catch(catchError(res));
 });
 
-//logout
-userRoutes.post("/logout", (req, res) => {
-  req.session.destroy((error) => {
-    if (error) {
-      console.error("logout", error);
-    }
-    res.json({ role: "guest" });
-  });
-});
+// //logout
+// userRoutes.post("/logout", (req, res) => {
+//   req.session.destroy((error) => {
+//     if (error) {
+//       console.error("logout", error);
+//     }
+//     res.redirect('/');
+//   });
+// });
 
 //--role--
 userRoutes.get("/is_admin", (req, res) => {
-  if (true) {
-    res.json({ role: "admin" })
-  } else if(req.session?.user) {
-    res.json({ role: "member" })
+  // if (true) {
+  //   res.json({ role: "admin" })
+  // } else if(req.session?.user) {
+  //   res.json({ role: "member" })
+  // }
+
+  if(req.session.user){
+    if(req.session.user.is_admin){
+      res.json({ role: "admin" })
+    }else{
+      res.json({ role: "member" })
+    }
+  }else{
+    res.json({msg:"Please login first!"})
   }
 });
 
@@ -147,6 +161,68 @@ userRoutes.get("/session", (req, res) => {
   }
 });
 
+// //google login
+// type GoogleProfile = {
+//   email: string
+//   picture: string
+// }
 
+// userRoutes.get('/login/google', async (req, res) => {
+//   console.log('login with google...')
+//   console.log('session:', req.session)
+//   let access_token = req.session?.grant?.response?.access_token
+//   if (!access_token) {
+//     res.status(400).json({ error: 'missing access_token in grant session' })
+//     return
+//   }
 
+//   let profile : GoogleProfile
+//   try {
+//     let googleRes = await fetch(
+//       `https://www.googleapis.com/oauth2/v2/userinfo`,
+//       {
+//         headers: { Authorization: 'Bearer ' + access_token },
+//       },
+//     )
+//     profile = await googleRes.json()
+//   } catch (error) {
+//     res.status(502).json({ error: 'Failed to get user info from Google' })
+//     return
+//   }
+
+//   try {
+//     // try to lookup existing users
+//     let result = await client.query(
+//       /* sql */ `
+// select id from users
+// where username = $1
+// `,
+//       [profile.email],
+//     )
+//     let user = result.rows[0]
+
+//     // auto register if this is a new user
+//     if (!user) {
+//       result = await client.query(
+//         /* sql */ `
+// insert into users
+// (usernames) values ($1)
+// returning id
+// `,
+//         [profile.email],
+//       )
+//       user = result.rows[0]
+//     }
+
+//     let id = user.id
+//     req.session.user = {
+//       id,
+//       username: profile.email,
+//     }
+//     // res.json({ id })
+//     res.redirect('/')
+//   } catch (error) {
+//     res.status(500).json({ error: 'Database Error: ' + String(error) })
+//   }
+// })
 

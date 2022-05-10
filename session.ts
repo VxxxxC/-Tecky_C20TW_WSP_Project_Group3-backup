@@ -3,11 +3,14 @@ import expressSession from 'express-session'
 import { env } from './env'
 
 declare module 'express-session' {
-  interface SessionData {
-    counter?: number
-    user?: {
-      id: number
-      usernames: string
+    interface SessionData {
+        counter?: number
+        user?: {
+            id: number
+            usernames: string,
+            is_admin:boolean
+        }
+        grant?:GrantSession
     }
     // grant?:GrantSession
   }

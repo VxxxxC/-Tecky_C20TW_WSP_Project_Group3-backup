@@ -12,7 +12,9 @@ import fs from 'fs';
 import { client } from './db';
 import path from 'path';
 import { sessionMiddleware } from './session';
-import { adminGuard, userGuard } from './guard';
+import { adminGuard } from './guard';
+import { catchError } from './error';
+// import { grantMiddleware } from './grant';
 
 const port = 8001;
 const app = express();
@@ -212,7 +214,7 @@ app.get('/main', async (req, res) => {
 
 // transfer post title , content, image from /post/ to content pages
 app.get('/post/:id', async (req, res) => {
-  // console.log(req.params.id);
+  console.log(req.params.id);
   let id = req.params.id
   let result = await client.query('select id, title,content,image from post where id = $1', [id])
   let posts = result.rows[0]
@@ -222,6 +224,81 @@ app.get('/post/:id', async (req, res) => {
 
 //adminGuard and userGuard
 
-app.use('/admin', adminGuard, express.static('admin'))
-app.use('/member', userGuard, express.static('member'))
+app.use('/admin',adminGuard,express.static('admin'))
 
+
+
+//edit function
+app.patch('/post/:id',adminGuard,(req,res)=>{
+  let user_id = req.session.user?.id
+  let id =+req.params.id
+  if(!id){
+    res.status(400).json({error:('Missing id in req.params')})
+    return
+  }
+  console.log('req.body:',req.body)
+  let content = req.body.content?.trim()
+  if(!content){
+    res.status(400).json({error:('post cannot be empty')})
+    return
+  }
+  client.query(/*sql*/
+  `
+  update post set content = $1 where id = $2 
+  `,[content,id]
+  )
+  .then(result => {
+    //if (result.rowCount) {
+      res.json({ ok: true })
+      client
+        .query(
+          /* sql */ `
+select image from post where id = $1
+`,
+          [id],
+        )
+        .then(result => {
+          let image = result.rows[0].image
+          io.emit('updated memo', { id, content, image, user_id })
+        })
+        .catch(error => {
+          console.error('failed to update:', error)
+        })
+    /*} else {
+      res.status(400).json({
+        error: 'failed',
+      })
+    }*/
+  })
+  .catch(catchError(res))
+})
+
+
+
+//delete post
+app.delete('/post/:id',adminGuard,(req,res)=>{
+  let id =+req.params.id
+  if(!id){
+    res.status(400).json({error:('Missing id in req.params')})
+    return
+  }
+  client.query(/*sql*/
+  `
+  delete from post where id = $1 and users_id =$2
+  `,[id,req.session.user?.id]
+  )
+  .then(result => {
+    if (result.rowCount) {
+      res.json({ ok: true })
+          io.emit('delete memo', id)
+    } else {
+      res.status(400).json({
+        error: 'failed',
+      })
+    }
+  })
+  .catch(catchError(res))
+})
+
+//google login
+// app.use(grantMiddleware)

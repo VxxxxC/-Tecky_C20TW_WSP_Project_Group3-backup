@@ -1,10 +1,12 @@
-//----------------Socket.IO client side--------------------
-const socket = io.connect();
+// const { RESERVED_EVENTS } = require("socket.io/dist/socket");
 
-socket.on("toClient", (msg) => {
-  console.log(msg);
-});
-socket.emit("toServer", "client side at home page respond to backend server");
+//----------------Socket.IO client side--------------------
+// const socket = io.connect();
+
+// socket.on("toClient", (msg) => {
+//   console.log(msg);
+// });
+// socket.emit("toServer", "client side at home page respond to backend server");
 
 //---------querySelector area-----------------
 let buttonList = document.querySelector(".button-list");
@@ -73,6 +75,7 @@ async function getPost() {
         src="https://dvg5hr78c8hf1.cloudfront.net/2016/06/21/15/37/47/4b0b2595-20dc-40bc-a963-e8e53b2fd5bf/1*2cAvoDuXZp_dy49WqNVVrA.jpeg">
       <div class="userid-postdate">${post.created_at}</div>
     </div>    
+    <a href="/content-page.html?id=${post.id}">more detail</a>
   </div>
   </a>`;
   }
@@ -130,20 +133,25 @@ buttonList.addEventListener("click", (event) => {
       }" style="text-decoration:none; color:black">
         <div class="content-box cnt${post.id}">
     <div class="inner-upper-content">
-      <i class="upper-content-top-icon fa-solid fa-eye"></i>
+    <button class="edit-btn">
+    <i class="upper-content-top-icon bi bi-eye"></i>
+    </button>
+   
       <img class="content-img"
         src="${"/img/" + post.image}">
-      <i class="upper-content-bottom-icon fa-solid fa-heart"></i>
+      <i class="upper-content-bottom-icon bi bi-heart"></i>
     </div>
     <div class="inner-center-content">${post.title}
       <div class="content-tag">hashtag</div>
       <p class="content">${post.content}</p>
+    
     </div>
     <div class="inner-bottom-content">
       <img class="user-pic"
         src="https://dvg5hr78c8hf1.cloudfront.net/2016/06/21/15/37/47/4b0b2595-20dc-40bc-a963-e8e53b2fd5bf/1*2cAvoDuXZp_dy49WqNVVrA.jpeg">
       <div class="userid-postdate">${post.created_at}</div>
     </div>
+ 
   </div>
   </a>`;
     }
@@ -164,8 +172,22 @@ fetch("/is_admin")
   .then((json) => {
     let admin = document.querySelector("#admin");
 
+<<<<<<< HEAD
+fetch('/is_admin')
+.then(res => res.json())
+.catch(error => ({ error: String(error) }))
+.then(json => {
+
+  let admin = document.querySelector('.admin')
+  
+  admin.textContent = json.role === 'admin' ? 'Admin' : 'Member';
+
+})
+
+=======
     admin.textContent = json.role === "admin" ? "Admin" : "Member";
   });
+>>>>>>> 1a801c3e77492d133a22c0d887f475fdf6ac2bce
 
 //   function ajaxForm(options) {
 //     const { form, getBody, cb } = options
@@ -226,6 +248,20 @@ fetch("/is_admin")
 //   },
 // })
 
+<<<<<<< HEAD
+
+
+
+// fetch('/logout')
+// .then(res=>res.JSON())
+// .catch(error => ({ error: String(error) }))
+// .then(json=>{
+//   let logout = document.querySelector('#logout')
+//   logout.textContent = 'login';
+// })
+
+
+=======
 // function loadAdminStyle() {
 //   let link = document.createElement('link')
 //   link.id = 'admin-style'
@@ -240,3 +276,4 @@ fetch("/is_admin")
 //   link.remove()
 //  }
 // }
+>>>>>>> 1a801c3e77492d133a22c0d887f475fdf6ac2bce
