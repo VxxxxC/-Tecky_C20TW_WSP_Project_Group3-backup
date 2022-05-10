@@ -1,4 +1,5 @@
 import expressSession from 'express-session'
+import { GrantSession } from 'grant'
 import { env } from './env'
 
 declare module 'express-session' {
@@ -8,6 +9,7 @@ declare module 'express-session' {
             id: number
             usernames: string
         }
+        // grant?:GrantSession
     }
 }
 

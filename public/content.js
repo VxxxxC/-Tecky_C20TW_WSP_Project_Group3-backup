@@ -78,6 +78,4 @@ async function postContent() {
        `;
 }
 
-
-
 postContent();

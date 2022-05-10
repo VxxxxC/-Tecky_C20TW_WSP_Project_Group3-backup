@@ -12,6 +12,7 @@ import fs from 'fs';
 import { client } from './db';
 import path from 'path';
 import { sessionMiddleware } from './session';
+import { adminGuard,userGuard } from './guard';
 
 const port = 8001;
 const app = express();
@@ -197,17 +198,13 @@ app.get('/post/:id', async (req, res) => {
   // console.log(req.params.id);
   let id = req.params.id
   let result = await client.query('select id, title,content,image from post where id = $1', [id])
-  let post = result.rows[0]
-  res.json({ post })
+  let posts = result.rows[0]
+  res.json({ posts })
 })
 
 
+//adminGuard and userGuard
 
- //app.get('./post', (req, res) => {
- //   let {title,content} = req.body
- // if(!title){
- //   res.status(404).json({error:'wrong title'})
- // }
- // if(!content){
- //   res.status(404).json({error:'wrong content'})
- // }
+app.use('/admin',adminGuard,express.static('admin'))
+app.use('/member',userGuard,express.static('member'))
+

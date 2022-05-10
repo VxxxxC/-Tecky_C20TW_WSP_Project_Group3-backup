@@ -4,6 +4,7 @@ import { client } from "./db";
 import { catchError } from "./error";
 import { print } from "listening-on";
 import "./session";
+import { type } from "os";
 // import { sessionMiddleware } from "./session";
 
 export let userRoutes = express.Router();
@@ -126,16 +127,15 @@ userRoutes.post("/logout", (req, res) => {
       console.error("logout", error);
     }
     res.json({ role: "guest" });
-    res.redirect("/index");
   });
 });
 
 //--role--
-userRoutes.get("/role", (req, res) => {
-  if (req.session?.user) {
-    res.json({ role: "admin" });
-  } else {
-    res.json({ role: "otheruser" });
+userRoutes.get("/is_admin", (req, res) => {
+  if (true) {
+    res.json({ role: "admin" })
+  } else if(req.session?.user) {
+    res.json({ role: "member" })
   }
 });
 
@@ -146,3 +146,7 @@ userRoutes.get("/session", (req, res) => {
     res.json({});
   }
 });
+
+
+
+
