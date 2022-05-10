@@ -7,9 +7,10 @@ declare module 'express-session' {
         counter?: number
         user?: {
             id: number
-            usernames: string
+            usernames: string,
+            is_admin:boolean
         }
-        // grant?:GrantSession
+        grant?:GrantSession
     }
 }
 
