@@ -11,11 +11,11 @@
 //---------querySelector area-----------------
 let buttonList = document.querySelector(".button-list");
 let pageNumber = document.querySelector("#page-number");
-let pageNumberText = pageNumber.textContent;
+let pageNumberText = pageNumber.innerHTML;
 let preBtn = document.querySelector(".previous-page");
 let nextBtn = document.querySelector(".next-page");
 
-//----------------check current page function-------------
+//----------------TODO: FIXME: check current page function-------------
 
 function equalOfPage(pageNum, contentInd) {
   if (pageNum % 1 === 0 && contentInd % 8 === 0) {
@@ -26,7 +26,11 @@ function equalOfPage(pageNum, contentInd) {
 }
 
 function checkCurrentPage() {
-  if (equalOfPage(pageNumberText, contentIndex) === true) {
+  if (equalOfPage(pageNumberText, contentIndex) === false) {
+    console.log({ equalOfPage: false });
+    return;
+  } else {
+    console.log({ equalOfPage: true });
     pageNumber.style.background = "rgba(40, 40, 40, 0.8)";
     pageNumber.style.color = "white";
   }
@@ -75,14 +79,14 @@ async function getPost() {
   </div>
   </a>`;
   }
-  checkCurrentPage(); // FIXME: 功能正常，但未能準確判斷
+  pagination();
 }
 getPost();
 
-//-----------------TODO: FIXME: pagination----------------------------
+//-----------------pagination----------------------------
 
 async function pagination() {
-  pageNumber.innerHTML = "";
+  buttonList.removeChild(pageNumber);
 
   let res = await fetch("/main");
   let result = await res.json();
@@ -90,38 +94,29 @@ async function pagination() {
   for (let post of posts) {
     console.log(post.id);
 
-    if (post.id % 8 === 0) {
-      let buttonNum = 0;
-      buttonNum++;
+    if (post.id % 8 === 1) {
+      let buttonNum;
+      buttonNum = Math.ceil(post.id / 8);
+      console.log({ "create page number": buttonNum });
 
-      let newPageButton = document.createElement("div");
-      newPageButton.classList.add("page-number");
-      newPageButton.textContent += buttonNum;
+      let newPageButton = pageNumber.cloneNode(true);
+      newPageButton.className = "Page-" + buttonNum;
+      newPageButton.innerHTML += buttonNum;
 
-      document.body.appendChild(newPageButton);
+      buttonList.appendChild(newPageButton);
     }
-
-    // function createPageButton() {
-    //   if (post.id % 8 === 0) {
-    //     totalPage += post.id / 8;
-    //     for (let i = 1; i < totalPage; i++) {
-    //       console.log({ i: i });
-    //     }
-    //   }
-    // }
-    // createPageButton();
   }
 }
-// pagination();
 
 //---------------choosing page data from database-----------
+
 buttonList.addEventListener("click", (event) => {
   console.log(event.target.innerHTML);
 
   contentIndex = (event.target.innerText - 1) * 8;
   console.log({ contentIndex: contentIndex });
 
-  async function changePage() {
+  async function clickPage() {
     postsContainer.innerHTML = "";
 
     let res = await fetch("/main", {
@@ -161,8 +156,7 @@ buttonList.addEventListener("click", (event) => {
   </a>`;
     }
   }
-  checkCurrentPage(); // FIXME: 功能正常，但未能準確判斷
-  changePage();
+  clickPage();
 });
 
 // let pageBtn = document.querySelector("#page");
@@ -170,10 +164,15 @@ buttonList.addEventListener("click", (event) => {
 // newPage.textContent = 3;
 // pageBtn.insertAdjacentElement("beforeend", newPage);
 
-
 // get what role is the user:normal user or admin
 
+fetch("/is_admin")
+  .then((res) => res.json())
+  .catch((error) => ({ error: String(error) }))
+  .then((json) => {
+    let admin = document.querySelector("#admin");
 
+<<<<<<< HEAD
 fetch('/is_admin')
 .then(res => res.json())
 .catch(error => ({ error: String(error) }))
@@ -185,8 +184,11 @@ fetch('/is_admin')
 
 })
 
+=======
+    admin.textContent = json.role === "admin" ? "Admin" : "Member";
+  });
+>>>>>>> 1a801c3e77492d133a22c0d887f475fdf6ac2bce
 
- 
 //   function ajaxForm(options) {
 //     const { form, getBody, cb } = options
 //     form.addEventListener('submit', event => {
@@ -207,8 +209,6 @@ fetch('/is_admin')
 //         .then(cb)
 //     })
 //   }
-
-
 
 //   ajaxForm({
 //     form: loginForm,
@@ -231,7 +231,6 @@ fetch('/is_admin')
 //     },
 //   })
 
-
 // ajaxForm({
 //   form: logout-Form,
 //   getBody() {
@@ -249,6 +248,7 @@ fetch('/is_admin')
 //   },
 // })
 
+<<<<<<< HEAD
 
 
 
@@ -261,3 +261,19 @@ fetch('/is_admin')
 // })
 
 
+=======
+// function loadAdminStyle() {
+//   let link = document.createElement('link')
+//   link.id = 'admin-style'
+//   link.rel = 'stylesheet'
+//   link.href = '/admin/admin.css'
+//   document.head.appendChild(link)
+// }
+
+// function unloadUserStyle() {
+//   let link = document.querySelector('#user.style')
+// if (link){
+//   link.remove()
+//  }
+// }
+>>>>>>> 1a801c3e77492d133a22c0d887f475fdf6ac2bce

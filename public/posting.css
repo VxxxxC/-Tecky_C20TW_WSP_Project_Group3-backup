@@ -194,11 +194,6 @@ body {
 }
 
 
-
-
-
-
-
 /* FIXME: 暫時hardcoded，supposed應該user已經登入同修改文章先會出現Delete button */
 .delete-button {
   position: relative;
@@ -226,4 +221,36 @@ body {
 
 .delete-button:hover {
   background: rgba(255, 0, 0, 0.8);
+}
+
+#post-tag {
+  width: 400px;
+  height: 300px;
+  border: 1px solid rgba(128, 128, 128, 0.35);
+  border-radius: 30px;
+  margin: 30px;
+
+
+  overflow: auto;
+}
+
+.tags {
+  font-size: 15px;
+  margin: 20px;
+  width: 80px;
+  height: 30px;
+  background: rgba(128, 128, 128, 0.15);
+
+  border-radius: 10px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgba(128, 128, 128, 0.65);
+  text-align: center;
+}
+
+.tag-content {
+  display: flex;
+  flex-wrap: wrap;
 }
