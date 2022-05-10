@@ -94,7 +94,7 @@ async function pagination() {
     if (post.id % 8 === 1) {
       let buttonNum;
       buttonNum = Math.ceil(post.id / 8);
-      console.log(post.id, buttonNum);
+      console.log({ "create page number": buttonNum });
 
       let newPageButton = pageNumber.cloneNode(true);
       newPageButton.className = "Page-" + buttonNum;
@@ -156,23 +156,17 @@ buttonList.addEventListener("click", (event) => {
 // newPage.textContent = 3;
 // pageBtn.insertAdjacentElement("beforeend", newPage);
 
-
 // get what role is the user:normal user or admin
 
+fetch("/is_admin")
+  .then((res) => res.json())
+  .catch((error) => ({ error: String(error) }))
+  .then((json) => {
+    let admin = document.querySelector("#admin");
 
-fetch('/is_admin')
-.then(res => res.json())
-.catch(error => ({ error: String(error) }))
-.then(json => {
+    admin.textContent = json.role === "admin" ? "Admin" : "Member";
+  });
 
-  let admin = document.querySelector('#admin')
-  
-  admin.textContent = json.role === 'admin' ? 'Admin' : 'Member';
-
-})
-
-
- 
 //   function ajaxForm(options) {
 //     const { form, getBody, cb } = options
 //     form.addEventListener('submit', event => {
@@ -194,8 +188,6 @@ fetch('/is_admin')
 //     })
 //   }
 
-
-
 //   ajaxForm({
 //     form: loginForm,
 //     getBody() {
@@ -216,7 +208,6 @@ fetch('/is_admin')
 //       loadUserStyle()
 //     },
 //   })
-
 
 // ajaxForm({
 //   form: logout-Form,
@@ -241,8 +232,7 @@ fetch('/is_admin')
 //   link.rel = 'stylesheet'
 //   link.href = '/admin/admin.css'
 //   document.head.appendChild(link)
-// } 
-
+// }
 
 // function unloadUserStyle() {
 //   let link = document.querySelector('#user.style')

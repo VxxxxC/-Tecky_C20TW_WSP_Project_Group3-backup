@@ -99,20 +99,26 @@ document
     console.log("posting...");
   });
 
-//--------------------------------------------------
+//-------------------------Tags-------------------------
 
-// await fetch("/post", {
-//   method: "POST",
-//   headers: {
-//     "content-type": "application/json",
-//   },
-//   body: JSON.stringify({
-//     title: title.value,
-//     content: content,
-//   }),
-// })
-//   .then((res) => res.json())
-//   .catch((err) => ({ error: string(err) }))
-//   .then((json) => {
-//     console.log(json);
-//   });
+let tags = document.querySelector(".tags");
+let tagList = document.querySelector(".tag-list");
+let tagContent = document.querySelector(".tag-content");
+
+tags.addEventListener("keypress", (event) => {
+  let tagInput = event.target;
+  let inputValue = event.target.value;
+
+  if (event.target.value !== "" && event.key == "Enter") {
+    console.log(inputValue);
+    let newTag = tags.cloneNode(true);
+    newTag.textContent = inputValue;
+    newTag.addEventListener("click", (event) => {
+      console.log(event.target.textContent);
+      tagInput.value = event.target.textContent;
+      newTag.remove();
+    });
+    tagContent.appendChild(newTag);
+    event.target.value = "";
+  }
+});
