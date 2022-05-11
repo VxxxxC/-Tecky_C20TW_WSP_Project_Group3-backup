@@ -87,7 +87,7 @@ async function getPost() {
 
 
   let deleteBtnList = document.querySelectorAll('.delete-btn')
-  let contentBoxList = document.querySelectorAll('.contentBox')
+  let contentBox = document.querySelector('.contentBox')
   
   deleteBtnList.forEach(deleteBtn=>
     {deleteBtn.addEventListener('click',()=>{
@@ -113,7 +113,7 @@ async function getPost() {
               Swal.fire('Cannot Delete', json.error, 'error')
             } else {
               Swal.fire('Deleted!', 'The post is deleted.', 'success')
-              contentBoxList.remove()
+              contentBox.remove()
             }
           })
       }
@@ -208,95 +208,42 @@ buttonList.addEventListener("click", (event) => {
 
 // get what role is the user:normal user or admin
 
-fetch("/is_admin")
-  .then((res) => res.json())
-  .catch((error) => ({ error: String(error) }))
-  .then((json) => {
-    let admin = document.querySelector("#admin");
-
-fetch('/is_admin')
-.then(res => res.json())
-.catch(error => ({ error: String(error) }))
-.then(json => {
-
-  let admin = document.querySelector('.admin')
+  fetch('/is_admin')
+  .then(res => res.json())
+  .catch(error => ({ error: String(error) }))
+  .then(json => {
+    let admin = document.querySelector('.admin')
+    admin.textContent = json.role === 'admin' ? 'Admin' : 'Member';
   
-  admin.textContent = json.role === 'admin' ? 'Admin' : 'Member';
-
-
-})
-
-    admin.textContent = json.role === "admin" ? "Admin" : "Member";
-  });
-
-//   function ajaxForm(options) {
-//     const { form, getBody, cb } = options
-//     form.addEventListener('submit', event => {
-//       event.preventDefault()
-//       Promise.resolve(getBody)
-//         .then(getBody => JSON.stringify(getBody()))
-//         .then(body =>
-//           fetch(form.action, {
-//             method: form.method,
-//             headers: {
-//               'Content-Type': 'application/json',
-//             },
-//             body,
-//           }),
-//         )
-//         .then(res => res.json())
-//         .catch(error => ({ error: String(error) }))
-//         .then(cb)
-//     })
-//   }
-
-//   ajaxForm({
-//     form: loginForm,
-//     getBody() {
-//       return {
-//         username: loginForm.username.value,
-//         password: loginForm.password.value,
-//       }
-//     },
-//     cb: json => {
-//       if (json.error) {
-//         Swal.fire({
-//           icon: 'error',
-//           title: 'Failed to login: ' + json.error,
-//         })
-//         return
-//       }
-//       user_id = json.id
-//       loadUserStyle()
-//     },
-//   })
-
-// ajaxForm({
-//   form: logout-Form,
-//   getBody() {
-//     return {}
-//   },
-//   cb: json => {
-//     if (json.error) {
-//       Swal.fire({
-//         icon: 'error',
-//         title: 'Failed to logout: ' + json.error,
-//       })
-//       return
-//     }
-//     unloadAdminStyle()
-//   },
-// })
+  })
 
 
 
-
-// fetch('/logout')
-// .then(res=>res.JSON())
-// .catch(error => ({ error: String(error) }))
-// .then(json=>{
-//   let logout = document.querySelector('#logout')
-//   logout.textContent = 'login';
-// })
+  
 
 
+
+  let logoutForm = document.querySelector('#logout-form')
+  logoutForm.addEventListener('submit', (e)=>{
+    e.preventDefault()
+    fetch('/logout',{
+      method: 'post',
+    })
+    .then(res => res.json())
+    .then(json => {
+  console.log('logout')
+  Swal.fire({
+    icon: 'success',
+    title: 'Logout',
+    text: 'Already logout!',
+    footer: '<a href="login.html">Log in</a>'
+  })
+
+      },
+    //  window.location.href = '/'
+    )
+    .catch(error => ({ error: String(error) }))
+  
+    })
+
+  

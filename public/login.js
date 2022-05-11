@@ -12,10 +12,20 @@ function validateForm() {
 
   //--login method----
 
-  fetch('/session')
+loginForm.addEventListener('submit', (e)=>{
+  e.preventDefault()
+  fetch('/login',{
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({username:loginForm.username.value, password:loginForm.password.value})
+  })
   .then(res => res.json())
-  .catch(error => ({ error: String(error) }))
   .then(json => {
+  //   console.log(json);
+  // console.log('hihi');
+
     if (json.error) {
       const Toast = Swal.mixin({
         toast: true,
@@ -33,14 +43,16 @@ function validateForm() {
         icon: 'error',
         title: 'Failed to auto login: ' + json.error,
       })
-      console.error('failed to check role:', json.error)
-      return
+      // console.error('failed to check role:', json.error)
+      // return
     }
-    user_id = json.id
-    if (json.username) {
-      loadUserStyle()
-    }
+    window.location.href = '/'
   })
+  .catch(error => ({ error: String(error) }))
+
+
+})
+
 
 
 

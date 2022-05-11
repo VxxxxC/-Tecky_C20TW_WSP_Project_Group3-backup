@@ -7,11 +7,10 @@ import "./session";
 import { type } from "os";
 import fetch from 'node-fetch'
 import { adminGuard } from "./guard";
-// import { grantMiddleware } from "./grant";
 // import { sessionMiddleware } from "./session";
 
 export let userRoutes = express.Router();
-userRoutes.use(express.urlencoded({ extended: false }));
+// userRoutes.use(express.urlencoded({ extended: true }));
 // userRoutes.use(sessionMiddleware);
 
 export type user = {
@@ -88,10 +87,13 @@ userRoutes.post("/login", (req, res) => {
   client
     .query(
       /**sql */ `
-          select id, usernames,passwords,is_admin from users where usernames ='${username}'
-          `
+          select id, usernames,passwords,is_admin from users where usernames = $1
+          `, [username]
     )
     .then((result: any) => {
+      let user = result.rows
+      console.log({user});
+      
       let username = result.rows[0].usernames;
    //   console.log(username);
       
@@ -103,12 +105,10 @@ userRoutes.post("/login", (req, res) => {
       }
       let password = result.rows[0].passwords;
       if (!password) {
-  //      console.log('password not found');
         
         res.status(400).json({ error: "password not found" });
         return;
       }
-  //    console.log('係呢到啦！');
 
       req.session.user = {
         id: result.rows[0].id,
@@ -119,29 +119,26 @@ userRoutes.post("/login", (req, res) => {
  //     console.log(req.session.user)
       
     //  res.json({id:result.rows[0].id})
-      res.redirect("/");
+    console.log(req.session.user);
+    
+      res.json({message:'Login successful!'})
     })
     .catch(catchError(res));
 });
 
-// //logout
-// userRoutes.post("/logout", (req, res) => {
-//   req.session.destroy((error) => {
-//     if (error) {
-//       console.error("logout", error);
-//     }
-//     res.redirect('/');
-//   });
-// });
+//logout
+userRoutes.post("/logout", (req, res) => {
+  req.session.destroy((error) => {
+    if (error) {
+      console.error("logout", error);
+    }
+    // res.redirect('/');
+    res.json({message:'Login successful!'})
+  });
+});
 
 //--role--
 userRoutes.get("/is_admin", (req, res) => {
-  // if (true) {
-  //   res.json({ role: "admin" })
-  // } else if(req.session?.user) {
-  //   res.json({ role: "member" })
-  // }
-
   if(req.session.user){
     if(req.session.user.is_admin){
       res.json({ role: "admin" })
@@ -157,72 +154,6 @@ userRoutes.get("/session", (req, res) => {
   if (req.session?.user) {
     res.json(req.session.user);
   } else {
-    res.json({});
+    res.json({error:'User does not exist!'});
   }
 });
-
-// //google login
-// type GoogleProfile = {
-//   email: string
-//   picture: string
-// }
-
-// userRoutes.get('/login/google', async (req, res) => {
-//   console.log('login with google...')
-//   console.log('session:', req.session)
-//   let access_token = req.session?.grant?.response?.access_token
-//   if (!access_token) {
-//     res.status(400).json({ error: 'missing access_token in grant session' })
-//     return
-//   }
-
-//   let profile : GoogleProfile
-//   try {
-//     let googleRes = await fetch(
-//       `https://www.googleapis.com/oauth2/v2/userinfo`,
-//       {
-//         headers: { Authorization: 'Bearer ' + access_token },
-//       },
-//     )
-//     profile = await googleRes.json()
-//   } catch (error) {
-//     res.status(502).json({ error: 'Failed to get user info from Google' })
-//     return
-//   }
-
-//   try {
-//     // try to lookup existing users
-//     let result = await client.query(
-//       /* sql */ `
-// select id from users
-// where username = $1
-// `,
-//       [profile.email],
-//     )
-//     let user = result.rows[0]
-
-//     // auto register if this is a new user
-//     if (!user) {
-//       result = await client.query(
-//         /* sql */ `
-// insert into users
-// (usernames) values ($1)
-// returning id
-// `,
-//         [profile.email],
-//       )
-//       user = result.rows[0]
-//     }
-
-//     let id = user.id
-//     req.session.user = {
-//       id,
-//       username: profile.email,
-//     }
-//     // res.json({ id })
-//     res.redirect('/')
-//   } catch (error) {
-//     res.status(500).json({ error: 'Database Error: ' + String(error) })
-//   }
-// })
-

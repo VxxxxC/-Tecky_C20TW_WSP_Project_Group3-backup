@@ -300,6 +300,3 @@ app.delete('/post/:id',adminGuard,(req,res)=>{
   })
   .catch(catchError(res))
 })
-
-//google login
-// app.use(grantMiddleware)
