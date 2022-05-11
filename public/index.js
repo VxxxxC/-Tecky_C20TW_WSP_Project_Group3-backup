@@ -227,18 +227,17 @@ buttonList.addEventListener("click", (event) => {
   logoutForm.addEventListener('submit', (e)=>{
     e.preventDefault()
     fetch('/logout',{
-      method: 'post',
+      method: 'POST',
     })
     .then(res => res.json())
     .then(json => {
-  console.log('logout')
+  console.log(json)
   Swal.fire({
     icon: 'success',
     title: 'Logout',
     text: 'Already logout!',
     footer: '<a href="login.html">Log in</a>'
   })
-
       },
       window.location.href = 'http://localhost:8001/login.html'
     )
