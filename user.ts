@@ -133,7 +133,8 @@ userRoutes.post("/logout", (req, res) => {
       console.error("logout", error);
     }
     // res.redirect('/login')
-    res.json({message:'Logout successful!'})
+    // res.json({message:'Logout successful!'})
+    res.json({ role: "guest" })
   });
 });
 
