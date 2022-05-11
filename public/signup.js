@@ -9,12 +9,26 @@ function validateForm() {
   }
 
 
+
+
+
 let signupForm = document.querySelector('#sign-form');
 
-fetch('/session')
+
+loginForm.addEventListener('submit', (e)=>{
+  e.preventDefault()
+  fetch('/signup',{
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({username:signupForm.username.value, password:signupForm.password.value})
+  })
   .then(res => res.json())
-  .catch(error => ({ error: String(error) }))
   .then(json => {
+  //   console.log(json);
+  // console.log('hihi');
+
     if (json.error) {
       const Toast = Swal.mixin({
         toast: true,
@@ -32,60 +46,10 @@ fetch('/session')
         icon: 'error',
         title: 'Failed to auto login: ' + json.error,
       })
-      console.error('failed to check role:', json.error)
-      return
+      // console.error('failed to check role:', json.error)
+      // return
     }
-    user_id = json.id
-    if (json.username) {
-      loadUserStyle()
-      checkAllMemoOwnership()
-    }
+    window.location.href = '/'
   })
-
-  
-  function ajaxForm(options) {
-    const { form, getBody, cb } = options
-    form.addEventListener('submit', event => {
-      event.preventDefault()
-      Promise.resolve(getBody)
-        .then(getBody => JSON.stringify(getBody()))
-        .then(body =>
-          fetch(form.action, {
-            method: form.method,
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body,
-          }),
-        )
-        .then(res => res.json())
-        .catch(error => ({ error: String(error) }))
-        .then(cb)
-    })
-  }
-  
-  
-  ajaxForm({
-    form: signupForm,
-    getBody() {
-      if (signupForm.password.value !== signupForm.password2.value) {
-        throw 'password not matched'
-      }
-      return {
-        username: signupForm.username.value,
-        password: signupForm.password.value,
-      }
-    },
-    cb: json => {
-      if (json.error) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Failed to signup: ' + json.error,
-        })
-        return
-      }
-      user_id = json.id
-      loadUserStyle()
-      checkAllMemoOwnership()
-    },
-  })
+  .catch(error => ({ error: String(error) }))
+})

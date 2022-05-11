@@ -49,8 +49,6 @@ loginForm.addEventListener('submit', (e)=>{
     window.location.href = '/'
   })
   .catch(error => ({ error: String(error) }))
-
-
 })
 
 
