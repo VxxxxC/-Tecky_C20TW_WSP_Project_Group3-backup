@@ -17,24 +17,24 @@ let nextBtn = document.querySelector(".next-page");
 
 //----------------TODO: FIXME: check current page function-------------
 
-function equalOfPage(pageNum, contentInd) {
-  if (pageNum % 1 === 0 && contentInd % 8 === 0) {
-    return true;
-  } else {
-    return false;
-  }
-}
+// function equalOfPage(pageNum, contentInd) {
+//   if (pageNum % 1 === 0 && contentInd % 8 === 0) {
+//     return true;
+//   } else {
+//     return false;
+//   }
+// }
 
-function checkCurrentPage() {
-  if (equalOfPage(pageNumberText, contentIndex) === false) {
-    console.log({ equalOfPage: false });
-    return;
-  } else {
-    console.log({ equalOfPage: true });
-    pageNumber.style.background = "rgba(40, 40, 40, 0.8)";
-    pageNumber.style.color = "white";
-  }
-}
+// function checkCurrentPage() {
+//   if (equalOfPage(pageNumberText, contentIndex) === false) {
+//     console.log({ equalOfPage: false });
+//     return;
+//   } else {
+//     console.log({ equalOfPage: true });
+//     pageNumber.style.background = "rgba(40, 40, 40, 0.8)";
+//     pageNumber.style.color = "white";
+//   }
+// }
 
 //----------------get content data from server, and post to main page content preview-------------
 let contentIndex = 0;
@@ -75,8 +75,11 @@ async function getPost() {
         src="https://dvg5hr78c8hf1.cloudfront.net/2016/06/21/15/37/47/4b0b2595-20dc-40bc-a963-e8e53b2fd5bf/1*2cAvoDuXZp_dy49WqNVVrA.jpeg">
       <div class="userid-postdate">${post.created_at}</div>
     </div>    
+<<<<<<< HEAD
     <a href="/content-page.html?id=${post.id}">more detail</a>
     <button class="delete-btn">delete</button>
+=======
+>>>>>>> 48553bd117b92d00da76ddb386112e27859c4d7f
   </div>
   </a>`;
   }
@@ -200,6 +203,7 @@ fetch("/is_admin")
   .then((json) => {
     let admin = document.querySelector("#admin");
 
+<<<<<<< HEAD
 fetch('/is_admin')
 .then(res => res.json())
 .catch(error => ({ error: String(error) }))
@@ -224,3 +228,81 @@ fetch('/is_admin')
 // })
 
 
+=======
+    admin.textContent = json.role === "admin" ? "Admin" : "Member";
+  });
+
+//   function ajaxForm(options) {
+//     const { form, getBody, cb } = options
+//     form.addEventListener('submit', event => {
+//       event.preventDefault()
+//       Promise.resolve(getBody)
+//         .then(getBody => JSON.stringify(getBody()))
+//         .then(body =>
+//           fetch(form.action, {
+//             method: form.method,
+//             headers: {
+//               'Content-Type': 'application/json',
+//             },
+//             body,
+//           }),
+//         )
+//         .then(res => res.json())
+//         .catch(error => ({ error: String(error) }))
+//         .then(cb)
+//     })
+//   }
+
+//   ajaxForm({
+//     form: loginForm,
+//     getBody() {
+//       return {
+//         username: loginForm.username.value,
+//         password: loginForm.password.value,
+//       }
+//     },
+//     cb: json => {
+//       if (json.error) {
+//         Swal.fire({
+//           icon: 'error',
+//           title: 'Failed to login: ' + json.error,
+//         })
+//         return
+//       }
+//       user_id = json.id
+//       loadUserStyle()
+//     },
+//   })
+
+// ajaxForm({
+//   form: logout-Form,
+//   getBody() {
+//     return {}
+//   },
+//   cb: json => {
+//     if (json.error) {
+//       Swal.fire({
+//         icon: 'error',
+//         title: 'Failed to logout: ' + json.error,
+//       })
+//       return
+//     }
+//     unloadAdminStyle()
+//   },
+// })
+
+// function loadAdminStyle() {
+//   let link = document.createElement('link')
+//   link.id = 'admin-style'
+//   link.rel = 'stylesheet'
+//   link.href = '/admin/admin.css'
+//   document.head.appendChild(link)
+// }
+
+// function unloadUserStyle() {
+//   let link = document.querySelector('#user.style')
+// if (link){
+//   link.remove()
+//  }
+// }
+>>>>>>> 48553bd117b92d00da76ddb386112e27859c4d7f

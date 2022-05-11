@@ -83,9 +83,16 @@ document
     event.preventDefault();
     let formData = new FormData();
 
+    let tags = [];
+    for (let tag of tagContent.querySelectorAll(".tags")) {
+      tags.push(tag.textContent);
+    }
+    console.log({ tags });
+
     formData.append("image", titleImg.files[0]);
     formData.append("title", title.value);
     formData.append("content", content);
+    formData.append("tags", tags);
 
     for (const entry of formData.entries()) {
       console.log(entry);
@@ -102,7 +109,6 @@ document
 //-------------------------Tags-------------------------
 
 let tags = document.querySelector(".tags");
-let tagList = document.querySelector(".tag-list");
 let tagContent = document.querySelector(".tag-content");
 
 tags.addEventListener("keypress", (event) => {
@@ -120,5 +126,6 @@ tags.addEventListener("keypress", (event) => {
     });
     tagContent.appendChild(newTag);
     event.target.value = "";
+    console.log(tagContent.querySelectorAll(".tags"));
   }
 });

@@ -122,7 +122,7 @@ app.post('/post', async (req, res, next) => {
     filter: file => file.mimetype?.startsWith('image/') || false,
   })
   // console.log(req.body)
-  form.parse(req, async (err, fields, files: any) => {
+  form.parse(req, async (err, fields: any, files: any) => {
     if (err) console.log(err)
 
     console.log({
@@ -133,32 +133,49 @@ app.post('/post', async (req, res, next) => {
 
     if (fields.image === 'undefined') {
 
-      let title = fields.title
-      let content = fields.content
+      let title = fields.title;
+      let content = fields.content;
+      let tags = fields.tags;
+
+      let eachTag = tags.split(',')
 
       const input = {
-        'title': title,
-        'content': content,
+        title: title,
+        content: content,
+        tags: eachTag,
       }
+      console.log(input)
 
       await client.query('insert into post (title,content,created_at,updated_at) values ($1,$2,now(),now() );', [input.title, input.content])
+      for (let tag of eachTag) {
+        console.log(tag)
+        await client.query('insert into tags (name) values ($1);', [tag])
+      }
       res.status(200).json({ message: 'post created!' })
       return
 
     } else {
 
 
-      let title = fields.title
-      let content = fields.content
-      let image = files.image.newFilename
+      let title = fields.title;
+      let content = fields.content;
+      let image = files.image.newFilename;
+      let tags = fields.tags;
+
+      let eachTag = tags.split(',')
 
       const input = {
-        'title': title,
-        'content': content,
-        'image': image,
+        title: title,
+        content: content,
+        image: image,
+        tags: eachTag,
       }
 
       await client.query('insert into post (title,content,image,created_at,updated_at) values ($1,$2,$3,now(),now());', [input.title, input.content, input.image])
+      for (let tag of eachTag) {
+        console.log(tag)
+        await client.query('insert into tags (name) values ($1);', [tag])
+      }
       res.status(200).json({ message: 'post created!' })
     }
 

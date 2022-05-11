@@ -72,7 +72,7 @@ create table comment (
 
 create table tags(
   id serial primary key,
-  tag varchar(255) not null,
+  name varchar(255)
 
 );
 
@@ -94,7 +94,7 @@ create table post_tag(
   foreign key (tags_id) references tags(id)
 );
 -- below code for reset post ID serial primary key :
--- alter sequence post_id_seq restart with 1000;
+-- alter sequence post_id_seq restart with 1;
 
 
 -- below code 搵由OFFSET開始計 8行嘅DATA :
