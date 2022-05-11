@@ -14,9 +14,44 @@
 
 <body>
     <!--header-->
-    <div class="header">Blogger
-        <input type=button onClick="parent.location='index.html'" value='return home page'>
-    </div>
+    <header>
+        <div class="header-container">
+          <div class="left-header">
+            <a href="index.html" style="text-decoration:none">
+              <div class="left-selection website-name">
+                <div class="left-selection-box-content">ABC Website</div>
+              </div>
+            </a>
+      
+            <a href="posting.html" style="text-decoration:none">
+              <div class="left-selection post">
+                <div class="left-selection-box-content">刊登創作<span class="post-icon"><i
+                      class="fa-solid fa-pen-to-square"></i></span></div>
+              </div>
+            </a>
+          </div>
+      
+          <!-- TODO: 差reset password page -->
+      
+          <div class="right-header">
+            <!-- <a href="reset" style="text-decoration:none"> -->
+         
+      
+            <form id="logout-form" method="POST" action="/logout">
+              <div class="right-selection login">
+              <input type="submit" value="logout" name="logout">
+              </div>
+            </form>
+      
+            <a href="login.html" style="text-decoration:none">
+              <div class="right-selection login">
+                <div class="right-selection-box-content">Login</div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </header>
+      <div class="isolate"></div>
  
     <main>
         <!--content-->

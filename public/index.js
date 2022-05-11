@@ -240,7 +240,7 @@ buttonList.addEventListener("click", (event) => {
   })
 
       },
-    //  window.location.href = '/'
+      window.location.href = 'http://localhost:8001/login.html'
     )
     .catch(error => ({ error: String(error) }))
   
