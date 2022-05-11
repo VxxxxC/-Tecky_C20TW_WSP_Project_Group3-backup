@@ -136,6 +136,7 @@ app.post('/post', async (req, res, next) => {
       let title = fields.title;
       let content = fields.content;
       let tags = fields.tags;
+      let tags_id = []
 
       let eachTag = tags.split(',')
 
@@ -144,12 +145,40 @@ app.post('/post', async (req, res, next) => {
         content: content,
         tags: eachTag,
       }
-      console.log(input)
-
-      await client.query('insert into post (title,content,created_at,updated_at) values ($1,$2,now(),now() );', [input.title, input.content])
       for (let tag of eachTag) {
-        console.log(tag)
-        await client.query('insert into tags (name) values ($1);', [tag])
+        let id
+        console.log({ tag })
+        let result = await client.query('select id from tags where name = $1;', [tag])
+
+        if (!result.rows[0]) {
+          client.query('insert into tags (name) values ($1) returning id;', [tag])
+          let result = await client.query('select id from tags where name = $1;', [tag])
+          console.log(result)
+          let id = result.rows[0].id
+          console.log(`insert first tags into the table: ${id}`)
+
+          tags_id.push(id)
+          continue;
+        }
+        else {
+
+          id = result.rows[0].id
+          console.log(id)
+          if (!id) {
+            let result = await client.query('insert into tags (name) values ($1) returning id;', [tag])
+            id = result.rows[0].id
+            console.log('inserted:', id)
+          }
+          tags_id.push(id)
+        }
+
+      }
+
+      let result = await client.query('insert into post (title,content,created_at,updated_at) values ($1,$2,now(),now()) returning id;', [input.title, input.content])
+      let post_id = result.rows[0].id
+      console.log({ tags_id, post_id })
+      for (let tag_id of tags_id) {
+        await client.query('insert into post_tag (post_id, tags_id) values ($1,$2)', [post_id, tag_id])
       }
       res.status(200).json({ message: 'post created!' })
       return
@@ -161,6 +190,7 @@ app.post('/post', async (req, res, next) => {
       let content = fields.content;
       let image = files.image.newFilename;
       let tags = fields.tags;
+      let tags_id = []
 
       let eachTag = tags.split(',')
 
@@ -170,11 +200,40 @@ app.post('/post', async (req, res, next) => {
         image: image,
         tags: eachTag,
       }
-
-      await client.query('insert into post (title,content,image,created_at,updated_at) values ($1,$2,$3,now(),now());', [input.title, input.content, input.image])
       for (let tag of eachTag) {
-        console.log(tag)
-        await client.query('insert into tags (name) values ($1);', [tag])
+        let id
+        console.log({ tag })
+        let result = await client.query('select id from tags where name = $1;', [tag])
+
+        if (!result.rows[0]) {
+          client.query('insert into tags (name) values ($1) returning id;', [tag])
+          let result = await client.query('select id from tags where name = $1;', [tag])
+          console.log(result)
+          let id = result.rows[0].id
+          console.log(`insert first tags into the table: ${id}`)
+
+          tags_id.push(id)
+          continue;
+        }
+        else {
+
+          id = result.rows[0].id
+          console.log(id)
+          if (!id) {
+            let result = await client.query('insert into tags (name) values ($1) returning id;', [tag])
+            id = result.rows[0].id
+            console.log('inserted:', id)
+          }
+          tags_id.push(id)
+        }
+
+      }
+
+      let result = await client.query('insert into post (title,content,image,created_at,updated_at) values ($1,$2,$3,now(),now()) returning id;', [input.title, input.content, input.image])
+      let post_id = result.rows[0].id
+      console.log({ tags_id, post_id })
+      for (let tag_id of tags_id) {
+        await client.query('insert into post_tag (post_id, tags_id) values ($1,$2)', [post_id, tag_id])
       }
       res.status(200).json({ message: 'post created!' })
     }
@@ -200,7 +259,9 @@ app.post('/main', async (req, res) => {
   const { contentIndex } = req.body
   let result = await client.query('select * from post offset $1 fetch first 8 rows only', [contentIndex])
   let posts = result.rows
-  res.json({ posts })
+  // console.log({result})
+  // console.log({posts})
+  res.json({ posts }) // 一定要加上"posts" 否則pass唔到個request俾frontend fetch() handler
 })
 
 //----------------below app.get'/main' is for pagination in index.js-------------
@@ -224,31 +285,31 @@ app.get('/post/:id', async (req, res) => {
 
 //adminGuard and userGuard
 
-app.use('/admin',adminGuard,express.static('admin'))
+app.use('/admin', adminGuard, express.static('admin'))
 
 
 
 //edit function
-app.patch('/post/:id',adminGuard,(req,res)=>{
+app.patch('/post/:id', adminGuard, (req, res) => {
   let user_id = req.session.user?.id
-  let id =+req.params.id
-  if(!id){
-    res.status(400).json({error:('Missing id in req.params')})
+  let id = +req.params.id
+  if (!id) {
+    res.status(400).json({ error: ('Missing id in req.params') })
     return
   }
-  console.log('req.body:',req.body)
+  console.log('req.body:', req.body)
   let content = req.body.content?.trim()
-  if(!content){
-    res.status(400).json({error:('post cannot be empty')})
+  if (!content) {
+    res.status(400).json({ error: ('post cannot be empty') })
     return
   }
   client.query(/*sql*/
-  `
+    `
   update post set content = $1 where id = $2 
-  `,[content,id]
+  `, [content, id]
   )
-  .then(result => {
-    //if (result.rowCount) {
+    .then(result => {
+      //if (result.rowCount) {
       res.json({ ok: true })
       client
         .query(
@@ -264,40 +325,40 @@ select image from post where id = $1
         .catch(error => {
           console.error('failed to update:', error)
         })
-    /*} else {
-      res.status(400).json({
-        error: 'failed',
-      })
-    }*/
-  })
-  .catch(catchError(res))
+      /*} else {
+        res.status(400).json({
+          error: 'failed',
+        })
+      }*/
+    })
+    .catch(catchError(res))
 })
 
 
 
 //delete post
-app.delete('/post/:id',adminGuard,(req,res)=>{
-  let id =+req.params.id
-  if(!id){
-    res.status(400).json({error:('Missing id in req.params')})
+app.delete('/post/:id', adminGuard, (req, res) => {
+  let id = +req.params.id
+  if (!id) {
+    res.status(400).json({ error: ('Missing id in req.params') })
     return
   }
   client.query(/*sql*/
-  `
+    `
   delete from post where id = $1 and users_id =$2
-  `,[id,req.session.user?.id]
+  `, [id, req.session.user?.id]
   )
-  .then(result => {
-    if (result.rowCount) {
-      res.json({ ok: true })
-          io.emit('delete memo', id)
-    } else {
-      res.status(400).json({
-        error: 'failed',
-      })
-    }
-  })
-  .catch(catchError(res))
+    .then(result => {
+      if (result.rowCount) {
+        res.json({ ok: true })
+        io.emit('delete memo', id)
+      } else {
+        res.status(400).json({
+          error: 'failed',
+        })
+      }
+    })
+    .catch(catchError(res))
 })
 
 //google login

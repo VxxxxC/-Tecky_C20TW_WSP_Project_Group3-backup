@@ -93,9 +93,24 @@ create table post_tag(
   tags_id integer,
   foreign key (tags_id) references tags(id)
 );
+
+
+/*
 -- below code for reset post ID serial primary key :
--- alter sequence post_id_seq restart with 1;
+alter sequence post_id_seq restart with 1;
 
 
 -- below code 搵由OFFSET開始計 8行嘅DATA :
--- select * from post offset 0 fetch first 8 rows only;
+select * from post offset 0 fetch first 8 rows only;
+
+*/
+
+/* 
+alter sequence post_id_seq restart with 1;
+alter sequence post_tag_id_seq restart with 1;
+alter sequence tags_id_seq restart with 1;
+
+delete from post_tag;
+delete from tags;
+delete from post;
+*/
