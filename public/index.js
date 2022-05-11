@@ -237,9 +237,11 @@ buttonList.addEventListener("click", (event) => {
     title: 'Logout',
     text: 'Already logout!',
     footer: '<a href="login.html">Log in</a>'
+  }).then (function(){
+    window.location.href = 'http://localhost:8001/login.html'
   })
       },
-      window.location.href = 'http://localhost:8001/login.html'
+      // window.location.href = 'http://localhost:8001/login.html'
     )
     .catch(error => ({ error: String(error) }))
   
