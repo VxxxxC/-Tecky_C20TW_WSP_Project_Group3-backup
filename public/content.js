@@ -80,34 +80,9 @@ async function postContent() {
     });
   });
 
-  // let deleteBtn = document.querySelector('.delete-btn')
-  // deleteBtn.addEventListener('click',()=>{
-  //   console.log('delete post')
-  //   Swal.fire({
-  //     title: 'Confirm to delete memo?',
-  //     text: `You are going to delete "${post.content}"`,
-  //     icon: 'warning',
-  //     showCancelButton: true,
-  //     confirmButtonColor: '#d33',
-  //     cancelButtonColor: '#333',
-  //     confirmButtonText: 'Confirm to delete',
-  //     cancelButtonText: 'Do not delete',
-  //   }).then(result => {
-  //     if (result.isConfirmed) {
-  //       fetch(`/post/` + post.id, { method: 'DELETE' })
-  //         .then(res => res.json())
-  //         .catch(err => ({ error: String(err) }))
-  //         .then(json => {
-  //           if (json.error) {
-  //             Swal.fire('Cannot Delete', json.error, 'error')
-  //           } else {
-  //             Swal.fire('Deleted!', 'The memo is deleted.', 'success')
-  //             postContainer.remove()
-  //           }
-  //         })
-  //     }
-  //   })
-  // })
+
 }
 
 postContent();
+
+

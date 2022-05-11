@@ -10,11 +10,9 @@ declare module 'express-session' {
             usernames: string,
             is_admin:boolean
         }
-        grant?:GrantSession
     }
-    // grant?:GrantSession
   }
-}
+
 
 
 

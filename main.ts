@@ -320,7 +320,7 @@ select image from post where id = $1
         )
         .then(result => {
           let image = result.rows[0].image
-          io.emit('updated memo', { id, content, image, user_id })
+          io.emit('updated post', { id, content, image, user_id })
         })
         .catch(error => {
           console.error('failed to update:', error)
@@ -337,29 +337,27 @@ select image from post where id = $1
 
 
 //delete post
-app.delete('/post/:id', adminGuard, (req, res) => {
-  let id = +req.params.id
-  if (!id) {
-    res.status(400).json({ error: ('Missing id in req.params') })
+app.delete('/post/:id',adminGuard,(req,res)=>{
+  let id =+req.params.id
+  console.log("test")
+  console.log(id)
+  if(!id){
+    res.status(400).json({error:('Missing id in req.params')})
     return
   }
   client.query(/*sql*/
-    `
-  delete from post where id = $1 and users_id =$2
-  `, [id, req.session.user?.id]
+  `
+  delete from post where id = $1 
+  `,[id] 
   )
-    .then(result => {
-      if (result.rowCount) {
-        res.json({ ok: true })
-        io.emit('delete memo', id)
-      } else {
-        res.status(400).json({
-          error: 'failed',
-        })
-      }
-    })
-    .catch(catchError(res))
+  .then(result => {
+    if (result.rowCount) {
+      res.json({ ok: true })
+    } else {
+      res.status(400).json({
+        error: 'failed',
+      })
+    }
+  })
+  .catch(catchError(res))
 })
-
-//google login
-// app.use(grantMiddleware)

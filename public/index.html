@@ -35,7 +35,7 @@
     <div class="right-header">
       <!-- <a href="reset" style="text-decoration:none"> -->
       <div class="right-selection guest">
-        <div class="right-selection-box-content admin logout">Guest</div>
+        <div class="right-selection-box-content admin">Guest</div>
       </div>
 
       <form id="logout-from" method="POST" action="/logout">
@@ -43,10 +43,6 @@
           <div class="right-selection-box-content" id="logout">Logout</div>
         </div>
       </form>
-
-      <div class="right-selection reset-password">
-        <div class="right-selection-box-content">Reset Password</div>
-      </div>
 
       <a href="login.html" style="text-decoration:none">
         <div class="right-selection login">
@@ -204,7 +200,12 @@
     <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"
       integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous">
     </script>
-    <script src="index.js"></script>
+ 
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script> -->
+    
+
+<script src="index.js"></script> 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
       integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous">
     </script>
@@ -214,5 +215,3 @@
   </div>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
-
-</html>
