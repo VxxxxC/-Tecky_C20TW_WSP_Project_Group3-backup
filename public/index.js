@@ -17,24 +17,24 @@ let nextBtn = document.querySelector(".next-page");
 
 //----------------TODO: FIXME: check current page function-------------
 
-// function equalOfPage(pageNum, contentInd) {
-//   if (pageNum % 1 === 0 && contentInd % 8 === 0) {
-//     return true;
-//   } else {
-//     return false;
-//   }
-// }
+function equalOfPage(pageNum, contentInd) {
+  if (pageNum % 1 === 0 && contentInd % 8 === 0) {
+    return true;
+  } else {
+    return false;
+  }
+}
 
-// function checkCurrentPage() {
-//   if (equalOfPage(pageNumberText, contentIndex) === false) {
-//     console.log({ equalOfPage: false });
-//     return;
-//   } else {
-//     console.log({ equalOfPage: true });
-//     pageNumber.style.background = "rgba(40, 40, 40, 0.8)";
-//     pageNumber.style.color = "white";
-//   }
-// }
+function checkCurrentPage() {
+  if (equalOfPage(pageNumberText, contentIndex) === false) {
+    console.log({ equalOfPage: false });
+    return;
+  } else {
+    console.log({ equalOfPage: true });
+    pageNumber.style.background = "rgba(40, 40, 40, 0.8)";
+    pageNumber.style.color = "white";
+  }
+}
 
 //----------------get content data from server, and post to main page content preview-------------
 let contentIndex = 0;
@@ -51,14 +51,15 @@ async function getPost() {
     body: JSON.stringify({ contentIndex }),
   });
 
-  let result = await res.json();
+  let result = await res.json()
   let posts = result.posts;
   console.log(posts);
 
+ 
+
   for (let post of posts) {
-    postsContainer.innerHTML += `<a href="/content-page.html?id=${
-      post.id
-    }" style="text-decoration:none; color:black">
+
+    postsContainer.innerHTML += `
     <div class="content-box cnt${post.id}">
     <div class="inner-upper-content">
       <i class="upper-content-top-icon fa-solid fa-eye"></i>
@@ -74,18 +75,57 @@ async function getPost() {
       <img class="user-pic"
         src="https://dvg5hr78c8hf1.cloudfront.net/2016/06/21/15/37/47/4b0b2595-20dc-40bc-a963-e8e53b2fd5bf/1*2cAvoDuXZp_dy49WqNVVrA.jpeg">
       <div class="userid-postdate">${post.created_at}</div>
+      <button class="delete-btn" id=btn${post.id}>delete</button>
     </div>    
-<<<<<<< HEAD
     <a href="/content-page.html?id=${post.id}">more detail</a>
-    <button class="delete-btn">delete</button>
-=======
->>>>>>> 48553bd117b92d00da76ddb386112e27859c4d7f
+
   </div>
-  </a>`;
+`;
+
   }
+
+
+
+  let deleteBtnList = document.querySelectorAll('.delete-btn')
+  let contentBox = document.querySelector('.contentBox')
+  
+  deleteBtnList.forEach(deleteBtn=>
+    {deleteBtn.addEventListener('click',()=>{
+    console.log('delete post')
+    console.log()
+    let postId = deleteBtn.id.replace('btn','')
+    Swal.fire({
+      title: 'Confirm to delete memo?',
+      text: `You are going to delete?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#333',
+      confirmButtonText: 'Confirm to delete',
+      cancelButtonText: 'Do not delete',
+    }).then(result => {
+      if (result.isConfirmed) {
+        fetch(`/post/` + postId, { method: 'DELETE' }) //reminder
+          .then(res => res.json())
+          .catch(err => ({ error: String(err) }))
+          .then(json => {
+            if (json.error) {
+              Swal.fire('Cannot Delete', json.error, 'error')
+            } else {
+              Swal.fire('Deleted!', 'The post is deleted.', 'success')
+              contentBox.remove()
+            }
+          })
+      }
+    })
+  })})
+  
+
   pagination();
 }
 getPost();
+
+// async function loadButton(){}
 
 //-----------------pagination----------------------------
 
@@ -155,35 +195,6 @@ buttonList.addEventListener("click", (event) => {
   </div>
   </a>`;
 
-    let deleteBtn = document.querySelector('.delete-btn')
-  deleteBtn.addEventListener('click',()=>{
-    console.log('delete post')
-    Swal.fire({
-      title: 'Confirm to delete memo?',
-      text: `You are going to delete "${post.content}"`,
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#d33',
-      cancelButtonColor: '#333',
-      confirmButtonText: 'Confirm to delete',
-      cancelButtonText: 'Do not delete',
-    }).then(result => {
-      if (result.isConfirmed) {
-        fetch(`/post/` + post.id, { method: 'DELETE' }) //reminder
-          .then(res => res.json())
-          .catch(err => ({ error: String(err) }))
-          .then(json => {
-            if (json.error) {
-              Swal.fire('Cannot Delete', json.error, 'error')
-            } else {
-              Swal.fire('Deleted!', 'The post is deleted.', 'success')
-              postContainer.remove()
-            }
-          })
-      }
-    })
-  })
-
 
     }
   }
@@ -197,112 +208,42 @@ buttonList.addEventListener("click", (event) => {
 
 // get what role is the user:normal user or admin
 
-fetch("/is_admin")
-  .then((res) => res.json())
-  .catch((error) => ({ error: String(error) }))
-  .then((json) => {
-    let admin = document.querySelector("#admin");
-
-<<<<<<< HEAD
-fetch('/is_admin')
-.then(res => res.json())
-.catch(error => ({ error: String(error) }))
-.then(json => {
-
-  let admin = document.querySelector('.admin')
+  fetch('/is_admin')
+  .then(res => res.json())
+  .catch(error => ({ error: String(error) }))
+  .then(json => {
+    let admin = document.querySelector('.admin')
+    admin.textContent = json.role === 'admin' ? 'Admin' : 'Member';
   
-  admin.textContent = json.role === 'admin' ? 'Admin' : 'Member';
-
-})
-
-    admin.textContent = json.role === "admin" ? "Admin" : "Member";
-  });
+  })
 
 
-// fetch('/logout')
-// .then(res=>res.JSON())
-// .catch(error => ({ error: String(error) }))
-// .then(json=>{
-//   let logout = document.querySelector('#logout')
-//   logout.textContent = 'login';
-// })
+
+  
 
 
-=======
-    admin.textContent = json.role === "admin" ? "Admin" : "Member";
-  });
 
-//   function ajaxForm(options) {
-//     const { form, getBody, cb } = options
-//     form.addEventListener('submit', event => {
-//       event.preventDefault()
-//       Promise.resolve(getBody)
-//         .then(getBody => JSON.stringify(getBody()))
-//         .then(body =>
-//           fetch(form.action, {
-//             method: form.method,
-//             headers: {
-//               'Content-Type': 'application/json',
-//             },
-//             body,
-//           }),
-//         )
-//         .then(res => res.json())
-//         .catch(error => ({ error: String(error) }))
-//         .then(cb)
-//     })
-//   }
+  let logoutForm = document.querySelector('#logout-form')
+  logoutForm.addEventListener('submit', (e)=>{
+    e.preventDefault()
+    fetch('/logout',{
+      method: 'post',
+    })
+    .then(res => res.json())
+    .then(json => {
+  console.log('logout')
+  Swal.fire({
+    icon: 'success',
+    title: 'Logout',
+    text: 'Already logout!',
+    footer: '<a href="login.html">Log in</a>'
+  })
 
-//   ajaxForm({
-//     form: loginForm,
-//     getBody() {
-//       return {
-//         username: loginForm.username.value,
-//         password: loginForm.password.value,
-//       }
-//     },
-//     cb: json => {
-//       if (json.error) {
-//         Swal.fire({
-//           icon: 'error',
-//           title: 'Failed to login: ' + json.error,
-//         })
-//         return
-//       }
-//       user_id = json.id
-//       loadUserStyle()
-//     },
-//   })
+      },
+    //  window.location.href = '/'
+    )
+    .catch(error => ({ error: String(error) }))
+  
+    })
 
-// ajaxForm({
-//   form: logout-Form,
-//   getBody() {
-//     return {}
-//   },
-//   cb: json => {
-//     if (json.error) {
-//       Swal.fire({
-//         icon: 'error',
-//         title: 'Failed to logout: ' + json.error,
-//       })
-//       return
-//     }
-//     unloadAdminStyle()
-//   },
-// })
-
-// function loadAdminStyle() {
-//   let link = document.createElement('link')
-//   link.id = 'admin-style'
-//   link.rel = 'stylesheet'
-//   link.href = '/admin/admin.css'
-//   document.head.appendChild(link)
-// }
-
-// function unloadUserStyle() {
-//   let link = document.querySelector('#user.style')
-// if (link){
-//   link.remove()
-//  }
-// }
->>>>>>> 48553bd117b92d00da76ddb386112e27859c4d7f
+  
