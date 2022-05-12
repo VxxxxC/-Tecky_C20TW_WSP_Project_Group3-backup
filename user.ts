@@ -103,7 +103,7 @@ userRoutes.post("/login", (req, res) => {
         res.status(400).json({ error: "users not found" });
         return;
       }
-      let password = result.rows[0].passwords;
+      let password = result.rows[0].password;
       if (!password) {
         
         res.status(400).json({ error: "password not found" });

@@ -44,7 +44,7 @@ loginForm.addEventListener('submit', (e)=>{
 
       Toast.fire({
         icon: 'error',
-        title: 'Failed to auto login: ' + json.error,
+        title: 'Failed to auto signup: ' + json.error,
       })
       // console.error('failed to check role:', json.error)
       // return
