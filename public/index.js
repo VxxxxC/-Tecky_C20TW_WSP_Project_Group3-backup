@@ -223,32 +223,46 @@ buttonList.addEventListener("click", (event) => {
 
 // get what role is the user:normal user or admin
 
-fetch("/is_admin")
-  .then((res) => res.json())
-  .catch((error) => ({ error: String(error) }))
-  .then((json) => {
-    let admin = document.querySelector(".admin");
-    admin.textContent = json.role === "admin" ? "Admin" : "Member";
-  });
-
-let logoutForm = document.querySelector("#logout-form");
-logoutForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-  fetch("/logout", {
-    method: "post",
+  fetch('/is_admin')
+  .then(res => {
+    if (res.ok) {
+      return res.json();
+    }
   })
-    .then((res) => res.json())
-    .then(
-      (json) => {
-        console.log("logout");
-        Swal.fire({
-          icon: "success",
-          title: "Logout",
-          text: "Already logout!",
-          footer: '<a href="login.html">Log in</a>',
-        });
-      }
-      //  window.location.href = '/'
+  .then(json => {
+    let adminEl = document.querySelector('.admin');
+
+    // if (json.role === 'admin') {
+    //   adminEl.textContent = 'Admin';
+    // }else if (json.role === 'member') {
+    //   adminEl.textContent = 'Member';
+    // }  
+    adminEl.textContent = json.role === 'admin' ? 'Admin' : 'Member';
+    
+  })
+  .catch(error => ({ error: String(error) }))
+  
+
+  let logoutForm = document.querySelector('#logout-form')
+  logoutForm.addEventListener('submit', (e)=>{
+    e.preventDefault()
+    fetch('/logout',{
+      method: 'POST',
+    })
+    .then(res => res.json())
+    .then(json => {
+  console.log(json)
+  Swal.fire({
+    icon: 'success',
+    title: 'Logout',
+    text: 'Already logout!',
+    footer: '<a href="login.html">Log in</a>'
+  })
+  .then (function(){
+    window.location.href = 'http://localhost:8001/index.html'
+  })
+      },
+      
     )
     .catch((error) => ({ error: String(error) }));
 });

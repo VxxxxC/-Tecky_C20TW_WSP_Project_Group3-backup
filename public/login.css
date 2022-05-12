@@ -3,6 +3,14 @@
     top: 0;
 }
 
+.container{
+  background-image: url(city.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+
+}
+
+
 
 .header-container {
     height: 60px;
@@ -158,6 +166,7 @@ padding: 50px;
     justify-content: center; 
     align-items: center;
     text-align: center;
+    transform: translate(-20%,-20%);
 }
 
 .google{
@@ -191,6 +200,36 @@ input{
 }
 
 .login:hover{
-    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }
 
+#login-btn:active{
+  background-color: #ffeb80;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+
+}
+
+#login-btn:hover{
+  background-color: #ffeb80;
+}
+
+#login-btn{
+  background-color: #949494;
+}
+
+input[type=text]:focus {
+  border: 3px solid #5c86ff; 
+}
+
+
+input[type=password]:focus {
+  border: 3px solid #5c86ff; 
+}
+
+.view:hover,
+.view:active{
+  font-size: 150%;
+}

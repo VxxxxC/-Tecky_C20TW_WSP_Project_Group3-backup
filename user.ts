@@ -132,8 +132,9 @@ userRoutes.post("/logout", (req, res) => {
     if (error) {
       console.error("logout", error);
     }
-    // res.redirect('/');
-    res.json({message:'Login successful!'})
+    // res.redirect('/login')
+    // res.json({message:'Logout successful!'})
+    res.json({ role: "guest" })
   });
 });
 
@@ -146,14 +147,14 @@ userRoutes.get("/is_admin", (req, res) => {
       res.json({ role: "member" })
     }
   }else{
-    res.json({msg:"Please login first!"})
+    res.status(401).json({msg:"Please login first!"})
   }
 });
 
-userRoutes.get("/session", (req, res) => {
-  if (req.session?.user) {
-    res.json(req.session.user);
-  } else {
-    res.json({error:'User does not exist!'});
-  }
-});
+// userRoutes.get("/session", (req, res) => {
+//   if (req.session?.user) {
+//     res.json(req.session.user);
+//   } else {
+//     res.json({error:'User does not exist!'});
+//   }
+// });
