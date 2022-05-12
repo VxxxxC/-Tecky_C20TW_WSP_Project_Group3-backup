@@ -1,5 +1,4 @@
 import expressSession from 'express-session'
-// import { GrantSession } from 'grant'
 import { env } from './env'
 
 declare module 'express-session' {
@@ -7,7 +6,7 @@ declare module 'express-session' {
         counter?: number
         user?: {
             id: number
-            usernames: string,
+            username: string,
             is_admin:boolean
         }
     }

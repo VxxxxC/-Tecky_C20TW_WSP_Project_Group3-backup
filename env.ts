@@ -13,8 +13,5 @@ export let env = {
   DB_USER: process.env.DB_USER,
   DB_PASSWORD: process.env.DB_PASSWORD,
   SESSION_SECRET: 'test',  // FIXME: 暫時hardcoded
-  // GOOGLE_CLIENT_ID: '',
-  // GOOGLE_CLIENT_SECRET: '',
-  // ORIGIN: 'http://localhost:8001',
   PORT: 8001,
 }

@@ -19,14 +19,14 @@ async function postContent() {
   let post = result.posts;
   content.innerHTML = `<div class="title-holder">${post.title}</div>
     <div class="slider">
-    <div class="slider-items">
-        <div  class="item active">
+        <div  class="item">
            <img src="${"/img/" + post.image}">
         </div>
-    </div>
  </div>
       <div class="text">${post.content}</div>
-      <button class="edit-btn">edit</button>
+      <button class="edit-btn">
+      <i class="bi bi-pencil"></i>
+      </button>
       <div class="author">
             <div class="sub-header-1">${post.users_id}</div>
             <div class="author-name">jk</div>
@@ -79,54 +79,40 @@ async function postContent() {
       }
     });
   });
-
-
 }
 
 postContent();
 
+fetch("/is_admin")
+  .then((res) => res.json())
+  .catch((error) => ({ error: String(error) }))
+  .then((json) => {
+    let admin = document.querySelector(".admin");
+    admin.textContent = json.role === "admin" ? "Admin" : "Member";
+  });
 
-fetch('/is_admin')
-.then(res => res.json())
-.catch(error => ({ error: String(error) }))
-.then(json => {
-  let admin = document.querySelector('.admin')
-  admin.textContent = json.role === 'admin' ? 'Admin' : 'Member';
-
-})
-
-
-
-
-
-
-
-let logoutForm = document.querySelector('#logout-form')
-logoutForm.addEventListener('submit', (e)=>{
-  e.preventDefault()
-  fetch('/logout',{
-    method: 'POST',
+let logoutForm = document.querySelector("#logout-form");
+logoutForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  fetch("/logout", {
+    method: "POST",
   })
-  .then(res => res.json())
-  .then(json => {
-console.log(json)
-Swal.fire({
-  icon: 'success',
-  title: 'Logout',
-  text: 'Already logout!',
-  footer: '<a href="login.html">Log in</a>'
-})
-// .then (function(){
-//   window.location.href = 'http://localhost:8001/login.html'
-// })
-.then(function(){
-  let admin = document.querySelector('.admin')
-  admin.textContent = json.role === 'guest' ? 'Guest' : 'Member';
-})
-    },
-    
-  )
-  .catch(error => ({ error: String(error) }))
-
-  })
-
+    .then((res) => res.json())
+    .then((json) => {
+      console.log(json);
+      Swal.fire({
+        icon: "success",
+        title: "Logout",
+        text: "Already logout!",
+        footer: '<a href="login.html">Log in</a>',
+      })
+        // .then (function(){
+        //   window.location.href = 'http://localhost:8001/login.html'
+        // })
+        .then(function () {
+          let admin = document.querySelector(".admin");
+          admin.textContent = json.role === "guest" ? "Guest" : "Member";
+        });
+    })
+    .catch((error) => ({ error: String(error) }));
+});

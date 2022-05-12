@@ -39,7 +39,7 @@ userRoutes.post("/signup", async (req, res) => {
     // result is foundUser, if(result) -> foundUser
     let result = await client.query(
       /*sql*/
-      "select * from users where usernames = $1;",
+      "select * from users where username = $1;",
       [username]
     );
     // console.log(username)
@@ -51,13 +51,13 @@ userRoutes.post("/signup", async (req, res) => {
 
     let newUser = await client.query(
       /*sql*/
-      "insert into users (usernames, passwords) values ($1,$2) returning id",
+      "insert into users (username, password) values ($1,$2) returning id",
       [username, password]
     );
     // console.log(id.rows[0])
     req.session.user = {
       id: newUser.rows[0].id,
-      usernames: username,is_admin:true
+      username: username,is_admin:true
     };
      // console.log(req.session.user);
     res.json({ id: newUser.rows[0].id });
@@ -87,14 +87,14 @@ userRoutes.post("/login", (req, res) => {
   client
     .query(
       /**sql */ `
-          select id, usernames,passwords,is_admin from users where usernames = $1
+          select id, username,password,is_admin from users where username = $1
           `, [username]
     )
     .then((result: any) => {
       let user = result.rows
       console.log({user});
       
-      let username = result.rows[0].usernames;
+      let username = result.rows[0].username;
    //   console.log(username);
       
       if (!username) {
@@ -112,7 +112,7 @@ userRoutes.post("/login", (req, res) => {
 
       req.session.user = {
         id: result.rows[0].id,
-        usernames: username,
+        username: username,
         is_admin:result.rows[0].is_admin
       };
 

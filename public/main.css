@@ -155,14 +155,15 @@ main {
 }
 
 .content {
-    background-color: goldenrod;
+    background-color: #fdfdfa;
 
 }
 
 .title-holder {
     text-align: center;
-    font-size: 25px;
-    background-color: gray;
+    font-size: 60px;
+    font-family: arial, "cwTeXYen";
+    height: auto;
 }
 
 
@@ -173,45 +174,11 @@ main {
 	overflow: hidden;
 }
 
-.slider .left-slide,.slider .right-slide{
-  position: absolute;
-  height: 40px;
-  width: 40px;
-  background-color: #444444;
-  border-radius: 50%;
-  color:#ffffff;
-  font-size: 20px;
-  top:50%;
-  cursor: pointer;
-  margin-top: -20px;
-  text-align: center;
-  line-height: 40px;
-}
 
-.slider .left-slide:hover,.slider .right-slide:hover{
- box-shadow: 0px 0px 10px black;
- background-color: #29a8e2;
-}
-
-.slider .left-slide{
-	left: 10px;
-}
-.slider .right-slide{
-	right: 10px;
-}
-.slider .slider-items .item img{
-	max-width: 100%;
-	display: block;
-	animation:zoom 1s ease;
-}
-
-.slider .slider-items .item{
-	display: none;
-	position: relative;
-}
-
-.slider .slider-items .item.active{
-	display: block;
+.item img{
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
 }
 
 .text {
@@ -222,6 +189,7 @@ main {
     background-image: linear-gradient(to bottom, #fdfdfa 0%, #f6f7ef 100%), linear-gradient(to bottom, #e3d6d64d 0%,#e3d6d64d 0%);
   background-clip: content-box, padding-box;
     overflow: hidden;
+    font-family: arial, "cwTeXYen";
 }
 
 .author{
@@ -260,3 +228,6 @@ textarea {
     padding-right: 24px;
 }
 
+.edit-btn{
+  border-radius: 50%;
+}

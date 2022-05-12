@@ -1,6 +1,6 @@
 create user veper with password 'abc123' superuser;
 
-create database blog;
+
 
 CREATE TABLE users(
     id SERIAL primary key,
@@ -27,18 +27,23 @@ INSERT INTO users (id,usernames ,passwords ,create_at,updated_at,is_admin) VALUE
 INSERT INTO users (id,usernames ,passwords ,create_at,updated_at,is_admin) VALUES (2,'BEN','12243',(CURRENT_TIMESTAMP),(CURRENT_TIMESTAMP),FALSE);
 INSERT INTO users (id,usernames ,passwords ,create_at,updated_at,is_admin) VALUES (3,'peter','12253',(CURRENT_TIMESTAMP),(CURRENT_TIMESTAMP),FALSE);
 =======
-INSERT INTO users (id,usernames ,passwords ,create_at,updated_at,is_admin) VALUES (4,'BEN','1523',(CURRENT_TIMESTAMP),(CURRENT_TIMESTAMP),FALSE);
+
+//////////////////////////////////////////////////////////
+create database blog;
+
 create table users (
   id serial primary key,
   username varchar(255) not null unique,
   password varchar(255) not null,
-  email varchar(255) not null unique,
   created_at timestamp default current_timestamp,
   updated_at timestamp default current_timestamp,
   is_admin boolean default false
 );
 
-
+INSERT INTO users (id,username ,password ,created_at,updated_at,is_admin) VALUES (1,'mary','1223',(CURRENT_TIMESTAMP),(CURRENT_TIMESTAMP),TRUE);
+INSERT INTO users (id,username ,password ,created_at,updated_at,is_admin) VALUES (2,'BEN','12243',(CURRENT_TIMESTAMP),(CURRENT_TIMESTAMP),FALSE;
+INSERT INTO users (id,username ,password ,created_at,updated_at,is_admin) VALUES (3,'peter','12253',(CURRENT_TIMESTAMP),(CURRENT_TIMESTAMP),FALSE);
+INSERT INTO users (id,username ,password ,created_at,updated_at,is_admin) VALUES (4,'user','1523',(CURRENT_TIMESTAMP),(CURRENT_TIMESTAMP),FALSE);
 
 create table post (
   id serial primary key,
@@ -49,10 +54,27 @@ create table post (
   updated_at timestamp default current_timestamp,
 
   users_id integer,
-  foreign key (users_id) references users(id)
+  foreign key (users_id) references users(id) 
+);
+
+create table tags(
+  id serial primary key,
+  name varchar(255)
+
+);
+
+create table post_tag(
+  id serial primary key,
+
+  post_id integer,
+  foreign key (post_id) references post(id),
+  tags_id integer,
+  foreign key (tags_id) references tags(id)
 );
 
 
+
+/////////////////////////////////////////////////////////////////////////////////
 
 create table comment (
   id serial primary key,
@@ -66,11 +88,7 @@ create table comment (
   foreign key (post_id) references post(id)
 );
 
-create table tags(
-  id serial primary key,
-  name varchar(255)
 
-);
 
 create table views(
   id serial primary key,
@@ -81,14 +99,6 @@ create table views(
   foreign key (post_id) references post(id)
 );
 
-create table post_tag(
-  id serial primary key,
-
-  post_id integer,
-  foreign key (post_id) references post(id),
-  tags_id integer,
-  foreign key (tags_id) references tags(id)
-);
 
 
 /*
