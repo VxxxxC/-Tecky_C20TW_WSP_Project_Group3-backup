@@ -294,7 +294,7 @@ app.post('/main', async (req, res) => {
   let posts = result.rows
   // console.log({result})
   // console.log({posts})
-  res.json({ posts }) // 一定要加上"posts" 否則pass唔到個request俾frontend fetch() handler
+  res.json({ posts }) // 一定要加上"posts" 否則pass唔到個request俾frontend fetch() handleruser.i
 })
 
 //----------------below app.get'/main' is for pagination in index.js-------------
@@ -310,7 +310,7 @@ app.get('/main', async (req, res) => {
 app.get('/post/:id', async (req, res) => {
   // console.log(req.params.id);
   let id = req.params.id
-  let result = await client.query('select id, title,content,image from post where id = $1', [id])
+  let result = await client.query('select post.id as id,title,content,image,users_id from post inner join users on users.id = post.users_id where post.id = $1', [id])
   let posts = result.rows[0]
   res.json({ posts })
 })
