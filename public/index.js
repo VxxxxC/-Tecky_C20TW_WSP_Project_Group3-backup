@@ -15,24 +15,45 @@ let pageNumberText = pageNumber.innerHTML;
 let preBtn = document.querySelector(".previous-page");
 let nextBtn = document.querySelector(".next-page");
 
-//----------------TODO: FIXME: check current page function-------------
+//---------------- FIXME: check current page function-------------
 
-function equalOfPage(pageNum, contentInd) {
-  if (pageNum % 1 === 0 && contentInd % 8 === 0) {
-    return true;
-  } else {
-    return false;
-  }
-}
+// function equalOfPage(pageNum, contentInd) {
+//   if (pageNum % 1 === 0 && contentInd % 8 === 0) {
+//     return true;
+//   } else {
+//     return false;
+//   }
+// }
 
-function checkCurrentPage() {
-  if (equalOfPage(pageNumberText, contentIndex) === false) {
-    console.log({ equalOfPage: false });
-    return;
-  } else {
-    console.log({ equalOfPage: true });
-    pageNumber.style.background = "rgba(40, 40, 40, 0.8)";
-    pageNumber.style.color = "white";
+// function checkCurrentPage() {
+//   if (equalOfPage(pageNumberText, contentIndex) === false) {
+//     console.log({ equalOfPage: false });
+//     return;
+//   } else {
+//     console.log({ equalOfPage: true });
+//     pageNumber.style.background = "rgba(40, 40, 40, 0.8)";
+//     pageNumber.style.color = "white";
+//   }
+// }
+
+//--------------------TODO: fetch each post hashtag---------------------
+
+async function getHashtag(id) {
+  let result = await fetch(`tags/${id}`);
+  let res = await result.json();
+  let contentTagContainer = document.querySelector(`#content-tag-${id}`);
+  contentTagContainer.style.display = "flex";
+  contentTagContainer.style.flexWrap = "wrap";
+
+  let newTagTemplate = contentTagContainer.querySelector(".content-tag");
+  newTagTemplate.remove();
+
+  for (let tag of res) {
+    console.log(tag.name);
+
+    let newTag = newTagTemplate.cloneNode(true);
+    newTag.innerHTML = tag.name;
+    contentTagContainer.appendChild(newTag);
   }
 }
 
@@ -51,14 +72,10 @@ async function getPost() {
     body: JSON.stringify({ contentIndex }),
   });
 
-  let result = await res.json()
+  let result = await res.json();
   let posts = result.posts;
-  console.log(posts);
-
- 
 
   for (let post of posts) {
-
     postsContainer.innerHTML += `
     <div class="content-box cnt${post.id}">
     <div class="inner-upper-content">
@@ -68,7 +85,9 @@ async function getPost() {
       <i class="upper-content-bottom-icon fa-solid fa-heart"></i>
     </div>
     <div class="inner-center-content">${post.title}
-      <div class="content-tag">hashtag</div>
+    <div id="content-tag-${post.id}">
+    <div class="content-tag">hihi</div>
+      </div>
       <p class="content">${post.content}</p>
     </div>
     <div class="inner-bottom-content">
@@ -81,45 +100,43 @@ async function getPost() {
 
   </div>
 `;
-
+    getHashtag(post.id);
   }
 
+  let deleteBtnList = document.querySelectorAll(".delete-btn");
+  let contentBox = document.querySelector(".contentBox");
 
-
-  let deleteBtnList = document.querySelectorAll('.delete-btn')
-  let contentBox = document.querySelector('.contentBox')
-  
-  deleteBtnList.forEach(deleteBtn=>
-    {deleteBtn.addEventListener('click',()=>{
-    console.log('delete post')
-    console.log()
-    let postId = deleteBtn.id.replace('btn','')
-    Swal.fire({
-      title: 'Confirm to delete memo?',
-      text: `You are going to delete?`,
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#d33',
-      cancelButtonColor: '#333',
-      confirmButtonText: 'Confirm to delete',
-      cancelButtonText: 'Do not delete',
-    }).then(result => {
-      if (result.isConfirmed) {
-        fetch(`/post/` + postId, { method: 'DELETE' }) //reminder
-          .then(res => res.json())
-          .catch(err => ({ error: String(err) }))
-          .then(json => {
-            if (json.error) {
-              Swal.fire('Cannot Delete', json.error, 'error')
-            } else {
-              Swal.fire('Deleted!', 'The post is deleted.', 'success')
-              contentBox.remove()
-            }
-          })
-      }
-    })
-  })})
-  
+  deleteBtnList.forEach((deleteBtn) => {
+    deleteBtn.addEventListener("click", () => {
+      console.log("delete post");
+      console.log();
+      let postId = deleteBtn.id.replace("btn", "");
+      Swal.fire({
+        title: "Confirm to delete memo?",
+        text: `You are going to delete?`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#333",
+        confirmButtonText: "Confirm to delete",
+        cancelButtonText: "Do not delete",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          fetch(`/post/` + postId, { method: "DELETE" }) //reminder
+            .then((res) => res.json())
+            .catch((err) => ({ error: String(err) }))
+            .then((json) => {
+              if (json.error) {
+                Swal.fire("Cannot Delete", json.error, "error");
+              } else {
+                Swal.fire("Deleted!", "The post is deleted.", "success");
+                contentBox.remove();
+              }
+            });
+        }
+      });
+    });
+  });
 
   pagination();
 }
@@ -194,8 +211,6 @@ buttonList.addEventListener("click", (event) => {
     </div>
   </div>
   </a>`;
-
-
     }
   }
   clickPage();
@@ -208,42 +223,32 @@ buttonList.addEventListener("click", (event) => {
 
 // get what role is the user:normal user or admin
 
-  fetch('/is_admin')
-  .then(res => res.json())
-  .catch(error => ({ error: String(error) }))
-  .then(json => {
-    let admin = document.querySelector('.admin')
-    admin.textContent = json.role === 'admin' ? 'Admin' : 'Member';
-  
+fetch("/is_admin")
+  .then((res) => res.json())
+  .catch((error) => ({ error: String(error) }))
+  .then((json) => {
+    let admin = document.querySelector(".admin");
+    admin.textContent = json.role === "admin" ? "Admin" : "Member";
+  });
+
+let logoutForm = document.querySelector("#logout-form");
+logoutForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  fetch("/logout", {
+    method: "post",
   })
-
-
-
-  
-
-
-
-  let logoutForm = document.querySelector('#logout-form')
-  logoutForm.addEventListener('submit', (e)=>{
-    e.preventDefault()
-    fetch('/logout',{
-      method: 'post',
-    })
-    .then(res => res.json())
-    .then(json => {
-  console.log('logout')
-  Swal.fire({
-    icon: 'success',
-    title: 'Logout',
-    text: 'Already logout!',
-    footer: '<a href="login.html">Log in</a>'
-  })
-
-      },
-    //  window.location.href = '/'
+    .then((res) => res.json())
+    .then(
+      (json) => {
+        console.log("logout");
+        Swal.fire({
+          icon: "success",
+          title: "Logout",
+          text: "Already logout!",
+          footer: '<a href="login.html">Log in</a>',
+        });
+      }
+      //  window.location.href = '/'
     )
-    .catch(error => ({ error: String(error) }))
-  
-    })
-
-  
+    .catch((error) => ({ error: String(error) }));
+});

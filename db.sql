@@ -44,11 +44,7 @@ create table post (
   id serial primary key,
   title text not null,
   content text not null,
-<<<<<<< HEAD
-  image text,
-=======
   image varchar(255),
->>>>>>> 1787499b809002ad4c9fbf96766362cb28f324f7
   created_at timestamp default current_timestamp,
   updated_at timestamp default current_timestamp,
 

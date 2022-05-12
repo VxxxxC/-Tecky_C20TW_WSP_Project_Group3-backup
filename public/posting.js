@@ -104,6 +104,7 @@ document
       body: formData,
     });
     console.log("posting...");
+    location.href = "/index.html";
   });
 
 //-------------------------Tags-------------------------

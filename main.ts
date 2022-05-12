@@ -241,15 +241,16 @@ app.post('/post', async (req, res, next) => {
   })
 })
 
-//----------------after posting , redirect to main page---------------
+//----------------frontend fetch hashtag data from database---------------
 
-// app.post('/post', (req, res) => {
-//   res.redirect('/index.html')
-
-// })
-
-
-
+app.get('/tags/:id', async (req, res) => {
+  let id = req.params.id
+  console.log(id)
+  let result = await client.query('select post.id, post.title, post.content, post.created_at, post.image, tags.name from post inner join post_tag on post.id = post_tag.post_id inner join tags on tags.id = post_tag.tags_id where post.id = $1;', [id])
+  let tags = result.rows;
+  console.log(tags);
+  res.json(tags)
+})
 
 //------------------從frontend request到database抓取data----------------------------
 
@@ -337,27 +338,27 @@ select image from post where id = $1
 
 
 //delete post
-app.delete('/post/:id',adminGuard,(req,res)=>{
-  let id =+req.params.id
+app.delete('/post/:id', adminGuard, (req, res) => {
+  let id = +req.params.id
   console.log("test")
   console.log(id)
-  if(!id){
-    res.status(400).json({error:('Missing id in req.params')})
+  if (!id) {
+    res.status(400).json({ error: ('Missing id in req.params') })
     return
   }
   client.query(/*sql*/
-  `
+    `
   delete from post where id = $1 
-  `,[id] 
+  `, [id]
   )
-  .then(result => {
-    if (result.rowCount) {
-      res.json({ ok: true })
-    } else {
-      res.status(400).json({
-        error: 'failed',
-      })
-    }
-  })
-  .catch(catchError(res))
+    .then(result => {
+      if (result.rowCount) {
+        res.json({ ok: true })
+      } else {
+        res.status(400).json({
+          error: 'failed',
+        })
+      }
+    })
+    .catch(catchError(res))
 })

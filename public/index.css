@@ -249,7 +249,7 @@ body {
 
 .content-box:hover {
   z-index: 10;
-  background: rgba(128, 128, 128, 0.6);
+  background: rgba(128, 128, 128, 0.45);
 
   transform: scale(1.1);
 
@@ -391,6 +391,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+
 }
 
 .content {
@@ -483,7 +484,7 @@ body {
   margin-top: 40px;
 }
 
-.delete-btn{
+.delete-btn {
   height: 50px;
   width: 50px;
 }
