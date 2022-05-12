@@ -28,8 +28,8 @@ async function postContent() {
       <i class="bi bi-pencil"></i>
       </button>
       <div class="author">
-            <div class="sub-header-1">${post.users_id}</div>
-            <div class="author-name">jk</div>
+            <div class="sub-header-1">Author</div>
+            <div class="author-name">${post.users_id}</div>
             <div class="intro">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto excepturi impedit, ipsum, numquam
                 temporibus hic iste at, inventore quo perspiciatis laudantium saepe modi! Quos ipsum debitis et
