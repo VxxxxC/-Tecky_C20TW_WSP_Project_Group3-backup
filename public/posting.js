@@ -130,3 +130,13 @@ tags.addEventListener("keypress", (event) => {
     console.log(tagContent.querySelectorAll(".tags"));
   }
 });
+
+//-------------seesion check User login----------
+fetch("/session").then((res) =>
+  res
+    .json()
+    .then((json) => {
+      console.log(json);
+    })
+    .catch((error) => ({ error: String(error) }))
+);
