@@ -284,7 +284,7 @@ app.get('/post/:id', async (req, res) => {
 })
 
 
-//adminGuard and userGuard
+//adminGuard
 
 app.use('/admin', adminGuard, express.static('admin'))
 
@@ -348,9 +348,14 @@ app.delete('/post/:id', adminGuard, (req, res) => {
   }
   client.query(/*sql*/
     `
-  delete from post where id = $1 
+  delete from post_tag where post_id = $1
   `, [id]
   )
+  client.query(/*sql*/
+  `
+delete from post where id = $1
+`, [id]
+)
     .then(result => {
       if (result.rowCount) {
         res.json({ ok: true })
