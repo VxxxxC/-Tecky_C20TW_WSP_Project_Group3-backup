@@ -193,36 +193,6 @@ body {
   background: rgba(0, 70, 70, 0.8);
 }
 
-
-/* FIXME: 暫時hardcoded，supposed應該user已經登入同修改文章先會出現Delete button */
-.delete-button {
-  position: relative;
-  top: 35px;
-  left: 82%;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  width: 130px;
-  height: 35px;
-
-  border-radius: 50px;
-
-  font-family: arial, "cwTeXYen";
-  font-size: 25px;
-  color: rgb(255, 255, 255);
-  background: rgba(255, 0, 0, 0.55);
-
-  cursor: pointer;
-
-  transition: 0.5s;
-}
-
-.delete-button:hover {
-  background: rgba(255, 0, 0, 0.8);
-}
-
 #post-tag {
   width: 400px;
   height: 300px;

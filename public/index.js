@@ -36,7 +36,7 @@ let nextBtn = document.querySelector(".next-page");
 //   }
 // }
 
-//--------------------TODO: fetch each post hashtag---------------------
+//--------------------fetch each post hashtag---------------------
 
 async function getHashtag(id) {
   let result = await fetch(`tags/${id}`);
@@ -72,11 +72,16 @@ async function getPost() {
     body: JSON.stringify({ contentIndex }),
   });
 
+  // FIXME: TODO: 最後記得加返入"postContainer.innerHTML" (第一行content-box之前) <a href="/content-page.html?id=${post.id}" style="text-decoration:none; color:black"> </a>
+
   let result = await res.json();
   let posts = result.posts;
 
   for (let post of posts) {
     postsContainer.innerHTML += `
+    <a href="/content-page.html?id=${
+      post.id
+    }" style="text-decoration:none; color:black">
     <div class="content-box cnt${post.id}">
     <div class="inner-upper-content">
       <i class="upper-content-top-icon fa-solid fa-eye"></i>
@@ -86,18 +91,17 @@ async function getPost() {
     </div>
     <div class="inner-center-content">${post.title}
     <div id="content-tag-${post.id}">
-    <div class="content-tag">hihi</div>
+    <div class="content-tag"></div>
       </div>
       <p class="content">${post.content}</p>
     </div>
+    </a>
     <div class="inner-bottom-content">
       <img class="user-pic"
         src="https://dvg5hr78c8hf1.cloudfront.net/2016/06/21/15/37/47/4b0b2595-20dc-40bc-a963-e8e53b2fd5bf/1*2cAvoDuXZp_dy49WqNVVrA.jpeg">
       <div class="userid-postdate">${post.created_at}</div>
       <button class="delete-btn" id=btn${post.id}>delete</button>
-    </div>    
-    <a href="/content-page.html?id=${post.id}">more detail</a>
-
+    </div>
   </div>
 `;
     getHashtag(post.id);
@@ -186,10 +190,13 @@ buttonList.addEventListener("click", (event) => {
       body: JSON.stringify({ contentIndex }),
     });
 
+    // FIXME: TODO: 最後記得加返入"postContainer.innerHTML" (第一行content-box之前) <a href="/content-page.html?id=${post.id}" style="text-decoration:none; color:black"> </a>
+
     let result = await res.json();
     let posts = result.posts;
     for (let post of posts) {
-      postsContainer.innerHTML += `<a href="/content-page.html?id=${
+      postsContainer.innerHTML += `
+      <a href="/content-page.html?id=${
         post.id
       }" style="text-decoration:none; color:black">
         <div class="content-box cnt${post.id}">
@@ -200,18 +207,55 @@ buttonList.addEventListener("click", (event) => {
       <i class="upper-content-bottom-icon bi bi-heart"></i>
     </div>
     <div class="inner-center-content">${post.title}
-      <div class="content-tag">hashtag</div>
+    <div id="content-tag-${post.id}">
+    <div class="content-tag"></div>
+      </div>
       <p class="content">${post.content}</p>
-      <button class="delete-btn">delete</button>
     </div>
+    </a>
     <div class="inner-bottom-content">
       <img class="user-pic"
         src="https://dvg5hr78c8hf1.cloudfront.net/2016/06/21/15/37/47/4b0b2595-20dc-40bc-a963-e8e53b2fd5bf/1*2cAvoDuXZp_dy49WqNVVrA.jpeg">
       <div class="userid-postdate">${post.created_at}</div>
+      <button class="delete-btn" id=btn${post.id}>delete</button>
     </div>
-  </div>
-  </a>`;
+  </div>`;
+      getHashtag(post.id);
     }
+    let deleteBtnList = document.querySelectorAll(".delete-btn");
+    let contentBox = document.querySelector(".contentBox");
+
+    deleteBtnList.forEach((deleteBtn) => {
+      deleteBtn.addEventListener("click", () => {
+        console.log("delete post");
+        console.log();
+        let postId = deleteBtn.id.replace("btn", "");
+        Swal.fire({
+          title: "Confirm to delete memo?",
+          text: `You are going to delete?`,
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#d33",
+          cancelButtonColor: "#333",
+          confirmButtonText: "Confirm to delete",
+          cancelButtonText: "Do not delete",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            fetch(`/post/` + postId, { method: "DELETE" }) //reminder
+              .then((res) => res.json())
+              .catch((err) => ({ error: String(err) }))
+              .then((json) => {
+                if (json.error) {
+                  Swal.fire("Cannot Delete", json.error, "error");
+                } else {
+                  Swal.fire("Deleted!", "The post is deleted.", "success");
+                  contentBox.remove();
+                }
+              });
+          }
+        });
+      });
+    });
   }
   clickPage();
 });
@@ -223,46 +267,41 @@ buttonList.addEventListener("click", (event) => {
 
 // get what role is the user:normal user or admin
 
-  fetch('/is_admin')
-  .then(res => {
+fetch("/is_admin")
+  .then((res) => {
     if (res.ok) {
       return res.json();
     }
   })
-  .then(json => {
-    let adminEl = document.querySelector('.admin');
+  .then((json) => {
+    let adminEl = document.querySelector(".admin");
 
     // if (json.role === 'admin') {
     //   adminEl.textContent = 'Admin';
     // }else if (json.role === 'member') {
     //   adminEl.textContent = 'Member';
-    // }  
-    adminEl.textContent = json.role === 'admin' ? 'Admin' : 'Member';
-    
+    // }
+    adminEl.textContent = json.role === "admin" ? "Admin" : "Member";
   })
-  .catch(error => ({ error: String(error) }))
-  
+  .catch((error) => ({ error: String(error) }));
 
-  let logoutForm = document.querySelector('#logout-form')
-  logoutForm.addEventListener('submit', (e)=>{
-    e.preventDefault()
-    fetch('/logout',{
-      method: 'POST',
+let logoutForm = document.querySelector("#logout-form");
+logoutForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  fetch("/logout", {
+    method: "POST",
+  })
+    .then((res) => res.json())
+    .then((json) => {
+      console.log(json);
+      Swal.fire({
+        icon: "success",
+        title: "Logout",
+        text: "Already logout!",
+        footer: '<a href="login.html">Log in</a>',
+      }).then(function () {
+        window.location.href = "http://localhost:8001/index.html";
+      });
     })
-    .then(res => res.json())
-    .then(json => {
-  console.log(json)
-  Swal.fire({
-    icon: 'success',
-    title: 'Logout',
-    text: 'Already logout!',
-    footer: '<a href="login.html">Log in</a>'
-  })
-  .then (function(){
-    window.location.href = 'http://localhost:8001/index.html'
-  })
-      },
-      
-    )
     .catch((error) => ({ error: String(error) }));
 });
