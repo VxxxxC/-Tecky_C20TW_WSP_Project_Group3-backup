@@ -485,6 +485,28 @@ body {
 }
 
 .delete-btn {
-  height: 50px;
-  width: 50px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-right: 10px;
+  margin-top: 30px;
+  width: 100px;
+  height: 35px;
+
+  border-radius: 20px;
+
+  font-family: arial, "cwTeXYen";
+  font-size: 15px;
+  color: rgb(255, 255, 255);
+  background: rgba(255, 0, 0, 0.25);
+
+  cursor: pointer;
+
+  transition: 0.5s;
+}
+
+.delete-btn:hover {
+  background: rgba(255, 0, 0, 0.6);
 }
