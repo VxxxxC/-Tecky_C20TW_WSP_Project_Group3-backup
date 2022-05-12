@@ -86,3 +86,47 @@ async function postContent() {
 postContent();
 
 
+fetch('/is_admin')
+.then(res => res.json())
+.catch(error => ({ error: String(error) }))
+.then(json => {
+  let admin = document.querySelector('.admin')
+  admin.textContent = json.role === 'admin' ? 'Admin' : 'Member';
+
+})
+
+
+
+
+
+
+
+let logoutForm = document.querySelector('#logout-form')
+logoutForm.addEventListener('submit', (e)=>{
+  e.preventDefault()
+  fetch('/logout',{
+    method: 'POST',
+  })
+  .then(res => res.json())
+  .then(json => {
+console.log(json)
+Swal.fire({
+  icon: 'success',
+  title: 'Logout',
+  text: 'Already logout!',
+  footer: '<a href="login.html">Log in</a>'
+})
+// .then (function(){
+//   window.location.href = 'http://localhost:8001/login.html'
+// })
+.then(function(){
+  let admin = document.querySelector('.admin')
+  admin.textContent = json.role === 'guest' ? 'Guest' : 'Member';
+})
+    },
+    
+  )
+  .catch(error => ({ error: String(error) }))
+
+  })
+

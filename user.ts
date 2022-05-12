@@ -147,7 +147,7 @@ userRoutes.get("/is_admin", (req, res) => {
       res.json({ role: "member" })
     }
   }else{
-    res.json({msg:"Please login first!"})
+    res.status(401).json({msg:"Please login first!"})
   }
 });
 
