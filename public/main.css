@@ -188,7 +188,7 @@ main {
     padding-left: 69px;
     background-image: linear-gradient(to bottom, #fdfdfa 0%, #f6f7ef 100%), linear-gradient(to bottom, #e3d6d64d 0%,#e3d6d64d 0%);
   background-clip: content-box, padding-box;
-    overflow: hidden;
+    overflow: auto;
     font-family: arial, "cwTeXYen";
 }
 

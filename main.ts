@@ -36,6 +36,7 @@ const app = express();
 //   password: process.env.DB_PASSWORD,
 // })
 
+
 client.connect(err => {
   if (err) {
     console.error("database connect error : ", err)
@@ -391,6 +392,7 @@ delete from post where id = $1
     .then(result => {
       if (result.rowCount) {
         res.json({ ok: true })
+        io.emit('deleted memo', id)
       } else {
         res.status(400).json({
           error: 'failed',
