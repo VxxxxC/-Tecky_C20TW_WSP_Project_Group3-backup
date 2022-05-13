@@ -112,8 +112,7 @@ async function getPost() {
 
   deleteBtnList.forEach((deleteBtn) => {
     deleteBtn.addEventListener("click", () => {
-      console.log("delete post");
-      console.log();
+      // console.log("delete post");
       let postId = deleteBtn.id.replace("btn", "");
       Swal.fire({
         title: "Confirm to delete memo?",
@@ -157,7 +156,7 @@ async function pagination() {
   let result = await res.json();
   let posts = result.posts;
   for (let post of posts) {
-    console.log(post.id);
+    // console.log(post.id);
 
     if (post.id % 8 === 1) {
       let buttonNum;
@@ -176,7 +175,7 @@ async function pagination() {
 //---------------choosing page data from database-----------
 
 buttonList.addEventListener("click", (event) => {
-  console.log(event.target.innerHTML);
+  // console.log(event.target.innerHTML);
 
   contentIndex = (event.target.innerText - 1) * 8;
   console.log({ contentIndex: contentIndex });
@@ -225,8 +224,7 @@ buttonList.addEventListener("click", (event) => {
 
     deleteBtnList.forEach((deleteBtn) => {
       deleteBtn.addEventListener("click", () => {
-        console.log("delete post");
-        console.log();
+        // console.log("delete post");
         let postId = deleteBtn.id.replace("btn", "");
         Swal.fire({
           title: "Confirm to delete memo?",
@@ -349,4 +347,12 @@ fetch("/search").then((res) => {
       document.querySelector(".navbar").appendChild(newTag);
     }
   });
+});
+
+//-----------navbar hashtag button onclick search-------------
+
+let hashtagBtn = document.querySelector(".navbar-hashtag");
+
+hashtagBtn.addEventListener("click", (event) => {
+  console.log(event);
 });

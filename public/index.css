@@ -9,7 +9,6 @@
     url(//fonts.gstatic.com/ea/cwtexyen/v3/cwTeXYen-zhonly.ttf) format('truetype');
 }
 
-
 body {
   margin: 0;
 }
@@ -100,8 +99,8 @@ body {
 
 .right-selection:hover {
   font-family: arial, "cwTeXYen";
-  font-size: 15px;
-  color: rgba(0, 0, 0, 0.7);
+  font-size: 18px;
+  color: rgba(39, 19, 19, 0.75);
   width: 110px;
   height: 35px;
 
@@ -147,7 +146,7 @@ input[type="submit"] {
   height: 35px;
 
   border-radius: 5px;
-  background: rgba(200, 0, 0, 0.5);
+  background: rgba(200, 0, 0, 0.35);
 
   font-family: arial, "cwTeXYen";
   font-size: 15px;
@@ -180,14 +179,14 @@ input[type="submit"] {
 }
 
 .navbar {
-  height: 60px;
+  height: 40px;
   background: white;
 
   display: flex;
 }
 
 .navbar-button {
-  margin: 15px;
+  margin: 10px;
   width: 80px;
   height: 35px;
   display: flex;
@@ -528,3 +527,25 @@ input[type="submit"] {
 .hidden {
   display: none;
 }
+
+/* 
+.navbar-button {
+  transition: ease-in-out;
+  animation-name: flame;
+  animation-duration: 3.5s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes flame {
+  0% {
+    background: rgba(255, 150, 80, 0.3)
+  }
+
+  50% {
+    background: rgba(255, 150, 80, 0.6)
+  }
+
+  100% {
+    background: rgba(255, 150, 80, 0.3)
+  }
+} */
