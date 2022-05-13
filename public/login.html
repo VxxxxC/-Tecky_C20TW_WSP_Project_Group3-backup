@@ -2,83 +2,84 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-    <link rel="stylesheet"  href="login.css">
-    
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="login.css">
+
 </head>
 
 <body>
-    <header>
-        <div class="header-container">
-          <div class="left-header">
-            <a href="index.html" style="text-decoration:none">
-              <div class="left-selection website-name">
-                <div class="left-selection-box-content">ABC Website</div>
-              </div>
-            </a>
-      
-            <a href="posting.html" style="text-decoration:none">
-              <div class="left-selection post">
-                <div class="left-selection-box-content">刊登創作<span class="post-icon"><i
-                      class="fa-solid fa-pen-to-square"></i></span></div>
-              </div>
-            </a>
+  <header>
+    <div class="header-container">
+      <div class="left-header">
+        <a href="index.html" style="text-decoration:none">
+          <div class="left-selection website-name">
+            <div class="left-selection-box-content">ABC Website</div>
           </div>
-      
-          <!-- TODO: 等May May搞掂login, reset password page -->
-      
-          <div class="right-header">
-      
-            <a href="signup.html" style="text-decoration:none">
-              <div class="right-selection login">
-                <div class="right-selection-box-content">Signup</div>
+        </a>
+
+        <a href="posting.html" style="text-decoration:none">
+          <div class="left-selection post">
+            <div class="left-selection-box-content">刊登創作<span class="post-icon"><i
+                  class="fa-solid fa-pen-to-square"></i></span></div>
+          </div>
+        </a>
+      </div>
+
+      <!-- TODO: 等May May搞掂login, reset password page -->
+
+      <div class="right-header">
+
+        <a href="signup.html" style="text-decoration:none">
+          <div class="right-selection signup">
+            <div class="right-selection-box-content">Signup</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </header>
+  <div class="isolate"></div>
+
+
+  <div class="container">
+    <div class="login-form">
+      <div
+        style="height: 500px; width: 500px;  background: rgba(255, 255, 255, 0.2);border: 2px solid rgba(120, 120, 120, 0.4); border-radius: 5px;margin-top: 250px;">
+        <h1>Log in</h1>
+        <div style="height: 100%;  display: flex; text-align: center; justify-content: center;">
+          <div>
+            <form id="login-form" method="post" name="Form" onsubmit="validateForm()" action="/login">
+              <h4> Username </h4>
+              <div class="fields">
+                <input type="text" class="inpute" placeholder="Username" name="username">
               </div>
-            </a>
+              <h4> Password </h4>
+              <div class="fields">
+                <input type="password" class="inpute" placeholder="Password" name="password">
+              </div>
+              <input type="submit" value="Log in" id="login-btn">
+              <!-- <button class="login"><spna>Log in</spna></button> -->
+              <br />
+              <br>
+              <a href="./signup.html" class="view">open a new account</a>
+              <br />
+            </form>
+
+
           </div>
         </div>
-      </header>
-      <div class="isolate"></div>
+      </div>
 
-      
-        <div class="container">
-            <div  class="login-form">
-                <div style="height: 500px; width: 500px; background-color: #f0f1f5; border-radius: 5px;margin-top: 250px;">
-                    <h1>Log in</h1>
-                    <div style="height: 100%;  display: flex; text-align: center; justify-content: center;">
-                        <div>
-                            <form id="login-form" method="post" name="Form" onsubmit="validateForm()" action="/login">
-                                <h4> Username </h4>
-                                <div class="fields">
-                                    <input type="text" class="inpute"  placeholder="Username" name="username">
-                                </div>
-                                <h4> Password </h4>
-                                <div class="fields">
-                                    <input type="password" class="inpute"  placeholder="Password" name="password">
-                                </div>
-                                <input type="submit" value="Log in" id="login-btn">
-                                <!-- <button class="login"><spna>Log in</spna></button> -->
-                                <br/>
-                                <br>
-                                <a href="./signup.html" class="view">open a new account</a>
-                                <br/>
-                            </form>
+    </div>
 
-                       
-                        </div> 
-                    </div>
-                </div>
-    
-            </div>
-      
-        </div>
+  </div>
 
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="login.js"></script>
-   
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="login.js"></script>
+
 </body>
 
 </html>
