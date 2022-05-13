@@ -1,11 +1,5 @@
 
-// const { RESERVED_EVENTS } = require("socket.io/dist/socket");
-// // // ----------------Socket.IO client side--------------------
-// let socket = io.connect();
 
-// socket.emit("connect",()=>{
-//   console.log('connected')
-// })
 
 // socket.on('editPost', (msg) => {
 //   console.log(msg);
@@ -45,7 +39,7 @@ async function postContent() {
       </button>
       <div class="author">
             <div class="sub-header-1">Author</div>
-            <div class="author-name">${post.users_id}</div>
+            <div class="author-name">${post.username}</div>
             <div class="intro">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto excepturi impedit, ipsum, numquam
                 temporibus hic iste at, inventore quo perspiciatis laudantium saepe modi! Quos ipsum debitis et
@@ -99,33 +93,33 @@ async function postContent() {
 
 postContent();
 
-fetch("/is_admin")
-  .then((res) => res.json())
-  .catch((error) => ({ error: String(error) }))
-  .then((json) => {
-    let admin = document.querySelector(".admin");
-    admin.textContent = json.role === "admin" ? "Admin" : "Member";
-  });
+// fetch("/is_admin")
+//   .then((res) => res.json())
+//   .catch((error) => ({ error: String(error) }))
+//   .then((json) => {
+//     let admin = document.querySelector(".admin");
+//     admin.textContent = json.role === "admin" ? "Admin" : "Member";
+//   });
 
-let logoutForm = document.querySelector("#logout-form");
-logoutForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-  fetch("/logout", {
-    method: "POST",
-  })
-    .then((res) => res.json())
-    .then((json) => {
-      console.log(json);
-      Swal.fire({
-        icon: "success",
-        title: "Logout",
-        text: "Already logout!",
-        footer: '<a href="login.html">Log in</a>',
-      })
-        .then (function(){
-          window.location.href = 'http://localhost:8001/index.html'
-        })
+// let logoutForm = document.querySelector("#logout-form");
+// logoutForm.addEventListener("submit", (e) => {
+//   e.preventDefault();
+//   fetch("/logout", {
+//     method: "POST",
+//   })
+//     .then((res) => res.json())
+//     .then((json) => {
+//       console.log(json);
+//       Swal.fire({
+//         icon: "success",
+//         title: "Logout",
+//         text: "Already logout!",
+//         footer: '<a href="login.html">Log in</a>',
+//       })
+//         .then (function(){
+//           window.location.href = 'http://localhost:8001/index.html'
+//         })
        
-    })
-    .catch((error) => ({ error: String(error) }));
-});
+//     })
+//     .catch((error) => ({ error: String(error) }));
+// });
