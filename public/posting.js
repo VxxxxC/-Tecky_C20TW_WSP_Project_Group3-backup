@@ -137,6 +137,17 @@ fetch("/session").then((res) =>
     .json()
     .then((json) => {
       console.log(json);
+
+      let loginBtn = document.querySelector(".right-selection.login");
+      let logoutBtn = document.querySelector("#logout-form");
+
+      if (json.id == null) {
+        console.log(`please login`);
+        loginBtn.classList.add("show");
+      } else {
+        console.log(`welcome!!`);
+        loginBtn.classList.add("hidden");
+      }
     })
     .catch((error) => ({ error: String(error) }))
 );

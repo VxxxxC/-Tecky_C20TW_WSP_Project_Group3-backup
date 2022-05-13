@@ -145,13 +145,27 @@ body {
   background: rgba(0, 200, 0, 0.5)
 }
 
-.right-selection.logout:hover {
+input[type="submit"] {
   width: 110px;
   height: 35px;
 
   border-radius: 5px;
-  background: rgba(200, 0, 0, 0.5)
+  background: rgba(200, 0, 0, 0.5);
+
+  font-family: arial, "cwTeXYen";
+  font-size: 15px;
+  color: rgba(0, 0, 0, 2.5);
+  border: none;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+  cursor: pointer;
+
 }
+
 
 .isolate {
   height: 2px;

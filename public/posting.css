@@ -145,6 +145,7 @@ body {
   background: rgba(0, 200, 0, 0.5)
 }
 
+
 .isolate {
   height: 2px;
   background: rgba(0, 0, 0, 0.5);
@@ -223,4 +224,12 @@ body {
 .tag-content {
   display: flex;
   flex-wrap: wrap;
+}
+
+.show {
+  display: flex;
+}
+
+.hidden {
+  display: none;
 }
