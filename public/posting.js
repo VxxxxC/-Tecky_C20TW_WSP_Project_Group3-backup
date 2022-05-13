@@ -6,7 +6,7 @@ socket.on("toClient", (msg) => {
 });
 socket.emit(
   "toServer",
-  "client side at posting page respond to backend server"
+  "SocketIO on !! Posting page listening to backend server..."
 );
 
 //-------------------text editor------------------------

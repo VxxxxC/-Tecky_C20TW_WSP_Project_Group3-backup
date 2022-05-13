@@ -1,12 +1,15 @@
 // const { RESERVED_EVENTS } = require("socket.io/dist/socket");
 
 //----------------Socket.IO client side--------------------
-// const socket = io.connect();
+const socket = io.connect();
 
-// socket.on("toClient", (msg) => {
-//   console.log(msg);
-// });
-// socket.emit("toServer", "client side at home page respond to backend server");
+socket.on("toClient", (msg) => {
+  console.log(msg);
+});
+socket.emit(
+  "toServer",
+  "SocketIO on !! Home page listening to backend server..."
+);
 
 //---------querySelector area-----------------
 let buttonList = document.querySelector(".button-list");
@@ -198,10 +201,10 @@ buttonList.addEventListener("click", (event) => {
       }" style="text-decoration:none; color:black">
         <div class="content-box cnt${post.id}">
     <div class="inner-upper-content">
-    <i class="upper-content-top-icon bi bi-eye"></i>
-      <img class="content-img"
-        src="${"/img/" + post.image}">
-      <i class="upper-content-bottom-icon bi bi-heart"></i>
+    <i class="upper-content-top-icon fa-solid fa-eye"></i>
+    <img class="content-img"
+      src="${"/img/" + post.image}">
+    <i class="upper-content-bottom-icon fa-solid fa-heart"></i>
     </div>
     <div class="inner-center-content">${post.title}
     <div id="content-tag-${post.id}">
@@ -310,6 +313,19 @@ fetch("/session").then((res) =>
     .json()
     .then((json) => {
       console.log(json);
+
+      let loginBtn = document.querySelector(".right-selection.login");
+      let logoutBtn = document.querySelector("#logout-form");
+
+      if (json.id == null) {
+        console.log(`please login`);
+        loginBtn.classList.add("show");
+        logoutBtn.classList.add("hidden");
+      } else {
+        console.log(`welcome!!`);
+        loginBtn.classList.add("hidden");
+        logoutBtn.classList.add("show");
+      }
     })
     .catch((error) => ({ error: String(error) }))
 );
