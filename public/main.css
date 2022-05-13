@@ -1,6 +1,7 @@
-* {
-    margin: 0;
-    top: 0;
+
+
+.content{
+  background-color: #e6e6e6;
 }
 
 
@@ -148,17 +149,6 @@
     background: rgba(0, 0, 0, 0.5);
   }
   
-
-main {
-    background-color: aqua;
-
-}
-
-.content {
-    background-color: #fdfdfa;
-
-}
-
 .title-holder {
     text-align: center;
     font-size: 60px;
@@ -197,16 +187,18 @@ main {
     width: auto;
     padding-right: 69px;
     padding-left: 69px;
-    background-image: linear-gradient(to bottom, #fdfdfa 0%, #f6f7ef 100%), linear-gradient(to bottom, #e3d6d64d 0%,#e3d6d64d 0%);
-  background-clip: content-box, padding-box;
+    /* background-image: linear-gradient(to bottom, #fdfdfa 0%, #f6f7ef 100%), linear-gradient(to bottom, #e3d6d64d 0%,#e3d6d64d 0%);
+  background-clip: content-box, padding-box; */
     overflow: auto;
     font-family: arial, "cwTeXYen";
+    display: flex;
 }
 
 .author{
 
     margin-bottom: 16px;
     padding: 12px;
+    background-color: #e6e6e6;
 
 }
 
@@ -215,12 +207,12 @@ main {
 }
 
 .author-name{
-    font-size: 48px;
+    font-size: 36px;
     font-weight: 700;
-    padding-left: 50px;
+    padding-left: 72px;
 }
 
-.intro{
+/* .intro{
     margin: 5px;
     padding-left: 24px;
     padding-right: 24px;
@@ -231,7 +223,7 @@ textarea {
     resize: none;
     margin: 5px;
     overflow: auto;
-}
+} */
 
 .comment{
     background-color: skyblue;
@@ -257,3 +249,35 @@ textarea {
 .hidden {
   display: none;
 }
+
+.footer{
+  background-color: #e6e6e6;
+}
+
+.copyright{
+  font-size: 24px;
+  font-family: arial, "cwTeXYen";
+  font-weight: bold;
+  text-align: center;
+  background-color: #e6e6e6;
+ 
+}
+
+.copyright p{
+  margin: 0px;
+}
+
+/* .media ul{
+  display: flex;
+  justify-content: space-around;
+}
+
+
+ */
+
+.media{ min-height: 200px; background:#e6e6e6; text-align: center; }
+.media ul { padding-top: 50px; padding-bottom: 20px; }
+.media ul li { display: inline-block; }
+.media ul li a { font-size: 40px; color: #fff; margin: 0px 10px; line-height: 100px; display: inline-block; width: 100px; height: 100px; background: #B71C1C; -webkit-transition: all .6s ease; -moz-transition: all .6s ease; -ms-transition: all .6s ease; -o-transition: all .6s ease; transition: all .6s ease; transform: scale(0.7);  }
+.media ul li:hover a { border-radius: 50%; background: #B71C1C; -moz-transform: rotate(360deg) ; -webkit-transform: rotate(360deg) ; -o-transform: rotate(360deg); -ms-transform: rotate(360deg); transform: rotate(360deg); }
+

@@ -33,17 +33,36 @@ async function postContent() {
            <img src="${"/img/" + post.image}">
         </div>
  </div>
-      <div class="text">${post.content}</div>
-      <button class="edit-btn">
-      <i class="bi bi-pencil"></i>
-      </button>
+      <div class="text">${post.content}
+      </div>
+      <button class="edit-btn .float-right ">
+      <i class="bi bi-pencil aria-hidden="true"></i>
+      </button>   
+  
+   
       <div class="author">
             <div class="sub-header-1">Author</div>
             <div class="author-name">${post.username}</div>
-            <div class="intro">
-            </div>
-          
+            <div class="isolate"></div>
         </div>
+
+  
+    <div class="media">
+      <ul>
+        <li>
+       <a href="https://www.facebook.com/"><i class="bi bi-facebook"></i></a>   
+        </li>
+        <li>
+      <a href="https://www.instagram.com"><i class="bi bi-instagram"></i></a>    
+        </li>
+        <li>
+          <a href="https://www.youtube.com"><i class="bi bi-youtube"></i></a>
+        </li>
+      </ul>
+    </div>
+    <div class="copyright">
+      <p>All copyright reserved by the author</p>
+    </div>
        `;
 
   let editBtn = document.querySelector(".edit-btn");
