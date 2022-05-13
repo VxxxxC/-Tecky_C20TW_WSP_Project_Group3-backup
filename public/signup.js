@@ -45,7 +45,7 @@ signupForm.addEventListener("submit", (e) => {
           title: "Failed to auto signup: " + json.error,
         });
         // console.error('failed to check role:', json.error)
-        // return
+        return;
       }
       loadingPage();
     })
