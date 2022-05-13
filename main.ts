@@ -312,16 +312,16 @@ app.get('/post/:id', async (req, res) => {
   // console.log(req.params.id);
   let id = req.params.id
   let result = await client.query('select post.id as id,title,content,image,username from post inner join users on users.id = post.users_id where post.id = $1', [id])
-  if(result.rows.length>0){
-      let posts = result.rows[0]
+  if (result.rows.length > 0) {
+    let posts = result.rows[0]
     res.json({ posts })
-  }else {
-    let result =   await client.query('select id,title,content,image from post where id = $1', [id])
+  } else {
+    let result = await client.query('select id,title,content,image from post where id = $1', [id])
     let posts = result.rows[0]
     posts.username = 'guest'
     res.json({ posts })
-    }
   }
+}
 )
 // 
 
@@ -408,4 +408,15 @@ delete from post where id = $1
       }
     })
     .catch(catchError(res))
+})
+
+//----------navbar hashtag searching--------
+
+app.get("/search", async (req, res) => {
+
+  let result = await client.query("select rank() over (order by count(*) desc),count(*), tags.name from tags inner join post_tag on tags.id = post_tag.tags_id group by tags.name order by count(*) desc limit 5;")
+  // console.log(result)
+  res.json({ result })
+
+
 })

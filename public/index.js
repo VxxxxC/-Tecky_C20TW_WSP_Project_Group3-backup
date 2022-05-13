@@ -52,8 +52,6 @@ async function getHashtag(id) {
   newTagTemplate.remove();
 
   for (let tag of res) {
-    console.log(tag.name);
-
     let newTag = newTagTemplate.cloneNode(true);
     newTag.innerHTML = tag.name;
     contentTagContainer.appendChild(newTag);
@@ -329,3 +327,26 @@ fetch("/session").then((res) =>
     })
     .catch((error) => ({ error: String(error) }))
 );
+
+//---------------navbar hashtag searching--------------
+
+fetch("/search").then((res) => {
+  res.json().then((json) => {
+    let result = json.result;
+
+    let hashtagList = document.querySelector(".navbar-button");
+    let hashtag = document.querySelector(".nav-hashtag");
+    hashtagList.remove();
+    hashtag.remove();
+
+    for (let tag of result.rows) {
+      console.log(tag);
+      let newTag = hashtagList.cloneNode(true);
+      let tagname = hashtag.cloneNode(true);
+      tagname.classList.add(`rank-${tag.rank}`);
+      tagname.innerHTML = tag.name;
+      newTag.appendChild(tagname);
+      document.querySelector(".navbar").appendChild(newTag);
+    }
+  });
+});
