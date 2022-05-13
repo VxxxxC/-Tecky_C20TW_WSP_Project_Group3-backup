@@ -101,7 +101,7 @@ async function getPost() {
     <div class="inner-bottom-content">
       <img class="user-pic"
         src="https://dvg5hr78c8hf1.cloudfront.net/2016/06/21/15/37/47/4b0b2595-20dc-40bc-a963-e8e53b2fd5bf/1*2cAvoDuXZp_dy49WqNVVrA.jpeg">
-      <div class="userid-postdate">${post.created_at}</div>
+      <div class="userid-postdate">${moment(post.created_at).format("LL")}</div>
       <button class="delete-btn" id=btn${post.id}>delete</button>
     </div>
   </div>
