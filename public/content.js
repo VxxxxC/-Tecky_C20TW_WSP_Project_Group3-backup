@@ -1,11 +1,5 @@
 
-// const { RESERVED_EVENTS } = require("socket.io/dist/socket");
-// // // ----------------Socket.IO client side--------------------
-// let socket = io.connect();
 
-// socket.emit("connect",()=>{
-//   console.log('connected')
-// })
 
 // socket.on('editPost', (msg) => {
 //   console.log(msg);

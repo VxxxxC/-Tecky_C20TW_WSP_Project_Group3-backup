@@ -172,13 +172,19 @@ main {
 	margin:80px auto;
 	position: relative;
 	overflow: hidden;
+  transition: 0.3s;
+}
+
+.slider:hover{
+  transform: scale(1.2);
 }
 
 
-.item img{
+.slider img{
   max-height: 100%;
   max-width: 100%;
   object-fit: contain;
+
 }
 
 .text {
