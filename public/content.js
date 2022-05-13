@@ -41,9 +41,6 @@ async function postContent() {
             <div class="sub-header-1">Author</div>
             <div class="author-name">${post.username}</div>
             <div class="intro">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto excepturi impedit, ipsum, numquam
-                temporibus hic iste at, inventore quo perspiciatis laudantium saepe modi! Quos ipsum debitis et
-                voluptatem beatae sit.
             </div>
           
         </div>
