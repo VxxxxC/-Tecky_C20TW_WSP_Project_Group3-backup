@@ -57,7 +57,7 @@ userRoutes.post("/signup", async (req, res) => {
     // console.log(id.rows[0])
     req.session.user = {
       id: newUser.rows[0].id,
-      username: username,is_admin:true
+      username: username,is_admin:false
     };
      // console.log(req.session.user);
     res.json({ id: newUser.rows[0].id });

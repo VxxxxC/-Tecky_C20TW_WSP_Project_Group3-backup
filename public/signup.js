@@ -15,7 +15,7 @@ function validateForm() {
 let signupForm = document.querySelector('#sign-form');
 
 
-loginForm.addEventListener('submit', (e)=>{
+signupForm.addEventListener('submit', (e)=>{
   e.preventDefault()
   fetch('/signup',{
     method: 'post',

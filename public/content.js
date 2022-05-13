@@ -1,3 +1,18 @@
+
+// const { RESERVED_EVENTS } = require("socket.io/dist/socket");
+// // // ----------------Socket.IO client side--------------------
+// let socket = io.connect();
+
+// socket.emit("connect",()=>{
+//   console.log('connected')
+// })
+
+// socket.on('editPost', (msg) => {
+//   console.log(msg);
+// });
+// socket.emit("toServer", "client side at home page respond to backend server");
+
+//====================checkdata================================//
 function checkData() {
   var txtCheck = document.formName;
   if (txtCheck.textarea.value == "") {
@@ -7,6 +22,7 @@ function checkData() {
   }
 }
 
+//==========================fecth content from index to contentpaged================//
 let content = document.querySelector(".content");
 
 async function postContent() {
@@ -106,13 +122,10 @@ logoutForm.addEventListener("submit", (e) => {
         text: "Already logout!",
         footer: '<a href="login.html">Log in</a>',
       })
-        // .then (function(){
-        //   window.location.href = 'http://localhost:8001/login.html'
-        // })
-        .then(function () {
-          let admin = document.querySelector(".admin");
-          admin.textContent = json.role === "guest" ? "Guest" : "Member";
-        });
+        .then (function(){
+          window.location.href = 'http://localhost:8001/index.html'
+        })
+       
     })
     .catch((error) => ({ error: String(error) }));
 });

@@ -31,8 +31,6 @@ INSERT INTO users (id,usernames ,passwords ,create_at,updated_at,is_admin) VALUE
 //////////////////////////////////////////////////////////
 create database blog;
 
-create table users (
-  id serial primary key,
   username varchar(255) not null unique,
   password varchar(255) not null,
   created_at timestamp default current_timestamp,
