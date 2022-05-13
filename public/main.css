@@ -168,7 +168,8 @@ main {
 
 
 .slider{
-	max-width: 700px;
+	width: auto;
+  height: auto;
 	margin:80px auto;
 	position: relative;
 	overflow: hidden;
@@ -179,7 +180,11 @@ main {
   transform: scale(1.2);
 }
 
-
+.item{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .slider img{
   max-height: 100%;
   max-width: 100%;
