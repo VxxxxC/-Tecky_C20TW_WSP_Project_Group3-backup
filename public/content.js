@@ -55,6 +55,7 @@ async function postContent() {
     Swal.fire({
       title: "Edit post",
       input: "text",
+      customClass: 'swal-wide',
       inputAttributes: {
         autocapitalize: "off",
       },
