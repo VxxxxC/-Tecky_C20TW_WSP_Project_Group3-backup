@@ -91,33 +91,34 @@ async function postContent() {
 
 postContent();
 
-// fetch("/is_admin")
-//   .then((res) => res.json())
-//   .catch((error) => ({ error: String(error) }))
-//   .then((json) => {
-//     let admin = document.querySelector(".admin");
-//     admin.textContent = json.role === "admin" ? "Admin" : "Member";
-//   });
+fetch("/is_admin")
+  .then((res) => res.json())
+  .catch((error) => ({ error: String(error) }))
+  .then((json) => {
+    let admin = document.querySelector(".admin");
+    admin.textContent = json.role === "admin" ? "Admin" : "Member";
+  });
 
-// let logoutForm = document.querySelector("#logout-form");
-// logoutForm.addEventListener("submit", (e) => {
-//   e.preventDefault();
-//   fetch("/logout", {
-//     method: "POST",
-//   })
-//     .then((res) => res.json())
-//     .then((json) => {
-//       console.log(json);
-//       Swal.fire({
-//         icon: "success",
-//         title: "Logout",
-//         text: "Already logout!",
-//         footer: '<a href="login.html">Log in</a>',
-//       })
-//         .then (function(){
-//           window.location.href = 'http://localhost:8001/index.html'
-//         })
-       
-//     })
-//     .catch((error) => ({ error: String(error) }));
-// });
+
+
+fetch("/session").then((res) =>
+  res
+    .json()
+    .then((json) => {
+      console.log(json);
+
+      let loginBtn = document.querySelector(".right-selection.login");
+      let logoutBtn = document.querySelector("#logout-form");
+
+      if (json.id == null) {
+        console.log(`please login`);
+        loginBtn.classList.add("show");
+        logoutBtn.classList.add("hidden");
+      } else {
+        console.log(`welcome!!`);
+        loginBtn.classList.add("hidden");
+        logoutBtn.classList.add("show");
+      }
+    })
+    .catch((error) => ({ error: String(error) }))
+);

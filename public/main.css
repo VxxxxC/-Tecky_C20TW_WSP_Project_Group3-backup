@@ -199,20 +199,20 @@ main {
 }
 
 .author{
-    margin-top: 16px;
+
     margin-bottom: 16px;
-    padding: 24px;
-    background-color: aquamarine;
+    padding: 12px;
+
 }
 
 .sub-header-1{
-    font-size: 11px;
+    font-size: 24px;
 }
 
 .author-name{
-    font-size: 24px;
+    font-size: 48px;
     font-weight: 700;
-    padding-left: 5px;
+    padding-left: 50px;
 }
 
 .intro{
@@ -245,3 +245,10 @@ textarea {
 }
 
 
+.show {
+  display: flex;
+}
+
+.hidden {
+  display: none;
+}
