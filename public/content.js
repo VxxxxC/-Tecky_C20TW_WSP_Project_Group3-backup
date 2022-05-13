@@ -54,7 +54,7 @@ async function postContent() {
     console.log("edit post");
     Swal.fire({
       title: "Edit post",
-      input: "text",
+      input: "textarea",
       customClass: 'swal-wide',
       inputAttributes: {
         autocapitalize: "off",
