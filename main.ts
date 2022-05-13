@@ -112,6 +112,7 @@ app.use(userRoutes);
 app.post('/post', async (req, res, next) => {
   console.log('someone posting...');
   // const form = formidable({ multiples: true });
+  //get session -> userId -> insert userId when post
 
 
   const form = formidable({
@@ -126,10 +127,11 @@ app.post('/post', async (req, res, next) => {
   form.parse(req, async (err, fields: any, files: any) => {
     if (err) console.log(err)
 
-    console.log({
-      'fields': fields,
-      'files': files
-    })
+    // console.log({
+    //   'fields': fields,
+    //   'files': files
+    // })
+
 
 
     if (fields.image === 'undefined') {
@@ -148,13 +150,13 @@ app.post('/post', async (req, res, next) => {
       }
       for (let tag of eachTag) {
         let id
-        console.log({ tag })
+        // console.log({ tag })
         let result = await client.query('select id from tags where name = $1;', [tag])
 
         if (!result.rows[0]) {
           client.query('insert into tags (name) values ($1) returning id;', [tag])
           let result = await client.query('select id from tags where name = $1;', [tag])
-          console.log(result)
+          // console.log(result)
           let id = result.rows[0].id
           console.log(`insert first tags into the table: ${id}`)
 
@@ -164,7 +166,7 @@ app.post('/post', async (req, res, next) => {
         else {
 
           id = result.rows[0].id
-          console.log(id)
+          // console.log(id)
           if (!id) {
             let result = await client.query('insert into tags (name) values ($1) returning id;', [tag])
             id = result.rows[0].id
@@ -174,13 +176,27 @@ app.post('/post', async (req, res, next) => {
         }
 
       }
+      let post_id;
 
-      let result = await client.query('insert into post (title,content,created_at,updated_at) values ($1,$2,now(),now()) returning id;', [input.title, input.content])
-      let post_id = result.rows[0].id
+      if (req.session.user) {
+
+        let userID = req.session.user?.id
+
+        let result = await client.query('insert into post (title,content,created_at,updated_at, users_id) values ($1,$2,now(),now(),$3) returning id;', [input.title, input.content, userID])
+        post_id = result.rows[0].id
+
+        console.log({ userID })
+
+      } else {
+
+        let result = await client.query('insert into post (title,content,created_at,updated_at) values ($1,$2,now(),now()) returning id;', [input.title, input.content])
+        post_id = result.rows[0].id
+      }
       console.log({ tags_id, post_id })
       for (let tag_id of tags_id) {
         await client.query('insert into post_tag (post_id, tags_id) values ($1,$2)', [post_id, tag_id])
       }
+
       res.status(200).json({ message: 'post created!' })
       return
 
@@ -203,13 +219,13 @@ app.post('/post', async (req, res, next) => {
       }
       for (let tag of eachTag) {
         let id
-        console.log({ tag })
+        // console.log({ tag })
         let result = await client.query('select id from tags where name = $1;', [tag])
 
         if (!result.rows[0]) {
           client.query('insert into tags (name) values ($1) returning id;', [tag])
           let result = await client.query('select id from tags where name = $1;', [tag])
-          console.log(result)
+          // console.log(result)
           let id = result.rows[0].id
           console.log(`insert first tags into the table: ${id}`)
 
@@ -219,7 +235,7 @@ app.post('/post', async (req, res, next) => {
         else {
 
           id = result.rows[0].id
-          console.log(id)
+          // console.log(id)
           if (!id) {
             let result = await client.query('insert into tags (name) values ($1) returning id;', [tag])
             id = result.rows[0].id
@@ -230,12 +246,28 @@ app.post('/post', async (req, res, next) => {
 
       }
 
-      let result = await client.query('insert into post (title,content,image,created_at,updated_at) values ($1,$2,$3,now(),now()) returning id;', [input.title, input.content, input.image])
-      let post_id = result.rows[0].id
+      let post_id;
+
+      if (req.session.user) {
+
+        let userID = req.session.user?.id
+
+        let result = await client.query('insert into post (title,content,image,created_at,updated_at, users_id) values ($1,$2,$3,now(),now(),$4) returning id;', [input.title, input.content, input.image, userID])
+        post_id = result.rows[0].id
+
+        console.log({ userID })
+
+      } else {
+
+        let result = await client.query('insert into post (title,content,image,created_at,updated_at) values ($1,$2,$3,now(),now()) returning id;', [input.title, input.content, input.image])
+        post_id = result.rows[0].id
+      }
+
       console.log({ tags_id, post_id })
       for (let tag_id of tags_id) {
         await client.query('insert into post_tag (post_id, tags_id) values ($1,$2)', [post_id, tag_id])
       }
+
       res.status(200).json({ message: 'post created!' })
     }
 
@@ -246,17 +278,17 @@ app.post('/post', async (req, res, next) => {
 
 app.get('/tags/:id', async (req, res) => {
   let id = req.params.id
-  console.log(id)
+  // console.log(id)
   let result = await client.query('select post.id, post.title, post.content, post.created_at, post.image, tags.name from post inner join post_tag on post.id = post_tag.post_id inner join tags on tags.id = post_tag.tags_id where post.id = $1;', [id])
   let tags = result.rows;
-  console.log(tags);
+  // console.log(tags);
   res.json(tags)
 })
 
 //------------------從frontend request到database抓取data----------------------------
 
 app.post('/main', async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
 
   const { contentIndex } = req.body
   let result = await client.query('select * from post offset $1 fetch first 8 rows only', [contentIndex])
@@ -268,7 +300,7 @@ app.post('/main', async (req, res) => {
 
 //----------------below app.get'/main' is for pagination in index.js-------------
 app.get('/main', async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
 
   let result = await client.query('select * from post;')
   let posts = result.rows
@@ -277,7 +309,7 @@ app.get('/main', async (req, res) => {
 
 // transfer post title , content, image from /post/ to content pages
 app.get('/post/:id', async (req, res) => {
-  console.log(req.params.id);
+  // console.log(req.params.id);
   let id = req.params.id
   let result = await client.query('select post.id as id,title,content,image,users_id from post inner join users on users.id = post.users_id where post.id = $1', [id])
   let posts = result.rows[0]
@@ -299,7 +331,7 @@ app.patch('/post/:id', adminGuard, (req, res) => {
     res.status(400).json({ error: ('Missing id in req.params') })
     return
   }
-  console.log('req.body:', req.body)
+  // console.log('req.body:', req.body)
   let content = req.body.content?.trim()
   if (!content) {
     res.status(400).json({ error: ('post cannot be empty') })
@@ -341,8 +373,8 @@ select image from post where id = $1
 //delete post
 app.delete('/post/:id', adminGuard, (req, res) => {
   let id = +req.params.id
-  console.log("test")
-  console.log(id)
+  // console.log("test")
+  // console.log(id)
   if (!id) {
     res.status(400).json({ error: ('Missing id in req.params') })
     return
@@ -353,10 +385,10 @@ app.delete('/post/:id', adminGuard, (req, res) => {
   `, [id]
   )
   client.query(/*sql*/
-  `
+    `
 delete from post where id = $1
 `, [id]
-)
+  )
     .then(result => {
       if (result.rowCount) {
         res.json({ ok: true })

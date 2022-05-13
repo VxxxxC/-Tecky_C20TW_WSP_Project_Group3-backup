@@ -151,10 +151,10 @@ userRoutes.get("/is_admin", (req, res) => {
   }
 });
 
-// userRoutes.get("/session", (req, res) => {
-//   if (req.session?.user) {
-//     res.json(req.session.user);
-//   } else {
-//     res.json({error:'User does not exist!'});
-//   }
-// });
+userRoutes.get("/session", (req, res) => {
+  if (req.session?.user) {
+    res.json(req.session.user);
+  } else {
+    res.json({error:'User does not exist!'});
+  }
+});

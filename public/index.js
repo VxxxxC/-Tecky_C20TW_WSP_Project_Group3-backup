@@ -72,10 +72,9 @@ async function getPost() {
     body: JSON.stringify({ contentIndex }),
   });
 
-  // FIXME: TODO: 最後記得加返入"postContainer.innerHTML" (第一行content-box之前) <a href="/content-page.html?id=${post.id}" style="text-decoration:none; color:black"> </a>
-
   let result = await res.json();
   let posts = result.posts;
+  console.log({ posts });
 
   for (let post of posts) {
     postsContainer.innerHTML += `
@@ -190,8 +189,6 @@ buttonList.addEventListener("click", (event) => {
       body: JSON.stringify({ contentIndex }),
     });
 
-    // FIXME: TODO: 最後記得加返入"postContainer.innerHTML" (第一行content-box之前) <a href="/content-page.html?id=${post.id}" style="text-decoration:none; color:black"> </a>
-
     let result = await res.json();
     let posts = result.posts;
     for (let post of posts) {
@@ -305,3 +302,14 @@ logoutForm.addEventListener("submit", (e) => {
     })
     .catch((error) => ({ error: String(error) }));
 });
+
+//-------------seesion check User login----------
+
+fetch("/session").then((res) =>
+  res
+    .json()
+    .then((json) => {
+      console.log(json);
+    })
+    .catch((error) => ({ error: String(error) }))
+);
