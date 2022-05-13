@@ -168,7 +168,8 @@ main {
 
 
 .slider{
-	max-width: 700px;
+	width: auto;
+  height: auto;
 	margin:80px auto;
 	position: relative;
 	overflow: hidden;
@@ -179,7 +180,11 @@ main {
   transform: scale(1.2);
 }
 
-
+.item{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .slider img{
   max-height: 100%;
   max-width: 100%;
@@ -199,20 +204,20 @@ main {
 }
 
 .author{
-    margin-top: 16px;
+
     margin-bottom: 16px;
-    padding: 24px;
-    background-color: aquamarine;
+    padding: 12px;
+
 }
 
 .sub-header-1{
-    font-size: 11px;
+    font-size: 24px;
 }
 
 .author-name{
-    font-size: 24px;
+    font-size: 48px;
     font-weight: 700;
-    padding-left: 5px;
+    padding-left: 50px;
 }
 
 .intro{
@@ -245,3 +250,10 @@ textarea {
 }
 
 
+.show {
+  display: flex;
+}
+
+.hidden {
+  display: none;
+}

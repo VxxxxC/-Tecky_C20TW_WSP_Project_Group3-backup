@@ -31,19 +31,27 @@
             </a>
           </div>
       
-          <!-- TODO: 差reset password page -->
-      
-          <!-- <div class="right-header">
-           <a href="reset" style="text-decoration:none"> 
-              <div class="right-selection guest">
-                <div class="right-selection-box-content admin">Guest</div>
+          <div class="right-header">
+            <div class="right-selection guest">
+              <div class="right-selection-box-content admin">Guest</div>
+            </div>
+            <!-- <a href="reset" style="text-decoration:none"> -->
+            <!-- <div class="right-selection guest">
+              <div class="right-selection-box-content admin">Guest</div>
+            </div> -->
+            <!--=================================logout=================================id="logout-form"-->
+            <form id="logout-form" method="POST" action="/logout">
+              <div class="right-selection">
+                <input type="submit" value="Logout">
               </div>
-
+            </form>
+            <!--=================================logout=================================-->
             <a href="login.html" style="text-decoration:none">
               <div class="right-selection login">
                 <div class="right-selection-box-content">Login</div>
               </div>
-            </a> -->
+            </a>
+          </div>
           </div>
         </div>
       </header>
@@ -79,7 +87,7 @@
                 vero itaque.
             </div>
             <button class="edit-btn ">
-              <i class="bi bi-pencil aria-hidden="true""></i>
+              <i class="bi bi-pencil aria-hidden="true"></i>
               </button>     
         <!--introduction of the author-->
         <div class="author">
@@ -87,16 +95,16 @@
             <!--author name from the database-->
             <div class="author-name">jk</div>
             <!--author introduction-->
-            <div class="intro">
+            <!-- <div class="intro">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto excepturi impedit, ipsum, numquam
                 temporibus hic iste at, inventore quo perspiciatis laudantium saepe modi! Quos ipsum debitis et
                 voluptatem beatae sit.
             </div>
-           
+            -->
         </div>
 
         <!--comment-->
-        <div class="comment">
+        <!-- <div class="comment">
             <form name="formName" method="post" action="" onSubmit="checkData();">   
                 <textarea name="textarea" rows="10" cols="100" placeholder="Welcome to comment"></textarea>
               </p>  <p>
@@ -104,7 +112,7 @@
               </p>
             </form>
         </div>
-    </main>
+    </main> -->
 
 
     <script src="content.js"></script>
