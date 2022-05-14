@@ -85,7 +85,7 @@ body:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 22px;
+  transform: scale(0.07);
 }
 
 .post {
