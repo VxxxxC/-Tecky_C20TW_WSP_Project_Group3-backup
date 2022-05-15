@@ -24,7 +24,45 @@ async function postContent() {
   let result = await res.json();
   console.log(result);
   let post = result.posts;
-  content.innerHTML = `<div class="title-holder">${post.title}</div>
+  if (post.image == null){
+    content.innerHTML = `<div class="title-holder">${post.title}</div>
+    <div class="slider">
+        <div  class="item">
+        </div>
+ </div>
+      <div class="text">${post.content}
+      </div>
+      <button class="edit-btn .float-right ">
+      <i class="bi bi-pencil aria-hidden="true"></i>
+      </button>   
+  
+   
+      <div class="author">
+            <div class="sub-header-1">Author</div>
+            <div class="author-name">${post.username}</div>
+            <div class="isolate"></div>
+        </div>
+
+  
+    <div class="media">
+      <ul>
+        <li>
+       <a href="https://www.facebook.com/"><i class="bi bi-facebook"></i></a>   
+        </li>
+        <li>
+      <a href="https://www.instagram.com"><i class="bi bi-instagram"></i></a>    
+        </li>
+        <li>
+          <a href="https://www.youtube.com"><i class="bi bi-youtube"></i></a>
+        </li>
+      </ul>
+    </div>
+    <div class="copyright">
+      <p>All copyright reserved by the author</p>
+    </div>
+       `;
+  }else{
+    content.innerHTML = `<div class="title-holder">${post.title}</div>
     <div class="slider">
         <div  class="item">
            <img src="${"/img/" + post.image}">
@@ -62,6 +100,8 @@ async function postContent() {
     </div>
        `;
 
+  }
+  
   let editBtn = document.querySelector(".edit-btn");
   editBtn.addEventListener("click", () => {
     console.log("edit post");
