@@ -1,18 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
 *{
-    margin: 0;
-    top: 0;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
-.body{
-  transform: none;
-}
-
-.container{
-  background-image: url(city.jpg);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-
-}
-
 
 .header-container {
     height: 60px;
@@ -152,34 +144,37 @@
   }
   
 
-
-.login-form h1{
-padding: 50px;
+  /* center */
+body{
+  margin: 0;
+  padding: 0;
+  background-image: url(city.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  /* background: linear-gradient(120deg,#2980b9, #8e44ad); */
+  height: 100vh;
+  
+  overflow: hidden;
 }
-
-
-.login-form{
-    margin-left: 500px;
-    margin-right: px;
-    padding: 75px;
-    height: 80vh; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center;
-    text-align: center;
-    transform: translate(-20%,-20%);
+.center{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 400px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 10px 10px 15px rgba(0,0,0,0.05);
 }
-
-.google{
-    height: 44px;
-    width: 300px;
-    border-radius: 5px;
-    box-sizing: border-box;
+.center h1{
+  text-align: center;
+  padding: 20px 0;
+  border-bottom: 1px solid silver;
 }
-
-.line{
-    height: 15px;
-    color: black;
+.center form{
+  padding: 0 40px;
+  box-sizing: border-box;
 }
 
 input{  
@@ -195,7 +190,21 @@ input{
     background: none;
 }
 
-.login{
+
+input[type=text]:focus {
+    border: 3px solid #5c86ff; 
+  }
+  
+  
+  input[type=password]:focus {
+    border: 3px solid #5c86ff; 
+  }
+
+  input::placeholder{
+    font-family: arial, "cwTeXYen";
+  }
+
+  .login{
     margin: 10px;
 
 }
@@ -221,16 +230,8 @@ input{
   background-color: #949494;
 }
 
-input[type=text]:focus {
-  border: 3px solid #5c86ff; 
-}
-
-
-input[type=password]:focus {
-  border: 3px solid #5c86ff; 
-}
-
-.view:hover,
-.view:active{
-  font-size: 150%;
+.signup_link{
+    text-align: center;
+    margin-top: 10px;
+    font-family: arial, "cwTeXYen";
 }

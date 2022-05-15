@@ -120,6 +120,27 @@ fetch("/is_admin")
 
 
 
+  let logoutForm = document.querySelector("#logout-form");
+logoutForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  fetch("/logout", {
+    method: "POST",
+  })
+    .then((res) => res.json())
+    .then((json) => {
+      console.log(json);
+      Swal.fire({
+        icon: "success",
+        title: "Logout",
+        text: "Already logout!",
+        footer: '<a href="login.html">Log in</a>',
+      }).then(function () {
+        window.location.href = "http://localhost:8001/index.html";
+      });
+    })
+    .catch((error) => ({ error: String(error) }));
+});
+
 fetch("/session").then((res) =>
   res
     .json()
