@@ -87,8 +87,8 @@ userRoutes.post("/login", (req, res) => {
   client
     .query(
       /**sql */ `
-          select id, username,password,is_admin from users where username = $1
-          `, [username]
+          select id, username,password,is_admin from users where username = $1 and password = $2
+          `, [username,password]
     )
     .then((result: any) => {
       let user = result.rows
