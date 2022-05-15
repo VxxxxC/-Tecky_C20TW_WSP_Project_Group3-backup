@@ -175,8 +175,9 @@ input[type="submit"] {
   align-items: center;
 
   position: absolute;
-  margin-left: 5%;
-  margin-right: 5%;
+  left: 12%;
+  right: 0;
+
 }
 
 .navbar {
@@ -443,7 +444,9 @@ input[type="submit"] {
 }
 
 .button-group {
-  margin-top: 70px;
+  position: relative;
+  top: 10%;
+  right: 7%;
 
   display: flex;
   justify-content: center;
