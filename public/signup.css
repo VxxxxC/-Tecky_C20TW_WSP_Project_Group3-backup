@@ -1,97 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
-*{
+
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
-
-.header-container {
-    height: 60px;
-    background: white;
-  
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .left-header {
-    display: flex;
-  }
-  
-  .left-selection {
-    display: flex;
-    margin: 10px;
-    width: 120px;
-    height: 40px;
-  
-    border-radius: 5px;
-    -webkit-transition: 0.2s;
-    transition: 0.2s;
-  }
-  
-  
-  .left-selection-box-content {
-    text-align: center;
-    font-family: arial, "cwTeXYen";
-  }
-  
-  .website-name {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 22px;
-  }
-  
-  .post {
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 20px;
-    background: rgba(46, 129, 46, 0.6);
-    transition: 1s;
-    transform: skewX(-20deg);
-    cursor: pointer;
-  }
-  
-  .post:hover {
-    width: 120px;
-    height: 40px;
-    border-radius: 5px;
-    background: rgba(46, 129, 46, 1);
-    transform: skewX(0deg);
-  }
-  
-  .post-icon {
-    margin: 3px;
-  }
-  
-  .right-header {
-    display: flex;
-  }
-  
-  .right-selection {
-    margin: 15px;
-    width: 100px;
-    height: 35px;
-  
-    border-radius: 5px;
-    -webkit-transition: 0.2s;
-    transition: 0.2s;
-  }
-  
-  .left-box {
-    font-family: arial, "cwTeXYen";
-    font-size: 15px;
-    color: rgba(0, 0, 0, 0.5)
-  }
-  
-  .left-box:hover {
-    color: rgba(0, 0, 0, 1);
-    font-family: arial, "cwTeXYen";
-    font-size: 15px;
-  }
-
 
 body {
   background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
@@ -136,7 +50,8 @@ body:hover {
 
 
 .header-container {
-  height: 60px;
+  padding: 8px;
+  height: 80px;
   background: white;
 
   display: flex;
@@ -165,10 +80,11 @@ body:hover {
 }
 
 .website-name {
+  padding: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
-  transform: scale(0.07);
+  transform: scale(0.11);
 }
 
 .post {
@@ -183,9 +99,9 @@ body:hover {
   cursor: pointer;
 }
 
-  input::placeholder{
-    font-family: arial, "cwTeXYen";
-  }
+input::placeholder {
+  font-family: arial, "cwTeXYen";
+}
 
 .post:hover {
   width: 120px;
@@ -272,6 +188,7 @@ body:hover {
 }
 
 .isolate {
+  position: relative;
   height: 2px;
   background: rgba(0, 0, 0, 0.5);
 }
@@ -282,10 +199,8 @@ body:hover {
 
 .login-form {
   position: absolute;
-  bottom: 20%;
-  left: 20%;
-  right: 20%;
-  top: 97px;
+  bottom: 35%;
+  left: 35%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -319,10 +234,10 @@ input {
 }
 
 
-.signup_link{
-    text-align: center;
-    margin-top: 10px;
-    font-family: arial, "cwTeXYen";
+.signup_link {
+  text-align: center;
+  margin-top: 10px;
+  font-family: arial, "cwTeXYen";
 }
 
 
@@ -331,7 +246,6 @@ input {
   font-size: 150%;
 }
 
-.right-header{
-    display: flex;
+.right-header {
+  display: flex;
 }
-

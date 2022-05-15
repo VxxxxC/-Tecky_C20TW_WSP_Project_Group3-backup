@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
     integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -15,31 +16,30 @@
 
 <header>
   <div class="header-container">
+
     <div class="left-header">
-      <a href="index.html" style="text-decoration:none">
-        <div class="left-selection website-name">
-          <img src="/LOGO.png" class="left-selection-box-content"></img>
-        </div>
-      </a>
+      <div>
+        <a href="index.html" style="text-decoration:none">
+          <div class="left-selection website-name">
+            <img src="/LOGO.png" class="left-selection-box-content"></img>
+          </div>
+        </a>
+      </div>
 
-      <a href="posting.html" style="text-decoration:none">
-        <div class="left-selection post">
-          <div class="left-selection-box-content">刊登創作<span class="post-icon"><i
-                class="fa-solid fa-pen-to-square"></i></span></div>
-        </div>
-      </a>
+      <div>
+        <a href="posting.html" style="text-decoration:none">
+          <div class="left-selection post">
+            <div class="left-selection-box-content">刊登創作<span class="post-icon"><i
+                  class="fa-solid fa-pen-to-square"></i></span></div>
+          </div>
+        </a>
+      </div>
     </div>
-
-    <!-- TODO: 差reset password page -->
 
     <div class="right-header">
       <div class="right-selection guest">
         <div class="right-selection-box-content admin">Guest</div>
       </div>
-      <!-- <a href="reset" style="text-decoration:none"> -->
-      <!-- <div class="right-selection guest">
-        <div class="right-selection-box-content admin">Guest</div>
-      </div> -->
       <!--=================================logout=================================id="logout-form"-->
       <form id="logout-form" method="POST" action="/logout">
         <div class="right-selection">
@@ -47,14 +47,18 @@
         </div>
       </form>
       <!--=================================logout=================================-->
-      <a href="login.html" style="text-decoration:none">
-        <div class="right-selection login">
-          <div class="right-selection-box-content">Login</div>
-        </div>
-      </a>
+      <div>
+        <a href="login.html" style="text-decoration:none">
+          <div class="right-selection login">
+            <div class="right-selection-box-content">Login</div>
+          </div>
+        </a>
+      </div>
     </div>
   </div>
 </header>
+
+
 <div class="isolate"></div>
 
 
