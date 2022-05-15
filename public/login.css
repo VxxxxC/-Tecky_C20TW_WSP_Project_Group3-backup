@@ -44,15 +44,6 @@ body:hover {
   animation: gradient 15s ease infinite;
 }
 
-
-/* .container{
-  background-image: url(city.jpg);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-} */
-
-
-
 .header-container {
   height: 60px;
   background: white;
@@ -190,15 +181,11 @@ body:hover {
   background: rgba(0, 0, 0, 0.5);
 }
 
-
-
 .login-form h1 {
   padding: 50px;
 }
 
-
 .login-form {
-
   position: absolute;
   bottom: 20%;
   left: 20%;
@@ -209,13 +196,6 @@ body:hover {
   text-align: center;
 }
 
-
-.google {
-  height: 44px;
-  width: 300px;
-  border-radius: 5px;
-  box-sizing: border-box;
-}
 
 .line {
   height: 15px;

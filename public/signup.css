@@ -135,30 +135,6 @@ body:hover {
 }
 
 
-  /* center */
-
-.center{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 400px;
-  height: 400px;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 10px 10px 15px rgba(0,0,0,0.05);
-}
-.center h1{
-  text-align: center;
-  padding: 20px 0;
-  border-bottom: 1px solid silver;
-}
-.center form{
-  padding: 0 40px;
-  box-sizing: border-box;
-}
-
-
 .header-container {
   height: 60px;
   background: white;
@@ -207,14 +183,8 @@ body:hover {
   cursor: pointer;
 }
 
-
-
   input::placeholder{
     font-family: arial, "cwTeXYen";
-  }
-
-  .login{
-    margin: 10px;
   }
 
 .post:hover {
@@ -306,29 +276,20 @@ body:hover {
   background: rgba(0, 0, 0, 0.5);
 }
 
-
-
 .login-form h1 {
   padding: 50px;
 }
-
 
 .login-form {
   position: absolute;
   bottom: 20%;
   left: 20%;
   right: 20%;
+  top: 97px;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-}
-
-.google {
-  height: 44px;
-  width: 300px;
-  border-radius: 5px;
-  box-sizing: border-box;
 }
 
 .line {
@@ -368,5 +329,9 @@ input {
 .view:hover,
 .view:active {
   font-size: 150%;
+}
+
+.right-header{
+    display: flex;
 }
 
