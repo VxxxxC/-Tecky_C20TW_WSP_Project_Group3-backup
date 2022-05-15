@@ -79,7 +79,6 @@ let titleImg = document.querySelector(".title-img");
 //--------------submit content to server--------------
 
 function submit() {
-  
   document
     .querySelector(".submit-button")
     .addEventListener("click", async (event) => {

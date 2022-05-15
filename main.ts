@@ -148,7 +148,12 @@ app.post('/post', async (req, res, next) => {
         content: content,
         tags: eachTag,
       }
+
       for (let tag of eachTag) {
+        if (tag === "") {
+          break;
+        }
+
         let id
         // console.log({ tag })
         let result = await client.query('select id from tags where name = $1;', [tag])
@@ -218,6 +223,11 @@ app.post('/post', async (req, res, next) => {
         tags: eachTag,
       }
       for (let tag of eachTag) {
+
+        if (tag === "") {
+          break;
+        }
+
         let id
         // console.log({ tag })
         let result = await client.query('select id from tags where name = $1;', [tag])
