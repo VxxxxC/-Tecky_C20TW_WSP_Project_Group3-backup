@@ -328,6 +328,7 @@ buttonList.addEventListener("click", (event) => {
 
 // get what role is the user:normal user or admin
 
+//----------------check login status---------------------
 fetch("/is_admin")
   .then((res) => {
     if (res.ok) {
@@ -346,6 +347,7 @@ fetch("/is_admin")
   })
   .catch((error) => ({ error: String(error) }));
 
+  //-----------------logout form----------------------------
 let logoutForm = document.querySelector("#logout-form");
 logoutForm.addEventListener("submit", (e) => {
   e.preventDefault();

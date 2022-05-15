@@ -1,6 +1,3 @@
-
-
-
 // socket.on('editPost', (msg) => {
 //   console.log(msg);
 // });
@@ -71,7 +68,7 @@ async function postContent() {
     Swal.fire({
       title: "Edit post",
       input: "textarea",
-      customClass: 'swal-wide',
+      customClass: "swal-wide",
       inputAttributes: {
         autocapitalize: "off",
       },
@@ -110,6 +107,7 @@ async function postContent() {
 
 postContent();
 
+//-------------check login status---------------
 fetch("/is_admin")
   .then((res) => res.json())
   .catch((error) => ({ error: String(error) }))
@@ -118,9 +116,8 @@ fetch("/is_admin")
     admin.textContent = json.role === "admin" ? "Admin" : "Member";
   });
 
-
-
-  let logoutForm = document.querySelector("#logout-form");
+//---------------logout form-------------------
+let logoutForm = document.querySelector("#logout-form");
 logoutForm.addEventListener("submit", (e) => {
   e.preventDefault();
   fetch("/logout", {

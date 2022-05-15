@@ -38,8 +38,20 @@
     <!-- TODO: 等 reset password page -->
 
     <div class="right-header">
+      <div class="right-selection guest">
+        <div class="right-selection-box-content admin">Guest</div>
+      </div>
       <!-- <a href="reset" style="text-decoration:none"> -->
-
+      <!-- <div class="right-selection guest">
+        <div class="right-selection-box-content admin">Guest</div>
+      </div> -->
+      <!--=================================logout=================================id="logout-form"-->
+      <form id="logout-form" method="POST" action="/logout">
+        <div class="right-selection">
+          <input type="submit" value="Logout">
+        </div>
+      </form>
+      <!--=================================logout=================================-->
       <a href="login.html" style="text-decoration:none">
         <div class="right-selection login">
           <div class="right-selection-box-content">Login</div>
@@ -76,6 +88,7 @@
     integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k" crossorigin="anonymous">
   </script>
   <script src="posting.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 

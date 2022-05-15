@@ -159,10 +159,53 @@ fetch("/session").then((res) =>
       if (json.id == null) {
         console.log(`please login`);
         loginBtn.classList.add("show");
+        logoutBtn.classList.add("hidden");
       } else {
         console.log(`welcome!!`);
         loginBtn.classList.add("hidden");
+        logoutBtn.classList.add("show");
       }
     })
     .catch((error) => ({ error: String(error) }))
 );
+
+//----------------check login status---------------------
+fetch("/is_admin")
+  .then((res) => {
+    if (res.ok) {
+      return res.json();
+    }
+  })
+  .then((json) => {
+    let adminEl = document.querySelector(".admin");
+
+    // if (json.role === 'admin') {
+    //   adminEl.textContent = 'Admin';
+    // }else if (json.role === 'member') {
+    //   adminEl.textContent = 'Member';
+    // }
+    adminEl.textContent = json.role === "admin" ? "Admin" : "Member";
+  })
+  .catch((error) => ({ error: String(error) }));
+
+//-----------------logout form----------------------------
+let logoutForm = document.querySelector("#logout-form");
+logoutForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  fetch("/logout", {
+    method: "POST",
+  })
+    .then((res) => res.json())
+    .then((json) => {
+      console.log(json);
+      Swal.fire({
+        icon: "success",
+        title: "Logout",
+        text: "Already logout!",
+        footer: '<a href="login.html">Log in</a>',
+      }).then(function () {
+        window.location.href = "http://localhost:8001/index.html";
+      });
+    })
+    .catch((error) => ({ error: String(error) }));
+});
