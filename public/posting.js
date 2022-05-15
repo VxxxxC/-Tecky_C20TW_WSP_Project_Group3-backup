@@ -70,42 +70,58 @@ let title = document.querySelector(".post-title");
 let content;
 quill.on("text-change", () => {
   content = quill.getText();
+  console.log(content);
 });
 
 //----------------title image value-----------
 let titleImg = document.querySelector(".title-img");
 
 //--------------submit content to server--------------
-document
-  .querySelector(".submit-button")
-  .addEventListener("click", async (event) => {
-    // let form = document.querySelector("#post-content");
-    event.preventDefault();
-    let formData = new FormData();
 
-    let tags = [];
-    for (let tag of tagContent.querySelectorAll(".tags")) {
-      tags.push(tag.textContent);
-    }
-    console.log({ tags });
+function submit() {
+  
+  document
+    .querySelector(".submit-button")
+    .addEventListener("click", async (event) => {
+      if (title.value == "" || null) {
+        alert("Please enter title");
+        return;
+      }
+      if (content == null || "") {
+        alert("Please enter content");
+        return;
+      }
 
-    formData.append("image", titleImg.files[0]);
-    formData.append("title", title.value);
-    formData.append("content", content);
-    formData.append("tags", tags);
+      // let form = document.querySelector("#post-content");
+      event.preventDefault();
 
-    for (const entry of formData.entries()) {
-      console.log(entry);
-    }
+      let formData = new FormData();
 
-    await fetch("/post", {
-      method: "POST",
-      // headers: { "Content-Type": "multipart/form-data" },
-      body: formData,
+      let tags = [];
+      for (let tag of tagContent.querySelectorAll(".tags")) {
+        tags.push(tag.textContent);
+      }
+      console.log({ tags });
+
+      formData.append("image", titleImg.files[0]);
+      formData.append("title", title.value);
+      formData.append("content", content);
+      formData.append("tags", tags);
+
+      for (const entry of formData.entries()) {
+        console.log(entry);
+      }
+
+      await fetch("/post", {
+        method: "POST",
+        // headers: { "Content-Type": "multipart/form-data" },
+        body: formData,
+      });
+      console.log("posting...");
+      location.href = "/index.html";
     });
-    console.log("posting...");
-    location.href = "/index.html";
-  });
+}
+submit();
 
 //-------------------------Tags-------------------------
 

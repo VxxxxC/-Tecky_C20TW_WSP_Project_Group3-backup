@@ -78,11 +78,41 @@ async function getPost() {
   console.log({ posts });
 
   for (let post of posts) {
-    postsContainer.innerHTML += `
+    if (post.image == null) {
+      postsContainer.innerHTML += `
+      <div class="content-box cnt${post.id}">
+      <a href="/content-page.html?id=${
+        post.id
+      }" style="text-decoration:none; color:black">
+      <div class="inner-upper-content">
+        <i class="upper-content-top-icon fa-solid fa-eye"></i>
+        <div class="content-img" style="color: rgba(128, 128, 128, 0.5);">user have not upload image of this post😢</div>
+        <i class="upper-content-bottom-icon fa-solid fa-heart"></i>
+      </div>
+      <div class="inner-center-content">${post.title}
+      <div id="content-tag-${post.id}">
+      <div class="content-tag"></div>
+        </div>
+        <p class="content">${post.content}</p>
+      </div>
+      </a>
+      <div class="inner-bottom-content">
+        <img class="user-pic"
+          src="https://dvg5hr78c8hf1.cloudfront.net/2016/06/21/15/37/47/4b0b2595-20dc-40bc-a963-e8e53b2fd5bf/1*2cAvoDuXZp_dy49WqNVVrA.jpeg">
+        <div class="userid-postdate">${moment(post.created_at).format(
+          "LL"
+        )}</div>
+        <button class="delete-btn" id=btn${post.id}>delete</button>
+      </div>
+    </div>
+  `;
+      getHashtag(post.id);
+    } else {
+      postsContainer.innerHTML += `
+    <div class="content-box cnt${post.id}">
     <a href="/content-page.html?id=${
       post.id
     }" style="text-decoration:none; color:black">
-    <div class="content-box cnt${post.id}">
     <div class="inner-upper-content">
       <i class="upper-content-top-icon fa-solid fa-eye"></i>
       <img class="content-img"
@@ -104,7 +134,8 @@ async function getPost() {
     </div>
   </div>
 `;
-    getHashtag(post.id);
+      getHashtag(post.id);
+    }
   }
 
   let deleteBtnList = document.querySelectorAll(".delete-btn");
@@ -156,7 +187,7 @@ async function pagination() {
   let result = await res.json();
   let posts = result.posts;
   for (let post of posts) {
-    // console.log(post.id);
+    console.log(post.id);
 
     if (post.id % 8 === 1) {
       let buttonNum;
@@ -178,7 +209,7 @@ buttonList.addEventListener("click", (event) => {
   // console.log(event.target.innerHTML);
 
   contentIndex = (event.target.innerText - 1) * 8;
-  console.log({ contentIndex: contentIndex });
+  // console.log({ contentIndex: contentIndex });
 
   async function clickPage() {
     postsContainer.innerHTML = "";
@@ -192,32 +223,66 @@ buttonList.addEventListener("click", (event) => {
     let result = await res.json();
     let posts = result.posts;
     for (let post of posts) {
-      postsContainer.innerHTML += `
+      if (post.image == null) {
+        postsContainer.innerHTML += `
+        <div class="content-box cnt${post.id}">
+        <a href="/content-page.html?id=${
+          post.id
+        }" style="text-decoration:none; color:black">
+        <div class="inner-upper-content">
+          <i class="upper-content-top-icon fa-solid fa-eye"></i>
+          <div class="content-img" style="color: rgba(128, 128, 128, 0.5);">user have not upload image of this post😢</div>
+          <i class="upper-content-bottom-icon fa-solid fa-heart"></i>
+        </div>
+        <div class="inner-center-content">${post.title}
+        <div id="content-tag-${post.id}">
+        <div class="content-tag"></div>
+          </div>
+          <p class="content">${post.content}</p>
+        </div>
+        </a>
+        <div class="inner-bottom-content">
+          <img class="user-pic"
+            src="https://dvg5hr78c8hf1.cloudfront.net/2016/06/21/15/37/47/4b0b2595-20dc-40bc-a963-e8e53b2fd5bf/1*2cAvoDuXZp_dy49WqNVVrA.jpeg">
+          <div class="userid-postdate">${moment(post.created_at).format(
+            "LL"
+          )}</div>
+          <button class="delete-btn" id=btn${post.id}>delete</button>
+        </div>
+      </div>
+    `;
+        getHashtag(post.id);
+      } else {
+        postsContainer.innerHTML += `
+      <div class="content-box cnt${post.id}">
       <a href="/content-page.html?id=${
         post.id
       }" style="text-decoration:none; color:black">
-        <div class="content-box cnt${post.id}">
-    <div class="inner-upper-content">
-    <i class="upper-content-top-icon fa-solid fa-eye"></i>
-    <img class="content-img"
-      src="${"/img/" + post.image}">
-    <i class="upper-content-bottom-icon fa-solid fa-heart"></i>
-    </div>
-    <div class="inner-center-content">${post.title}
-    <div id="content-tag-${post.id}">
-    <div class="content-tag"></div>
+      <div class="inner-upper-content">
+        <i class="upper-content-top-icon fa-solid fa-eye"></i>
+        <img class="content-img"
+          src="${"/img/" + post.image}">
+        <i class="upper-content-bottom-icon fa-solid fa-heart"></i>
       </div>
-      <p class="content">${post.content}</p>
+      <div class="inner-center-content">${post.title}
+      <div id="content-tag-${post.id}">
+      <div class="content-tag"></div>
+        </div>
+        <p class="content">${post.content}</p>
+      </div>
+      </a>
+      <div class="inner-bottom-content">
+        <img class="user-pic"
+          src="https://dvg5hr78c8hf1.cloudfront.net/2016/06/21/15/37/47/4b0b2595-20dc-40bc-a963-e8e53b2fd5bf/1*2cAvoDuXZp_dy49WqNVVrA.jpeg">
+        <div class="userid-postdate">${moment(post.created_at).format(
+          "LL"
+        )}</div>
+        <button class="delete-btn" id=btn${post.id}>delete</button>
+      </div>
     </div>
-    </a>
-    <div class="inner-bottom-content">
-      <img class="user-pic"
-        src="https://dvg5hr78c8hf1.cloudfront.net/2016/06/21/15/37/47/4b0b2595-20dc-40bc-a963-e8e53b2fd5bf/1*2cAvoDuXZp_dy49WqNVVrA.jpeg">
-      <div class="userid-postdate">${post.created_at}</div>
-      <button class="delete-btn" id=btn${post.id}>delete</button>
-    </div>
-  </div>`;
-      getHashtag(post.id);
+  `;
+        getHashtag(post.id);
+      }
     }
     let deleteBtnList = document.querySelectorAll(".delete-btn");
     let contentBox = document.querySelector(".contentBox");

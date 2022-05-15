@@ -86,7 +86,7 @@ select * from post offset 0 fetch first 8 rows only;
 
 */
 
-/* 
+/* -- Reset所有table , 將所有table id點歸由「0」開始
 alter sequence post_id_seq restart with 1;
 alter sequence post_tag_id_seq restart with 1;
 alter sequence tags_id_seq restart with 1;
