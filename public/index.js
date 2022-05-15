@@ -97,8 +97,7 @@ async function getPost() {
       </div>
       </a>
       <div class="inner-bottom-content">
-        <img class="user-pic"
-          src="https://dvg5hr78c8hf1.cloudfront.net/2016/06/21/15/37/47/4b0b2595-20dc-40bc-a963-e8e53b2fd5bf/1*2cAvoDuXZp_dy49WqNVVrA.jpeg">
+      <div class="user-pic"></div>
         <div class="userid-postdate">${moment(post.created_at).format(
           "LL"
         )}</div>
@@ -127,8 +126,7 @@ async function getPost() {
     </div>
     </a>
     <div class="inner-bottom-content">
-      <img class="user-pic"
-        src="https://dvg5hr78c8hf1.cloudfront.net/2016/06/21/15/37/47/4b0b2595-20dc-40bc-a963-e8e53b2fd5bf/1*2cAvoDuXZp_dy49WqNVVrA.jpeg">
+      <div class="user-pic"></div>
       <div class="userid-postdate">${moment(post.created_at).format("LL")}</div>
       <button class="delete-btn" id=btn${post.id}>delete</button>
     </div>
@@ -242,8 +240,7 @@ buttonList.addEventListener("click", (event) => {
         </div>
         </a>
         <div class="inner-bottom-content">
-          <img class="user-pic"
-            src="https://dvg5hr78c8hf1.cloudfront.net/2016/06/21/15/37/47/4b0b2595-20dc-40bc-a963-e8e53b2fd5bf/1*2cAvoDuXZp_dy49WqNVVrA.jpeg">
+        <div class="user-pic"></div>
           <div class="userid-postdate">${moment(post.created_at).format(
             "LL"
           )}</div>
@@ -272,8 +269,7 @@ buttonList.addEventListener("click", (event) => {
       </div>
       </a>
       <div class="inner-bottom-content">
-        <img class="user-pic"
-          src="https://dvg5hr78c8hf1.cloudfront.net/2016/06/21/15/37/47/4b0b2595-20dc-40bc-a963-e8e53b2fd5bf/1*2cAvoDuXZp_dy49WqNVVrA.jpeg">
+      <div class="user-pic"></div>
         <div class="userid-postdate">${moment(post.created_at).format(
           "LL"
         )}</div>
@@ -347,7 +343,7 @@ fetch("/is_admin")
   })
   .catch((error) => ({ error: String(error) }));
 
-  //-----------------logout form----------------------------
+//-----------------logout form----------------------------
 let logoutForm = document.querySelector("#logout-form");
 logoutForm.addEventListener("submit", (e) => {
   e.preventDefault();
