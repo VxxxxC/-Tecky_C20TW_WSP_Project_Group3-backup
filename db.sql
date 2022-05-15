@@ -95,3 +95,19 @@ delete from post_tag;
 delete from tags;
 delete from post;
 */
+
+/*
+
+select count(*), tags_id from post_tag group by tags_id order by count(*) desc;
+
+select rank() over (order by count(*) desc),count(*), tags_id from post_tag group by tags_id order by count(*) desc;
+select rank() over (order by count(*) desc),count(*), tags_id from post_tag group by tags_id order by count(*) desc limit 5;
+select rank() over (order by count(*) desc),count(*), tags.name from tags inner join post_tag on tags.id = post_tag.tags_id group by tags.name order by count(*) desc;
+
+select * from post inner join post_tag on post.id = post_tag.post_id where tags_id = (select id from tags where name = 'TEST');     
+select * from post left join post_tag on post.id = post_tag.post_id where tags_id = (select id from tags where name = 'TEST');
+
+select post.* from post left join post_tag on post.id = post_tag.post_id where tags_id = (select id from tags where name = 'TEST');
+select distinct post.* from post inner join post_tag on post.id = post_tag.post_id where tags_id = (select id from tags where name = 'TEST');
+
+*/
