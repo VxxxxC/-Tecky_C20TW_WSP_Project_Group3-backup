@@ -213,6 +213,8 @@ input[type="submit"] {
   max-height: 100%;
   max-width: 100%;
   object-fit: contain;
+  border: 5px solid #8080804e;
+  border-radius: 20px;
 
 }
 
@@ -223,9 +225,24 @@ input[type="submit"] {
   padding-left: 69px;
   /* background-image: linear-gradient(to bottom, #fdfdfa 0%, #f6f7ef 100%), linear-gradient(to bottom, #e3d6d64d 0%,#e3d6d64d 0%);
   background-clip: content-box, padding-box; */
+  /* overflow: auto;
+  font-family: arial, "cwTeXYen";
+  display: flex; */
+}
+
+.core{
+  border: 5px solid #8080804e;
+  border-radius: 20px;
+  height: 500px;
+  max-width: 100%;
+   padding-right: 69px;
+  padding-left: 69px; 
+  /* background-image: linear-gradient(to bottom, #fdfdfa 0%, #f6f7ef 100%), linear-gradient(to bottom, #e3d6d64d 0%,#e3d6d64d 0%);
+  background-clip: content-box, padding-box; */
   overflow: auto;
   font-family: arial, "cwTeXYen";
   display: flex;
+  line-height: 32px;
 }
 
 .author {

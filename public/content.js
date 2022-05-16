@@ -30,13 +30,15 @@ async function postContent() {
         <div  class="item">
         </div>
  </div>
-      <div class="text">${post.content}
+      <div class="text">
+      <div class="core">
+      ${post.content}
+      </div>
       </div>
       <button class="edit-btn .float-right ">
       <i class="bi bi-pencil aria-hidden="true"></i>
       </button>   
   
-   
       <div class="author">
             <div class="sub-header-1">Author</div>
             <div class="author-name">${post.username}</div>
@@ -65,16 +67,17 @@ async function postContent() {
     content.innerHTML = `<div class="title-holder">${post.title}</div>
     <div class="slider">
         <div  class="item">
-           <img src="${"/img/" + post.image}">
         </div>
  </div>
-      <div class="text">${post.content}
+      <div class="text">
+      <div class="core">
+      ${post.content}
+      </div>
       </div>
       <button class="edit-btn .float-right ">
       <i class="bi bi-pencil aria-hidden="true"></i>
       </button>   
   
-   
       <div class="author">
             <div class="sub-header-1">Author</div>
             <div class="author-name">${post.username}</div>
