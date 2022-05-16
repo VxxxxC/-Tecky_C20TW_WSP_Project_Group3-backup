@@ -301,10 +301,10 @@ app.post('/main', async (req, res) => {
   // console.log(req.body);
 
   const { contentIndex } = req.body
-  let result = await client.query('select * from post offset $1 fetch first 8 rows only', [contentIndex])
+  let result = await client.query('select * from post order by created_at desc offset $1 limit 8', [contentIndex])
   let posts = result.rows
-  // console.log({result})
-  // console.log({posts})
+  // console.log({ result })
+  // console.log({ posts })
   res.json({ posts }) // 一定要加上"posts" 否則pass唔到個request俾frontend fetch() handleruser.i
 })
 

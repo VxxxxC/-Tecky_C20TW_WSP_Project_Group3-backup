@@ -1,4 +1,5 @@
 // const { RESERVED_EVENTS } = require("socket.io/dist/socket");
+let posts;
 
 //----------------Socket.IO client side--------------------
 const socket = io.connect();
@@ -39,44 +40,10 @@ let nextBtn = document.querySelector(".next-page");
 //   }
 // }
 
-//--------------------fetch each post hashtag---------------------
+//---------------render post---------------------------
 
-async function getHashtag(id) {
-  let result = await fetch(`tags/${id}`);
-  let res = await result.json();
-  let contentTagContainer = document.querySelector(`#content-tag-${id}`);
-  contentTagContainer.style.display = "flex";
-  contentTagContainer.style.flexWrap = "wrap";
-
-  let newTagTemplate = contentTagContainer.querySelector(".content-tag");
-  newTagTemplate.remove();
-
-  for (let tag of res) {
-    let newTag = newTagTemplate.cloneNode(true);
-    newTag.innerHTML = tag.name;
-    contentTagContainer.appendChild(newTag);
-  }
-}
-
-//----------------get content data from server, and post to main page content preview-------------
-let contentIndex = 0;
-
-let postsContainer = document.querySelector("#all-post-container");
-
-async function getPost() {
+function renderPage(posts) {
   postsContainer.innerHTML = "";
-
-  console.log("getting posts...");
-  let res = await fetch("/main", {
-    method: "POST",
-    headers: { "Content-type": "application/json" },
-    body: JSON.stringify({ contentIndex }),
-  });
-
-  let result = await res.json();
-  let posts = result.posts;
-  console.log({ posts });
-
   for (let post of posts) {
     if (post.image == null) {
       postsContainer.innerHTML += `
@@ -126,15 +93,57 @@ async function getPost() {
     </div>
     </a>
     <div class="inner-bottom-content">
-      <div class="user-pic"></div>
+    <div class="user-pic"></div>
       <div class="userid-postdate">${moment(post.created_at).format("LL")}</div>
       <button class="delete-btn" id=btn${post.id}>delete</button>
     </div>
   </div>
-`;
+  `;
       getHashtag(post.id);
     }
   }
+}
+
+
+//--------------------fetch each post hashtag---------------------
+
+async function getHashtag(id) {
+  let result = await fetch(`tags/${id}`);
+  let res = await result.json();
+  let contentTagContainer = document.querySelector(`#content-tag-${id}`);
+  contentTagContainer.style.display = "flex";
+  contentTagContainer.style.flexWrap = "wrap";
+
+  let newTagTemplate = contentTagContainer.querySelector(".content-tag");
+  newTagTemplate.remove();
+
+  for (let tag of res) {
+    let newTag = newTagTemplate.cloneNode(true);
+    newTag.innerHTML = tag.name;
+    contentTagContainer.appendChild(newTag);
+  }
+}
+
+//----------------get content data from server, and post to main page content preview-------------
+let contentIndex = 0;
+
+let postsContainer = document.querySelector("#all-post-container");
+
+async function getPost() {
+  postsContainer.innerHTML = "";
+
+  console.log("getting posts...");
+  let res = await fetch("/main", {
+    method: "POST",
+    headers: { "Content-type": "application/json" },
+    body: JSON.stringify({ contentIndex }),
+  });
+
+  let result = await res.json();
+  let posts = result.posts;
+  console.log({ posts });
+
+  renderPage(posts);
 
   let deleteBtnList = document.querySelectorAll(".delete-btn");
   let contentBox = document.querySelector(".contentBox");
@@ -183,7 +192,7 @@ async function pagination() {
 
   let res = await fetch("/main");
   let result = await res.json();
-  let posts = result.posts;
+  posts = result.posts;
   console.log("pagination:", posts);
   let postLength = posts.length; // 9
   let pageLength = 1; // 0
@@ -197,21 +206,6 @@ async function pagination() {
     postLength -= 8;
     pageLength += 1;
   }
-  // for (let post of posts) {
-  //   console.log(post.id);
-
-  //   if (post.id % 8 === 1) {
-  //     let buttonNum;
-  //     buttonNum = Math.ceil(post.id / 8);
-  //     console.log({ "create page number": buttonNum });
-
-  //     let newPageButton = pageNumber.cloneNode(true);
-  //     newPageButton.className = "Page-" + buttonNum;
-  //     newPageButton.innerHTML += buttonNum;
-
-  //     buttonList.appendChild(newPageButton);
-  //   }
-  // }
 }
 
 //---------------choosing page data from database-----------
@@ -232,67 +226,8 @@ buttonList.addEventListener("click", (event) => {
     });
 
     let result = await res.json();
-    let posts = result.posts;
-    for (let post of posts) {
-      if (post.image == null) {
-        postsContainer.innerHTML += `
-        <div class="content-box cnt${post.id}">
-        <a href="/content-page.html?id=${
-          post.id
-        }" style="text-decoration:none; color:black">
-        <div class="inner-upper-content">
-          <i class="upper-content-top-icon fa-solid fa-eye"></i>
-          <div class="content-img" style="color: rgba(128, 128, 128, 0.5);">user have not upload image of this post😢</div>
-          <i class="upper-content-bottom-icon fa-solid fa-heart"></i>
-        </div>
-        <div class="inner-center-content">${post.title}
-        <div id="content-tag-${post.id}">
-        <div class="content-tag"></div>
-          </div>
-          <p class="content">${post.content}</p>
-        </div>
-        </a>
-        <div class="inner-bottom-content">
-        <div class="user-pic"></div>
-          <div class="userid-postdate">${moment(post.created_at).format(
-            "LL"
-          )}</div>
-          <button class="delete-btn" id=btn${post.id}>delete</button>
-        </div>
-      </div>
-    `;
-        getHashtag(post.id);
-      } else {
-        postsContainer.innerHTML += `
-      <div class="content-box cnt${post.id}">
-      <a href="/content-page.html?id=${
-        post.id
-      }" style="text-decoration:none; color:black">
-      <div class="inner-upper-content">
-        <i class="upper-content-top-icon fa-solid fa-eye"></i>
-        <img class="content-img"
-          src="${"/img/" + post.image}">
-        <i class="upper-content-bottom-icon fa-solid fa-heart"></i>
-      </div>
-      <div class="inner-center-content">${post.title}
-      <div id="content-tag-${post.id}">
-      <div class="content-tag"></div>
-        </div>
-        <p class="content">${post.content}</p>
-      </div>
-      </a>
-      <div class="inner-bottom-content">
-      <div class="user-pic"></div>
-        <div class="userid-postdate">${moment(post.created_at).format(
-          "LL"
-        )}</div>
-        <button class="delete-btn" id=btn${post.id}>delete</button>
-      </div>
-    </div>
-  `;
-        getHashtag(post.id);
-      }
-    }
+    posts = result.posts;
+    renderPage(posts);
     let deleteBtnList = document.querySelectorAll(".delete-btn");
     let contentBox = document.querySelector(".contentBox");
 
@@ -409,7 +344,7 @@ fetch("/session").then((res) =>
 fetch("/search").then((res) => {
   res.json().then((json) => {
     let result = json.result;
-
+    console.log("rank result: ", result);
     let hashtagList = document.querySelector(".navbar-button");
     let hashtag = document.querySelector(".nav-hashtag");
     hashtagList.remove();
@@ -421,6 +356,11 @@ fetch("/search").then((res) => {
       let tagname = hashtag.cloneNode(true);
       tagname.classList.add(`rank-${tag.rank}`);
       tagname.innerHTML = tag.name;
+      tagname.addEventListener("click", (event) => {
+        let tag = event.currentTarget.textContent;
+        console.log(posts);
+        console.log(tag);
+      });
       newTag.appendChild(tagname);
       document.querySelector(".navbar").appendChild(newTag);
     }
@@ -428,9 +368,3 @@ fetch("/search").then((res) => {
 });
 
 //-----------navbar hashtag button onclick search-------------
-
-let hashtagBtn = document.querySelector(".navbar-hashtag");
-
-hashtagBtn.addEventListener("click", (event) => {
-  console.log(event);
-});
