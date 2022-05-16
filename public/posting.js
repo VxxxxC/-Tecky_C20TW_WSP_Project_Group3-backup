@@ -111,16 +111,19 @@ function submit() {
         console.log(entry);
       }
 
-      await fetch("/post", {
+      const res = await fetch("/post", {
         method: "POST",
         // headers: { "Content-Type": "multipart/form-data" },
         body: formData,
       });
+      const result = await res.json();
       console.log("posting...");
-      location.href = "/index.html";
+      //if (result.success){
+        location.href = "/index.html";
+      //}
     });
 }
-submit();
+
 
 //-------------------------Tags-------------------------
 
@@ -204,8 +207,11 @@ logoutForm.addEventListener("submit", (e) => {
         text: "Already logout!",
         footer: '<a href="login.html">Log in</a>',
       }).then(function () {
-        window.location.href = "http://localhost:8001/index.html";
+        window.location.href = "/";
       });
     })
     .catch((error) => ({ error: String(error) }));
 });
+
+
+submit();

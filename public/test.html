@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+        .hidden{
+            display: none;
+        }
+        .bg{
+            width: 100%; 
+            height:100%;
+            background:black;
+            position:absolute;
+            top:0;z-index:-1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0.6;
+        }
+        .bg_hide{
+            width: 100%; 
+            height:100%;
+            background:black;
+            position:absolute;
+            top:0;z-index:-1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0.6;
+            display: none;
+        }
+        .modal{
+            background-color: white;
+            width:300px;
+            height:200px;
+            z-index:1000;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .modal_hide{
+            background-color: white;
+            width:300px;
+            height:200px;
+            z-index:1000;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+    <div style="position:absolute;display:flex;justify-content: center;align-items:center;left:0px;right:0px;top:0px;bottom:0px;">
+        <button id="login">Login</button>
+
+        <!--Modal Box-->
+        <div id="bg" class="bg">  
+        </div>
+        <div id="modal" class="modal">
+          <h2>Login</h2>
+          <form style="display: flex;justify-content: center;align-items: center;flex-direction: column;">
+            <div style="margin-top: 10;margin-bottom:10px"><input type="text" name="username" placeholder="email"/></div>
+            <div style="margin-top: 10;margin-bottom:10px"><input type="password" name="password" placeholder="password"/></div>
+            <div>
+                <input type="submit" value="Login"/>
+            </div>
+        </form>
+      </div>
+    </div>
+    <script>
+            document.querySelector("#bg").classList.remove("bg");
+            document.querySelector("#bg").classList.add("bg_hide");
+            document.querySelector("#modal").classList.remove("modal");
+            document.querySelector("#modal").classList.add("modal_hide");
+            document.querySelector("#login").addEventListener("click",(event)=>{
+
+            document.querySelector("#bg").classList.add("bg");
+            document.querySelector("#bg").classList.remove("bg_hide");
+
+            document.querySelector("#modal").classList.add("modal");
+            document.querySelector("#modal").classList.remove("modal_hide");
+
+            event.currentTarget.classList.add("hidden")
+            
+        })
+    </script>
+</body>
+</html>

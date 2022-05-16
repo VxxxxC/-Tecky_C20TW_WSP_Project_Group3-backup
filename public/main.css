@@ -263,7 +263,7 @@ input[type="submit"] {
   padding-left: 72px;
 }
 
-/* .intro{
+.intro{
     margin: 5px;
     padding-left: 24px;
     padding-right: 24px;
@@ -274,7 +274,7 @@ textarea {
     resize: none;
     margin: 5px;
     overflow: auto;
-} */
+}
 
 .comment {
   background-color: skyblue;

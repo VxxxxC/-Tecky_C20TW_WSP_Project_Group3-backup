@@ -210,7 +210,7 @@ async function pagination() {
 
 //---------------choosing page data from database-----------
 
-buttonList.addEventListener("click", (event) => {
+buttonList.addEventListener("click", async(event) => {
   // console.log(event.target.innerHTML);
 
   contentIndex = (event.target.innerText - 1) * 8;
@@ -264,7 +264,8 @@ buttonList.addEventListener("click", (event) => {
       });
     });
   }
-  clickPage();
+  await clickPage();
+  
 });
 
 // let pageBtn = document.querySelector("#page");
@@ -309,7 +310,7 @@ logoutForm.addEventListener("submit", (e) => {
         text: "Already logout!",
         footer: '<a href="login.html">Log in</a>',
       }).then(function () {
-        window.location.href = "http://localhost:8001/index.html";
+        window.location = "/";
       });
     })
     .catch((error) => ({ error: String(error) }));

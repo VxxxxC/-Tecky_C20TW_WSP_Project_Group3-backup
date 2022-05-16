@@ -52,14 +52,14 @@
         <h1>Sign up</h1>
         <div style="height: 100%;  display: flex; text-align: center; justify-content: center;">
           <div>
-            <form id="sign-form" method="post" name="Form" onsubmit="validateForm()" action="/signup">
+            <form id="sign-form" method="post" name="Form" action="/signup">
               <h4> Username </h4>
               <div class="fields">
-                <input type="text" class="inpute" placeholder="Username" name="username">
+                <input type="text" class="inpute" placeholder="Username" name="username" required>
               </div>
               <h4> Password </h4>
               <div class="fields">
-                <input type="password" class="inpute" placeholder="Password" name="password">
+                <input type="password" class="inpute" placeholder="Password" name="password" required>
               </div>
               <input type="submit" value="sign up" id="login-btn">
               <br />
