@@ -184,21 +184,34 @@ async function pagination() {
   let res = await fetch("/main");
   let result = await res.json();
   let posts = result.posts;
-  for (let post of posts) {
-    console.log(post.id);
+  console.log("pagination:", posts);
+  let postLength = posts.length; // 9
+  let pageLength = 1; // 0
+  while (postLength >= 0) {
+    let newPageButton = pageNumber.cloneNode(true);
+    newPageButton.className = "Page-" + pageLength;
+    newPageButton.innerHTML += pageLength;
 
-    if (post.id % 8 === 1) {
-      let buttonNum;
-      buttonNum = Math.ceil(post.id / 8);
-      console.log({ "create page number": buttonNum });
+    buttonList.appendChild(newPageButton);
 
-      let newPageButton = pageNumber.cloneNode(true);
-      newPageButton.className = "Page-" + buttonNum;
-      newPageButton.innerHTML += buttonNum;
-
-      buttonList.appendChild(newPageButton);
-    }
+    postLength -= 8;
+    pageLength += 1;
   }
+  // for (let post of posts) {
+  //   console.log(post.id);
+
+  //   if (post.id % 8 === 1) {
+  //     let buttonNum;
+  //     buttonNum = Math.ceil(post.id / 8);
+  //     console.log({ "create page number": buttonNum });
+
+  //     let newPageButton = pageNumber.cloneNode(true);
+  //     newPageButton.className = "Page-" + buttonNum;
+  //     newPageButton.innerHTML += buttonNum;
+
+  //     buttonList.appendChild(newPageButton);
+  //   }
+  // }
 }
 
 //---------------choosing page data from database-----------
@@ -287,6 +300,8 @@ buttonList.addEventListener("click", (event) => {
       deleteBtn.addEventListener("click", () => {
         // console.log("delete post");
         let postId = deleteBtn.id.replace("btn", "");
+        let deleteBox = document.querySelector(`.cnt${postId}`);
+
         Swal.fire({
           title: "Confirm to delete memo?",
           text: `You are going to delete?`,
@@ -306,7 +321,7 @@ buttonList.addEventListener("click", (event) => {
                   Swal.fire("Cannot Delete", json.error, "error");
                 } else {
                   Swal.fire("Deleted!", "The post is deleted.", "success");
-                  contentBox.remove();
+                  deleteBox.remove();
                 }
               });
           }
