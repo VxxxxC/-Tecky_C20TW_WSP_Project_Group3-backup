@@ -28,6 +28,7 @@ async function postContent() {
     content.innerHTML = `<div class="title-holder">${post.title}</div>
     <div class="slider">
         <div  class="item">
+        <img src="${"/img/" + post.image}">
         </div>
  </div>
       <div class="text">
@@ -67,6 +68,7 @@ async function postContent() {
     content.innerHTML = `<div class="title-holder">${post.title}</div>
     <div class="slider">
         <div  class="item">
+        <img src="${"/img/" + post.image}">
         </div>
  </div>
       <div class="text">
