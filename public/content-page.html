@@ -6,7 +6,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Content-pages</title>
-
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
     integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -97,9 +96,16 @@
         vero itaque.
       </div>
       </div>
-      <button class="edit-btn .float-right ">
-        <i class="bi bi-pencil aria-hidden=" true"></i>
-      </button>
+      <div class="two-button">
+        <button class="button" id="edit-btn">
+          <i class="bi bi-pencil aria-hidden=" true"></i>
+        </button>
+  
+        <button class="button" id="comment-btn">
+          <i class="bi bi-chat-text"></i>
+      </div>
+   
+ 
 
       <!--introduction of the author-->
       <div class="author">
@@ -115,11 +121,25 @@
       
       </div>
       <div class="isolate"></div>
-      <!-- comment!-->
-        <div class="comment">
+    <!--user-comment-->
+    <div class= "message">
+      <div class="comment-name">
+        comment as 
+      </div>
+      <div class="comment-content">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa at, optio accusamus asperiores laboriosam vitae mollitia velit dolore vel illum. Deleniti temporibus veniam voluptatem porro laudantium blanditiis optio similique quod
+        
+        .
+      </div>
+
+    </div>
+    <div class="isolate"></div>
+
+        <!-- comment!-->
+        <div class="comment_hide comment_show" id="comment-textarea">
             <form name="formName" method="post" action="" onSubmit="checkData();">   
                 <textarea name="textarea" rows="10" cols="100" placeholder="Welcome to comment"></textarea>
-              </p>  <p>
+                <p>
                 <input name="Submit" type="submit" value="Submit">
               </p>
             </form>
@@ -129,8 +149,6 @@
 
 
 
-
-  <footer>
 
       <div class="media">
         <ul>
@@ -145,9 +163,6 @@
           </li>
         </ul>
       </div>
-
-     
-
       <div class="copyright">
         <p>All copyright reserved by the author</p>
       </div>

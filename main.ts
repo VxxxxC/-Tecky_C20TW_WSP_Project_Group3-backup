@@ -432,3 +432,12 @@ app.get("/search", async (req, res) => {
   // console.log(result)
   res.json({ result });
 });
+
+
+//----------------------comment--------------------------//
+app.post("/comment", async (req, res) => {
+  console.log("someone commenting...")
+  let result = await client.query(
+  `insert into comment (content) values ($1) retuning id;`
+  )
+});
