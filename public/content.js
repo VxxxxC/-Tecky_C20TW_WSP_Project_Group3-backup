@@ -3,16 +3,6 @@
 // });
 // socket.emit("toServer", "client side at home page respond to backend server");
 
-//====================checkdata================================//
-function checkData() {
-  var txtCheck = document.formName;
-  if (txtCheck.textarea.value == "") {
-    alert("Please enter information in the textarea");
-    txtCheck.textarea.focus();
-    return false;
-  }
-}
-
 //==========================fecth content from index to contentpaged================//
 let content = document.querySelector(".content");
 
@@ -30,7 +20,7 @@ async function postContent() {
     content.innerHTML = `<div class="title-holder">${post.title}</div>
     <div class="slider">
         <div  class="item">
-        <img src="${"/img/" + post.image}">
+
         </div>
  </div>
       <div class="text">
@@ -209,3 +199,19 @@ fetch("/session").then((res) =>
     })
     .catch((error) => ({ error: String(error) }))
 );
+
+
+//show comment area
+
+document.querySelector("#comment-textarea").classList.remove("comment_show");
+document.querySelector("#comment-textarea").classList.add("comment_hide");
+
+
+let commentBtn = document.querySelector("#comment-btn");
+
+commentBtn.addEventListener('click',(event)=>{
+  document.querySelector("#comment-textarea").classList.add("comment_show");
+  document.querySelector("#comment-textarea").classList.remove("comment_hide");
+
+})
+
