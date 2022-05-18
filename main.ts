@@ -15,6 +15,7 @@ import { sessionMiddleware } from './session';
 import { adminGuard } from './guard';
 import { catchError } from './error';
 // import { grantMiddleware } from './grant';
+// import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html';
 
 const port = 8001;
 const app = express();
@@ -328,6 +329,11 @@ app.get('/post/:id', async (req, res) => {
   } else {
     let result = await client.query('select id,title,content,image from post where id = $1', [id])
     let posts = result.rows[0]
+    // let detail = [JSON.parse(result.rows[0].content)]
+    // console.log(detail)
+    // let converter: any = new QuillDeltaToHtmlConverter(detail)
+    // let html = converter.convert();
+    // console.log(html)
     posts.username = 'guest'
     res.json({ posts })
   }

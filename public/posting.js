@@ -178,13 +178,11 @@ fetch("/is_admin")
   })
   .then((json) => {
     let adminEl = document.querySelector(".admin");
-
-    // if (json.role === 'admin') {
-    //   adminEl.textContent = 'Admin';
-    // }else if (json.role === 'member') {
-    //   adminEl.textContent = 'Member';
-    // }
-    adminEl.textContent = json.role === "admin" ? "Admin" : "Member";
+    if (json.role) {
+      adminEl.textContent = json.role === "admin" ? "Admin" : "Member";
+    } else {
+      adminEl.textContent = "Guess";
+    }
   })
   .catch((error) => ({ error: String(error) }));
 
