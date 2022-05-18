@@ -118,12 +118,16 @@ function submit() {
       });
       const result = await res.json();
       console.log("posting...");
-      //if (result.success){
+      console.log(result);
+      if (res.ok == true) {
+        alert("Submit successful sent!");
         location.href = "/index.html";
-      //}
+      } else {
+        alert("Submit failed ! please try again..");
+        return;
+      }
     });
 }
-
 
 //-------------------------Tags-------------------------
 
@@ -210,6 +214,5 @@ logoutForm.addEventListener("submit", (e) => {
     })
     .catch((error) => ({ error: String(error) }));
 });
-
 
 submit();
