@@ -15,7 +15,7 @@ import { sessionMiddleware } from './session';
 import { adminGuard } from './guard';
 import { catchError } from './error';
 // import { grantMiddleware } from './grant';
-
+import { QuillDeltaToHtmlConverter } from 'quill-delta-to-html';
 const port = 8001;
 const app = express();
 
@@ -319,6 +319,8 @@ app.get('/main', async (req, res) => {
 
 // transfer post title , content, image from /post/ to content pages
 app.get('/post/:id', async (req, res) => {
+  let deltaOps = [];
+
   // console.log(req.params.id);
   let id = req.params.id
   let result = await client.query('select post.id as id,title,content,image,username from post inner join users on users.id = post.users_id where post.id = $1', [id])
@@ -329,7 +331,11 @@ app.get('/post/:id', async (req, res) => {
     let result = await client.query('select id,title,content,image from post where id = $1', [id])
     let posts = result.rows[0]
     posts.username = 'guest'
-    res.json({ posts })
+    let content = JSON.parse(posts.content)
+    deltaOps.push(content.ops)
+    let converter = new QuillDeltaToHtmlConverter(deltaOps)
+    let html = converter.convert()
+    res.json({ posts, content })
   }
 }
 )

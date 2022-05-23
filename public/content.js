@@ -13,8 +13,6 @@ async function postContent() {
   let res = await fetch("/post/" + id);
   let result = await res.json();
   console.log(result);
-  // let mainContent = result.detail;
-  // console.log(mainContent);
   let post = result.posts;
   if (post.image == null) {
     content.innerHTML = `<div class="title-holder">${post.title}</div>
@@ -200,18 +198,14 @@ fetch("/session").then((res) =>
     .catch((error) => ({ error: String(error) }))
 );
 
-
 //show comment area
 
 document.querySelector("#comment-textarea").classList.remove("comment_show");
 document.querySelector("#comment-textarea").classList.add("comment_hide");
 
-
 let commentBtn = document.querySelector("#comment-btn");
 
-commentBtn.addEventListener('click',(event)=>{
+commentBtn.addEventListener("click", (event) => {
   document.querySelector("#comment-textarea").classList.add("comment_show");
   document.querySelector("#comment-textarea").classList.remove("comment_hide");
-
-})
-
+});

@@ -69,7 +69,7 @@ let title = document.querySelector(".post-title");
 //---------------text editor content value--------
 let content;
 quill.on("text-change", () => {
-  content = quill.getText();
+  content = quill.getContents();
   console.log(content);
 });
 
