@@ -118,12 +118,16 @@ function submit() {
       });
       const result = await res.json();
       console.log("posting...");
-      //if (result.success){
+      console.log(result);
+      if (res.ok == true) {
+        alert("Submit successful sent!");
         location.href = "/index.html";
-      //}
+      } else {
+        alert("Submit failed ! please try again..");
+        return;
+      }
     });
 }
-
 
 //-------------------------Tags-------------------------
 
@@ -181,13 +185,11 @@ fetch("/is_admin")
   })
   .then((json) => {
     let adminEl = document.querySelector(".admin");
-
-    // if (json.role === 'admin') {
-    //   adminEl.textContent = 'Admin';
-    // }else if (json.role === 'member') {
-    //   adminEl.textContent = 'Member';
-    // }
-    adminEl.textContent = json.role === "admin" ? "Admin" : "Member";
+    if (json.role) {
+      adminEl.textContent = json.role === "admin" ? "Admin" : "Member";
+    } else {
+      adminEl.textContent = "Guess";
+    }
   })
   .catch((error) => ({ error: String(error) }));
 
@@ -212,6 +214,5 @@ logoutForm.addEventListener("submit", (e) => {
     })
     .catch((error) => ({ error: String(error) }));
 });
-
 
 submit();

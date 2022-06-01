@@ -15,8 +15,10 @@ async function postContent() {
   let res = await fetch("/post/" + id);
   let result = await res.json();
   console.log(result);
+  // let mainContent = result.detail;
+  // console.log(mainContent);
   let post = result.posts;
-  if (post.image == null){
+  if (post.image == null) {
     content.innerHTML = `<div class="title-holder">${post.title}</div>
     <div class="slider">
         <div  class="item">
@@ -64,7 +66,7 @@ async function postContent() {
 <div class="isolate"></div>
 
        `;
-  }else{
+  } else {
     content.innerHTML = `<div class="title-holder">${post.title}</div>
     <div class="slider">
         <div  class="item">
@@ -101,11 +103,13 @@ async function postContent() {
 
       <div class="isolate"></div>
        `;
-
   }
 
+<<<<<<< HEAD
   //edit function
   
+=======
+>>>>>>> 37af2e5afb2ca8325a34c9e7db46c1ca0b83665a
   let editBtn = document.querySelector(".edit-btn");
   editBtn.addEventListener("click", () => {
     console.log("edit post");
@@ -156,8 +160,12 @@ fetch("/is_admin")
   .then((res) => res.json())
   .catch((error) => ({ error: String(error) }))
   .then((json) => {
-    let admin = document.querySelector(".admin");
-    admin.textContent = json.role === "admin" ? "Admin" : "Member";
+    let adminEl = document.querySelector(".admin");
+    if (json.role) {
+      adminEl.textContent = json.role === "admin" ? "Admin" : "Member";
+    } else {
+      adminEl.textContent = "Guess";
+    }
   });
 
 //---------------logout form-------------------
