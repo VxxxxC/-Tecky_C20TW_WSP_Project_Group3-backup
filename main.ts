@@ -435,9 +435,13 @@ app.get("/search", async (req, res) => {
 
 
 //----------------------comment--------------------------//
-app.post("/comment", async (req, res) => {
-  console.log("someone commenting...")
-  let result = await client.query(
-  `insert into comment (content) values ($1) retuning id;`
-  )
-});
+// app.post("/comment/", async (req, res) => {
+//   console.log("someone commenting...")
+// let id = req.params;
+//   let result = await client.query(
+//   `insert into comment (content) values ($1) returning id`,[id]
+//   );
+//   let comment = result.rows;
+//   console.log(comment)
+//   res.json(comment)
+// });
