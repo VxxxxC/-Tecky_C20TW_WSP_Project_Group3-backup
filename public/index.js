@@ -144,6 +144,8 @@ async function getPost() {
 
   renderPage(posts);
 
+  //delete btn//
+
   let deleteBtnList = document.querySelectorAll(".delete-btn");
   let contentBox = document.querySelector(".contentBox");
 

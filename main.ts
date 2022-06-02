@@ -426,7 +426,19 @@ app.get("/search", async (req, res) => {
 
   let result = await client.query("select rank() over (order by count(*) desc),count(*), tags.name from tags inner join post_tag on tags.id = post_tag.tags_id group by tags.name order by count(*) desc limit 5;")
   // console.log(result)
-  res.json({ result })
+  res.json({ result })});
 
 
-})
+
+// ----------------------comment--------------------------//
+// app.post("/comment/", async (req, res) => {
+//   console.log("someone commenting...")
+// let id = req.params;
+//   let result = await client.query(
+//   `insert into comment (content) values ($1) returning id`,[id]
+//   );
+//   let comment = result.rows;
+//   console.log(comment)
+//   res.json(comment)
+// });
+
