@@ -204,7 +204,7 @@ logoutForm.addEventListener("submit", (e) => {
         text: "Already logout!",
         footer: '<a href="login.html">Log in</a>',
       }).then(function () {
-        window.location.href = "http://localhost:8001/index.html";
+        window.location.href = "/index.html";
       });
     })
     .catch((error) => ({ error: String(error) }));

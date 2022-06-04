@@ -153,12 +153,22 @@ postContent();
 
 //-------------check login status---------------
 fetch("/is_admin")
-  .then((res) => res.json())
-  .catch((error) => ({ error: String(error) }))
+  .then((res) => {
+    if (res.ok) {
+      return res.json();
+    }
+  })
   .then((json) => {
-    let admin = document.querySelector(".admin");
-    admin.textContent = json.role === "admin" ? "Admin" : "Member";
-  });
+    let adminEl = document.querySelector(".admin");
+
+    // if (json.role === 'admin') {
+    //   adminEl.textContent = 'Admin';
+    // }else if (json.role === 'member') {
+    //   adminEl.textContent = 'Member';
+    // }
+    adminEl.textContent = json.role === "admin" ? "Admin" : "Member";
+  })
+  .catch((error) => ({ error: String(error) }));
 
 //---------------logout form-------------------
 let logoutForm = document.querySelector("#logout-form");
@@ -176,7 +186,7 @@ logoutForm.addEventListener("submit", (e) => {
         text: "Already logout!",
         footer: '<a href="login.html">Log in</a>',
       }).then(function () {
-        window.location.href = "http://localhost:8001/index.html";
+        window.location.href = "/index.html";
       });
     })
     .catch((error) => ({ error: String(error) }));
