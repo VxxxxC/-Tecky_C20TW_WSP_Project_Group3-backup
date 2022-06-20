@@ -16,38 +16,38 @@ variables:
   WEB_SERVER_ROOT: Express
   WEB_SERVER_NAME: Blog
 
-testing:
-  services:
-    - postgres:14.3-alpine
+# testing:
+#   services:
+#     - postgres:14.3-alpine
 
-  artifacts:
-    paths:
-      - $WEB_SERVER_ROOT/node_modules
+#   artifacts:
+#     paths:
+#       - $WEB_SERVER_ROOT/node_modules
 
-  before_script:
-    - cd Express
-    - npm i -g pnpm
-    - pnpm i
+#   before_script:
+#     - cd Express
+#     - npm i -g pnpm
+#     - pnpm i
 
-  stage: testing
-  script:
-    - npm test
+#   stage: testing
+#   script:
+#     - npm test
 
-build:
-  stage: build
-  dependencies:
-    - testing
+# build:
+#   stage: build
+#   dependencies:
+#     - testing
 
-  artifacts:
-    paths:
-      - $WEB_SERVER_ROOT/dist
+#   artifacts:
+#     paths:
+#       - $WEB_SERVER_ROOT/dist
 
-  before_script:
-    - cd $WEB_SERVER_ROOT
-    - npm install
+#   before_script:
+#     - cd $WEB_SERVER_ROOT
+#     - npm install
 
-  script:
-    - npm run build
+#   script:
+#     - npm run build
 
 deploy:
   stage: deploy
