@@ -60,7 +60,7 @@ deploy:
     - apt update
     - apt install --yes rsync openssh-client
     - mkdir -p ~/.ssh
-    - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+    - echo "$AWS_EC2_SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
     - chmod 600 ~/.ssh/id_rsa
     - ssh-keyscan -H $SERVER_HOST > ~/.ssh/known_hosts
     - echo "Host server" >> ~/.ssh/config
