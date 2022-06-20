@@ -63,7 +63,7 @@ deploy:
     - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
     - chmod 400 ~/.ssh/id_rsa
     - ssh-keyscan -H $SERVER_HOST > ~/.ssh/known_hosts
-    - echo "Hostserver" >> ~/.ssh/config
+    - echo "Host server" >> ~/.ssh/config
     - echo "  Hostname $SERVER_HOST" >> ~/.ssh/config
     - echo "  User $SERVER_USER" >> ~/.ssh/config
     - echo "  IdentityFile ~/.ssh/id_rsa " >> ~/.ssh/config
@@ -71,8 +71,8 @@ deploy:
     - cat ~/.ssh/config
 
   script:
-    - rsync -SavLP dist 'Hostserver:~/tecky_c20tw_wsp_project_group3/Express'
-    - ssh Hostserver "
+    - rsync -SavLP dist 'server:~/tecky_c20tw_wsp_project_group3/Express'
+    - ssh server "
       source ~/.nvm/nvm.sh &&
       cd $PROJECT_ROOT/$WEB_SERVER_ROOT &&
       git fetch &&
