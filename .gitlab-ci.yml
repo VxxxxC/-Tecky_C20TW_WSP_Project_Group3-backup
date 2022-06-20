@@ -61,9 +61,9 @@ deploy:
     - apt install --yes rsync openssh-client
     - mkdir -p ~/.ssh
     - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-    - chmod 600 ~/.ssh/id_rsa
+    - chmod 400 ~/.ssh/id_rsa
     - ssh-keyscan -H $SERVER_HOST > ~/.ssh/known_hosts
-    - echo "Host server" >> ~/.ssh/config
+    - echo "Hostserver" >> ~/.ssh/config
     - echo "  Hostname $SERVER_HOST" >> ~/.ssh/config
     - echo "  User $SERVER_USER" >> ~/.ssh/config
     - echo "  IdentityFile ~/.ssh/id_rsa " >> ~/.ssh/config
@@ -71,7 +71,7 @@ deploy:
 
   script:
     - rsync -SavLP dist "server:$PROJECT_ROOT/$WEB_SERVER_ROOT"
-    - ssh server "
+    - ssh Hostserver "
       source ~/.nvm/nvm.sh &&
       cd $PROJECT_ROOT/$WEB_SERVER_ROOT &&
       git fetch &&
