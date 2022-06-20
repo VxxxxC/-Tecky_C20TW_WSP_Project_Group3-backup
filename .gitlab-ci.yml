@@ -1,8 +1,8 @@
 image: node:16.15.0-slim
 
 stages:
-  - testing
-  - build
+  # - testing
+  # - build
   - deploy
 
 variables:
@@ -53,8 +53,8 @@ deploy:
   stage: deploy
   image: ubuntu:22.04
 
-  dependencies:
-    - build
+  # dependencies:
+  # - build
 
   before_script:
     - apt update
@@ -70,7 +70,7 @@ deploy:
     - cd $WEB_SERVER_ROOT
 
   script:
-    - rsync -SavLP dist "server:$PROJECT_ROOT/$WEB_SERVER_ROOT"
+    - rsync -SavLP dist "Hostserver:$PROJECT_ROOT/$WEB_SERVER_ROOT"
     - ssh Hostserver "
       source ~/.nvm/nvm.sh &&
       cd $PROJECT_ROOT/$WEB_SERVER_ROOT &&
