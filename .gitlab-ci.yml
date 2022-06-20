@@ -1,8 +1,8 @@
 image: node:16.15.0-slim
 
 stages:
-  # - testing
-  # - build
+  - testing
+  - build
   - deploy
 
 variables:
@@ -16,45 +16,45 @@ variables:
   WEB_SERVER_ROOT: Express
   WEB_SERVER_NAME: Blog
 
-# testing:
-#   services:
-#     - postgres:14.3-alpine
+testing:
+  services:
+    - postgres:14.3-alpine
 
-#   artifacts:
-#     paths:
-#       - $WEB_SERVER_ROOT/node_modules
+  artifacts:
+    paths:
+      - $WEB_SERVER_ROOT/node_modules
 
-#   before_script:
-#     - cd Express
-#     - npm i -g pnpm
-#     - pnpm i
+  before_script:
+    - cd Express
+    - npm i -g pnpm
+    - pnpm i
 
-#   stage: testing
-#   script:
-#     - npm test
+  stage: testing
+  script:
+    - npm test
 
-# build:
-#   stage: build
-#   dependencies:
-#     - testing
+build:
+  stage: build
+  dependencies:
+    - testing
 
-#   artifacts:
-#     paths:
-#       - $WEB_SERVER_ROOT/dist
+  artifacts:
+    paths:
+      - $WEB_SERVER_ROOT/dist
 
-#   before_script:
-#     - cd $WEB_SERVER_ROOT
-#     - npm install
+  before_script:
+    - cd $WEB_SERVER_ROOT
+    - npm install
 
-#   script:
-#     - npm run build
+  script:
+    - npm run build
 
 deploy:
   stage: deploy
   image: ubuntu:22.04
 
-  # dependencies:
-  # - build
+  dependencies:
+    - build
 
   before_script:
     - apt update
@@ -70,7 +70,7 @@ deploy:
     - cd $WEB_SERVER_ROOT
 
   script:
-    - rsync -SavLP dist "Hostserver:$PROJECT_ROOT/$WEB_SERVER_ROOT"
+    - rsync -SavLP dist 'Hostserver:~/tecky_c20tw_wsp_project_group3/Express'
     - ssh Hostserver "
       source ~/.nvm/nvm.sh &&
       cd $PROJECT_ROOT/$WEB_SERVER_ROOT &&
