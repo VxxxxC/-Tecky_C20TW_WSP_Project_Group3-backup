@@ -71,7 +71,7 @@ deploy:
     - cat ~/.ssh/config
 
   script:
-    - rsync -SavLP dist 'server:~/tecky_c20tw_wsp_project_group3/Express'
+    - rsync -SavLP dist 'wsp_project@18.213.102.175:~/tecky_c20tw_wsp_project_group3/Express'
     - ssh server "
       source ~/.nvm/nvm.sh &&
       cd $PROJECT_ROOT/$WEB_SERVER_ROOT &&
