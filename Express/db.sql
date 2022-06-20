@@ -6,6 +6,7 @@ create user veper with password 'abc123' superuser;
 //////////////////////////////////////////////////////////
 create database blog;
 
+create table users (
   username varchar(255) not null unique,
   password varchar(255) not null,
   created_at timestamp default current_timestamp,

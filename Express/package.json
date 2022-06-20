@@ -6,7 +6,7 @@
   "scripts": {
     "start": "ts-node-dev main.ts",
     "dev": "ts-node-dev main.ts",
-    "test": "jest --runInBand --forceExit",
+    "test": "jest --runInBand --forceExit --coverage",
     "build": "npx tsc -p ."
   },
   "keywords": [],
@@ -32,11 +32,15 @@
     "@types/bcryptjs": "^2.4.2",
     "@types/dotenv": "^8.2.0",
     "@types/express": "^4.17.13",
+    "@types/express-session": "^1.17.4",
+    "@types/formidable": "^2.0.5",
+    "@types/jest": "^28.1.2",
     "@types/node": "^17.0.31",
     "@types/node-fetch": "^2.6.1",
     "@types/pg": "^8.6.5",
-    "@types/express-session": "^1.17.4",
-    "@types/formidable": "^2.0.5",
+    "jest": "^28.1.1",
+    "knex": "^2.1.0",
+    "ts-jest": "^28.0.5",
     "ts-node-dev": "^1.1.8"
   }
 }
