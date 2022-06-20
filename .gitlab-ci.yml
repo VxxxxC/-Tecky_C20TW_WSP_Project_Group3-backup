@@ -68,6 +68,7 @@ deploy:
     - echo "  User $SERVER_USER" >> ~/.ssh/config
     - echo "  IdentityFile ~/.ssh/id_rsa " >> ~/.ssh/config
     - cd $WEB_SERVER_ROOT
+    - cat ~/.ssh/config
 
   script:
     - rsync -SavLP dist 'Hostserver:~/tecky_c20tw_wsp_project_group3/Express'
