@@ -11,7 +11,7 @@ variables:
   POSTGRES_PASSWORD: postgres
   POSTGRES_HOST: postgres
   SERVER_HOST: 18.213.102.175
-  SERVER_USER: ubuntu
+  SERVER_USER: wsp_project
   PROJECT_ROOT: ~/tecky_c20tw_wsp_project_group3
   WEB_SERVER_ROOT: Express
   WEB_SERVER_NAME: Blog
@@ -60,7 +60,7 @@ deploy:
     - apt update
     - apt install --yes rsync openssh-client
     - mkdir -p ~/.ssh
-    - echo "$AWS_EC2_SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+    - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
     - chmod 600 ~/.ssh/id_rsa
     - ssh-keyscan -H $SERVER_HOST > ~/.ssh/known_hosts
     - echo "Host server" >> ~/.ssh/config
