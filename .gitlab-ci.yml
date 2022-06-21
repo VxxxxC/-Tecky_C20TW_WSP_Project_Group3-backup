@@ -67,6 +67,9 @@ deploy:
     - echo "  Hostname $SERVER_HOST" >> ~/.ssh/config
     - echo "  User $SERVER_USER" >> ~/.ssh/config
     - echo "  IdentityFile ~/.ssh/id_rsa " >> ~/.ssh/config
+    - cat ~/.ssh/config
+    - pwd
+    - ls -la
     - cd $WEB_SERVER_ROOT
 
   script:
