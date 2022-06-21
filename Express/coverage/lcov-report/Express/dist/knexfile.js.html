@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for Express/knexfile.ts</title>
+    <title>Code coverage report for Express/dist/knexfile.js</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../prettify.css" />
-    <link rel="stylesheet" href="../base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="../favicon.png" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(../sort-arrow-sprite.png);
+            background-image: url(../../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">Express</a> knexfile.ts</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">Express/dist</a> knexfile.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -119,11 +119,7 @@
 <a name='L54'></a><a href='#L54'>54</a>
 <a name='L55'></a><a href='#L55'>55</a>
 <a name='L56'></a><a href='#L56'>56</a>
-<a name='L57'></a><a href='#L57'>57</a>
-<a name='L58'></a><a href='#L58'>58</a>
-<a name='L59'></a><a href='#L59'>59</a>
-<a name='L60'></a><a href='#L60'>60</a>
-<a name='L61'></a><a href='#L61'>61</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L57'></a><a href='#L57'>57</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -179,70 +175,62 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import type { Knex } from "knex";
-import { env } from './env';
-&nbsp;
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.config = void 0;
+const env_1 = require("./env");
 // Update with your config settings.
-&nbsp;
-export const config: { [key: string]: Knex.Config } = {
-  development: {
-    client: "postgresql",
-    connection: {
-      host: env.DB_HOST,
-      database: env.DB_NAME,
-      user: env.DB_USER,
-      password: env.DB_PASSWORD
+exports.config = {
+    development: {
+        client: "postgresql",
+        connection: {
+            host: env_1.env.DB_HOST,
+            database: env_1.env.DB_NAME,
+            user: env_1.env.DB_USER,
+            password: env_1.env.DB_PASSWORD
+        },
+        pool: {
+            min: 2,
+            max: 10
+        },
+        migrations: {
+            tableName: "knex_migrations"
+        },
     },
-    pool: {
-      min: 2,
-      max: 10
+    test: {
+        client: "postgresql",
+        connection: {
+            host: env_1.env.DB_HOST,
+            database: env_1.env.DB_NAME,
+            user: env_1.env.DB_USER,
+            password: env_1.env.DB_PASSWORD
+        },
+        pool: {
+            min: 2,
+            max: 10
+        },
+        migrations: {
+            tableName: "knex_migrations"
+        },
     },
-    migrations: {
-      tableName: "knex_migrations"
-    },
-  },
-&nbsp;
-  test: {
-    client: "postgresql",
-    connection: {
-      host: env.DB_HOST,
-      database: env.DB_NAME,
-      user: env.DB_USER,
-      password: env.DB_PASSWORD
-    },
-    pool: {
-      min: 2,
-      max: 10
-    },
-    migrations: {
-      tableName: "knex_migrations"
-    },
-  },
-&nbsp;
-  production: {
-    client: "postgresql",
-    connection: {
-      host: env.DB_HOST,
-      database: env.DB_NAME,
-      user: env.DB_USER,
-      password: env.DB_PASSWORD
-    },
-    pool: {
-      min: 2,
-      max: 10
-    },
-    migrations: {
-      tableName: "knex_migrations"
-    },
-  }
-&nbsp;
+    production: {
+        client: "postgresql",
+        connection: {
+            host: env_1.env.DB_HOST,
+            database: env_1.env.DB_NAME,
+            user: env_1.env.DB_USER,
+            password: env_1.env.DB_PASSWORD
+        },
+        pool: {
+            min: 2,
+            max: 10
+        },
+        migrations: {
+            tableName: "knex_migrations"
+        },
+    }
 };
-&nbsp;
-module.exports = config;
+module.exports = exports.config;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -252,14 +240,14 @@ module.exports = config;
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
                 at Mon Jun 20 2022 14:52:25 GMT+0800 (香港標準時間)
             </div>
-        <script src="../prettify.js"></script>
+        <script src="../../prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="../sorter.js"></script>
-        <script src="../block-navigation.js"></script>
+        <script src="../../sorter.js"></script>
+        <script src="../../block-navigation.js"></script>
     </body>
 </html>
     

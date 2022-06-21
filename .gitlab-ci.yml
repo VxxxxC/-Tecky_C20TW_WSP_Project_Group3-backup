@@ -1,87 +1,87 @@
-image: node:16.15.0-slim
+# image: node:16.15.0-slim
 
-stages:
-  - testing
-  - build
-  - deploy
+# stages:
+#   - testing
+#   - build
+#   - deploy
 
-variables:
-  POSTGRES_DB: blog
-  POSTGRES_USER: postgres
-  POSTGRES_PASSWORD: postgres
-  POSTGRES_HOST: postgres
-  SERVER_HOST: 18.213.102.175
-  SERVER_USER: wsp_project
-  PROJECT_ROOT: ~/tecky_c20tw_wsp_project_group3
-  WEB_SERVER_ROOT: Express
-  WEB_SERVER_NAME: Blog
+# variables:
+#   POSTGRES_DB: blog
+#   POSTGRES_USER: postgres
+#   POSTGRES_PASSWORD: postgres
+#   POSTGRES_HOST: postgres
+#   SERVER_HOST: 18.213.102.175
+#   SERVER_USER: wsp_project
+#   PROJECT_ROOT: ~/tecky_c20tw_wsp_project_group3
+#   WEB_SERVER_ROOT: Express
+#   WEB_SERVER_NAME: Blog
 
-testing:
-  services:
-    - postgres:14.3-alpine
+# testing:
+#   services:
+#     - postgres:14.3-alpine
 
-  artifacts:
-    paths:
-      - $WEB_SERVER_ROOT/node_modules
+#   artifacts:
+#     paths:
+#       - $WEB_SERVER_ROOT/node_modules
 
-  before_script:
-    - cd Express
-    - npm i -g pnpm
-    - pnpm i
+#   before_script:
+#     - cd Express
+#     - npm i -g pnpm
+#     - pnpm i
 
-  stage: testing
-  script:
-    - npm test
+#   stage: testing
+#   script:
+#     - npm test
 
-build:
-  stage: build
-  dependencies:
-    - testing
+# build:
+#   stage: build
+#   dependencies:
+#     - testing
 
-  artifacts:
-    paths:
-      - $WEB_SERVER_ROOT/dist
+#   artifacts:
+#     paths:
+#       - $WEB_SERVER_ROOT/dist
 
-  before_script:
-    - cd $WEB_SERVER_ROOT
-    - npm install
+#   before_script:
+#     - cd $WEB_SERVER_ROOT
+#     - npm install
 
-  script:
-    - npm run build
+#   script:
+#     - npm run build
 
-deploy:
-  stage: deploy
-  image: ubuntu:22.04
+# deploy:
+#   stage: deploy
+#   image: ubuntu:22.04
 
-  dependencies:
-    - build
+#   dependencies:
+#     - build
 
-  before_script:
-    - apt update
-    - apt install --yes rsync openssh-client
-    - mkdir -p ~/.ssh
-    - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-    - chmod 600 ~/.ssh/id_rsa
-    - ssh-keyscan -H $SERVER_HOST > ~/.ssh/known_hosts
-    - echo "Host server" >> ~/.ssh/config
-    - echo "  Hostname $SERVER_HOST" >> ~/.ssh/config
-    - echo "  User $SERVER_USER" >> ~/.ssh/config
-    - echo "  IdentityFile ~/.ssh/id_rsa " >> ~/.ssh/config
-    - cat ~/.ssh/config
-    - pwd
-    - ls -la
-    - cd $WEB_SERVER_ROOT
+#   before_script:
+#     - apt update
+#     - apt install --yes rsync openssh-client
+#     - mkdir -p ~/.ssh
+#     - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+#     - chmod 600 ~/.ssh/id_rsa
+#     - ssh-keyscan -H $SERVER_HOST > ~/.ssh/known_hosts
+#     - echo "Host server" >> ~/.ssh/config
+#     - echo "  Hostname $SERVER_HOST" >> ~/.ssh/config
+#     - echo "  User $SERVER_USER" >> ~/.ssh/config
+#     - echo "  IdentityFile ~/.ssh/id_rsa " >> ~/.ssh/config
+#     - cat ~/.ssh/config
+#     - pwd
+#     - ls -la
+#     - cd $WEB_SERVER_ROOT
 
-  script:
-    - rsync -SavLP dist "server:$PROJECT_ROOT/$WEB_SERVER_ROOT"
-    - ssh server "
-      source ~/.nvm/nvm.sh &&
-      cd $PROJECT_ROOT/$WEB_SERVER_ROOT &&
-      git fetch &&
-      git checkout $CI_COMMIT_SHA &&
-      pnpm i --prod &&
-      cd dist &&
-      npx knex migrate:latest &&
-      pm2 start --name $WEB_SERVER_NAME main.js ||
-      pm2 reload $WEB_SERVER_NAME
-      "
+#   script:
+#     - rsync -SavLP dist "server:$PROJECT_ROOT/$WEB_SERVER_ROOT"
+#     - ssh server "
+#       source ~/.nvm/nvm.sh &&
+#       cd $PROJECT_ROOT/$WEB_SERVER_ROOT &&
+#       git fetch &&
+#       git checkout $CI_COMMIT_SHA &&
+#       pnpm i --prod &&
+#       cd dist &&
+#       npx knex migrate:latest &&
+#       pm2 start --name $WEB_SERVER_NAME main.js ||
+#       pm2 reload $WEB_SERVER_NAME
+#       "
