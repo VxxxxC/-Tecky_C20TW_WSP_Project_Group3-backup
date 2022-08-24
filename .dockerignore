@@ -1,0 +1,5 @@
+node_modules
+dist
+coverage
+upload
+package-lock.json

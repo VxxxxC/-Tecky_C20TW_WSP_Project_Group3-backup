@@ -1,4 +1,5 @@
 import { config } from "dotenv";
+import populateEnv from "populate-env";
 
 config()
 let mode = process.env.NODE_ENV || "development"
@@ -10,20 +11,24 @@ if (envConfig.error) {
 }
 
 export let env: any = {
-  DB_NAME: process.env.DB_NAME,
-  DB_USER: process.env.DB_USER,
-  DB_PASSWORD: process.env.DB_PASSWORD,
-  SESSION_SECRET: 'Blog',  // FIXME: 暫時hardcoded
-  PORT: 8001,
-  DB_HOST: 'localhost',
+  POSTGRES_DB: process.env.POSTGRES_DB,
+  POSTGRES_USER: process.env.POSTGRES_USER,
+  POSTGRES_PASSWORD: process.env.POSTGRES_PASSWORD,
+  SESSION_SECRET: process.env.SESSION_SECRET,
+  POSTGRES_HOST: process.env.POSTGRES_HOST,
   NODE_ENV: 'development',
+
 }
+console.log(`HOST: ${env.POSTGRES_HOST}, DB:${env.POSTGRES_DB}, USER: ${env.POSTGRES_USER}, PASSWORD: ${env.POSTGRES_PASSWORD}`)
+populateEnv(env, { mode: 'halt' })
+
+
 
 if (process.env.NODE_ENV === 'test') {
-  env.DB_HOST = process.env.POSTGRES_HOST
-  env.DB_NAME = process.env.POSTGRES_DB
-  env.DB_USER = process.env.POSTGRES_USER
-  env.DB_PASSWORD = process.env.POSTGRES_PASSWORD
+  env.POSTGRES_HOST = process.env.POSTGRES_HOST
+  env.POSTGRES_NAME = process.env.POSTGRES_DB
+  env.POSTGRES_USER = process.env.POSTGRES_USER
+  env.POSTGRES_PASSWORD = process.env.POSTGRES_PASSWORD
 
-  console.log(`HOST: ${env.DB_HOST}, DB:${env.DB_NAME}, USER: ${env.DB_USER}, PASSWORD: ${env.DB_PASSWORD}`)
+  console.log(`HOST: ${env.POSTGRES_HOST}, DB:${env.POSTGRES_NAME}, USER: ${env.POSTGRES_USER}, PASSWORD: ${env.POSTGRES_PASSWORD}`)
 }

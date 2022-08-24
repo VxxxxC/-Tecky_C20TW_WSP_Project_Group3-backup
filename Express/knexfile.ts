@@ -1,16 +1,16 @@
 import type { Knex } from "knex";
 import { env } from './env';
-
+console.log(env)
 // Update with your config settings.
 
 export const config: { [key: string]: Knex.Config } = {
   development: {
     client: "postgresql",
     connection: {
-      host: env.DB_HOST,
-      database: env.DB_NAME,
-      user: env.DB_USER,
-      password: env.DB_PASSWORD
+      host: env.POSTGRES_HOST,
+      database: env.POSTGRES_DB,
+      user: env.POSTGRES_USER,
+      password: env.POSTGRES_PASSWORD
     },
     pool: {
       min: 2,
@@ -24,10 +24,10 @@ export const config: { [key: string]: Knex.Config } = {
   test: {
     client: "postgresql",
     connection: {
-      host: env.DB_HOST,
-      database: env.DB_NAME,
-      user: env.DB_USER,
-      password: env.DB_PASSWORD
+      host: env.POSTGRES_HOST,
+      database: env.POSTGRES_DB,
+      user: env.POSTGRES_USER,
+      password: env.POSTGRES_PASSWORD
     },
     pool: {
       min: 2,
@@ -41,10 +41,10 @@ export const config: { [key: string]: Knex.Config } = {
   production: {
     client: "postgresql",
     connection: {
-      host: env.DB_HOST,
-      database: env.DB_NAME,
-      user: env.DB_USER,
-      password: env.DB_PASSWORD
+      host: env.POSTGRES_HOST,
+      database: env.POSTGRES_DB,
+      user: env.POSTGRES_USER,
+      password: env.POSTGRES_PASSWORD
     },
     pool: {
       min: 2,

@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+    blog:
+        container_name: "wsp-blog"
+
+    # same effect using env_file as below of using environment    
+#        environment: 
+#            POSTGRES_HOST: host.docker.internal
+#            POSTGRES_USER: veper
+#            POSTGRES_PASSWORD: abc123
+#            POSTGRES_DB: blog
+#            PORT: 8001
+#        depends_on: 
+#            - postgres:13
+
+        env_file:
+            - .variables.env
+        build:
+            context: ./
+            dockerfile: ./dockerfile
+        image: "wsp-blog:latest"
+        ports:
+            - "7001:8001"
+#    postgres:
+#        container_name: "pg"
+#        image: "postgres:13"
+#        environment:
+#            POSTGRES_USER: postgres
+#            POSTGRES_PASSWORD: postgres
+#            POSTGRES_DB: blog
+#            PORT: 5432
+#        ports:
+#            - "5432:5432"
+#        volumes:
+#            - ./pgdata:/var/lib/postgresql/data
+    # volumes: 
+    #     pgdata

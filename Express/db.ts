@@ -3,9 +3,10 @@ import { env } from "./env"
 
 
 export let client = new Client({
-    database: env.DB_NAME,
-    user: env.DB_USER,
-    password: env.DB_PASSWORD
+    host: env.POSTGRES_HOST,
+    database: env.POSTGRES_DB,
+    user: env.POSTGRES_USER,
+    password: env.POSTGRES_PASSWORD
 
 })
 

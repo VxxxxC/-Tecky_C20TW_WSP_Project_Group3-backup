@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+    blog:
+        container_name: "wsp-blog"
+        env_file:
+            - .variables.env
+        build:
+            context: ./
+            dockerfile: ./dockerfile
+        image: "wsp-blog:latest"
+        ports:
+            - "7001:8001"
