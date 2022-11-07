@@ -20,23 +20,6 @@ const port = 8001;
 const app = express();
 
 
-//------------------ENV config----------------------- FIXME: duplicate
-// dotenv.config();
-// const envConfig = dotenv.config();
-// if (envConfig.error) {
-//   console.log("we got and envconfig error : ", envConfig.error)
-// } else {
-//   console.log("dotenv config : ", envConfig)
-// }
-
-//------------------Database---------------------- FIXME: duplicate
-// const client = new Client({
-//   database: process.env.DB_NAME,
-//   user: process.env.DB_USERNAME,
-//   password: process.env.DB_PASSWORD,
-// })
-
-
 client.connect(err => {
   if (err) {
     console.error("database connect error : ", err)
@@ -426,7 +409,8 @@ app.get("/search", async (req, res) => {
 
   let result = await client.query("select rank() over (order by count(*) desc),count(*), tags.name from tags inner join post_tag on tags.id = post_tag.tags_id group by tags.name order by count(*) desc limit 5;")
   // console.log(result)
-  res.json({ result })});
+  res.json({ result })
+});
 
 
 
