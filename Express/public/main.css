@@ -263,7 +263,7 @@ input[type="submit"] {
   padding-left: 72px;
 }
 
-/* .intro{
+.intro{
     margin: 5px;
     padding-left: 24px;
     padding-right: 24px;
@@ -271,19 +271,36 @@ input[type="submit"] {
 }
 
 textarea {
-    resize: none;
+    resize: none !important;
     margin: 5px;
     overflow: auto;
-} */
-
-.comment {
-  background-color: skyblue;
+}
+/* 
+.comment_hide {
   padding-left: 24px;
   padding-right: 24px;
+  margin-top: 10px;
+  display: none;
+} */
+
+
+.comment_show{
+  padding-left: 24px;
+  padding-right: 24px;
+  margin-top: 10px;
 }
 
-.edit-btn {
+.two-button{
+  display: flex;
+  flex-direction: row;
+}
+
+.button {
+  display: block;
+  height: 30px;
+  width: 30px;
   border-radius: 50%;
+  margin: 5px;
 }
 
 
@@ -359,4 +376,23 @@ textarea {
   -o-transform: rotate(360deg);
   -ms-transform: rotate(360deg);
   transform: rotate(360deg);
+}
+
+.message{
+  background-color: aqua;
+  width: 100%;
+  padding-left: 10px;
+}
+
+.comment-name{
+  font-family: arial, "cwTeXYen";
+  font-size: 20px;
+}
+
+.comment-content{
+  font-family: arial, "cwTeXYen";
+  font-size: 24px;
+  padding-right: 15px;
+  padding-left: 15px;
+  overflow: hidden;
 }

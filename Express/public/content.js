@@ -3,15 +3,7 @@
 // });
 // socket.emit("toServer", "client side at home page respond to backend server");
 
-//====================checkdata================================//
-function checkData() {
-  var txtCheck = document.formName;
-  if (txtCheck.textarea.value == "") {
-    alert("Please enter information in the textarea");
-    txtCheck.textarea.focus();
-    return false;
-  }
-}
+const { getCommentRange } = require("typescript");
 
 //==========================fecth content from index to contentpaged================//
 let content = document.querySelector(".content");
@@ -23,6 +15,8 @@ async function postContent() {
   let res = await fetch("/post/" + id);
   let result = await res.json();
   console.log(result);
+  // let mainContent = result.detail;
+  // console.log(mainContent);
   let post = result.posts;
   if (post.image == null) {
     content.innerHTML = `<div class="title-holder">${post.title}</div>
@@ -36,33 +30,41 @@ async function postContent() {
       ${post.content}
       </div>
       </div>
-      <button class="edit-btn .float-right ">
-      <i class="bi bi-pencil aria-hidden="true"></i>
-      </button>   
-  
-      <div class="author">
-            <div class="sub-header-1">Author</div>
-            <div class="author-name">${post.username}</div>
-            <div class="isolate"></div>
-        </div>
+      <div class="two-button">
+      <button class="button" id="edit-btn">
+        <i class="bi bi-pencil aria-hidden=" true"></i>
+      </button>
 
+      <button class="button" id="comment-btn">
+        <i class="bi bi-chat-text"></i>
+        </button>
+    </div>  
   
-    <div class="media">
-      <ul>
-        <li>
-       <a href="https://www.facebook.com/"><i class="bi bi-facebook"></i></a>   
-        </li>
-        <li>
-      <a href="https://www.instagram.com"><i class="bi bi-instagram"></i></a>    
-        </li>
-        <li>
-          <a href="https://www.youtube.com"><i class="bi bi-youtube"></i></a>
-        </li>
-      </ul>
-    </div>
-    <div class="copyright">
-      <p>All copyright reserved by the author</p>
-    </div>
+    <div class="author">
+    <div class="sub-header-1">Author</div>
+    <div class="author-name">${post.username}</div>
+    <div class="intro">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto excepturi impedit, ipsum, numquam
+            temporibus hic iste at, inventore quo perspiciatis laudantium saepe modi! Quos ipsum debitis et
+            voluptatem beatae sit.
+        </div>
+  </div>
+
+  <div class="isolate"></div>
+
+<div class= "message">
+  <div class="comment-name">
+    comment as JK
+  </div>
+  <div class="comment-content">
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto excepturi impedit, ipsum, numquam
+  temporibus hic iste at, inventore quo perspiciatis laudantium saepe modi! Quos ipsum debitis et
+  voluptatem beatae sit.
+  </div>
+
+</div>
+<div class="isolate"></div>
+
        `;
   } else {
     content.innerHTML = `<div class="title-holder">${post.title}</div>
@@ -70,39 +72,36 @@ async function postContent() {
         <div  class="item">
         <img src="${"/img/" + post.image}">
         </div>
- </div>
+    </div>
       <div class="text">
       <div class="core">
       ${post.content}
       </div>
       </div>
-      <button class="edit-btn .float-right ">
-      <i class="bi bi-pencil aria-hidden="true"></i>
-      </button>   
-  
-      <div class="author">
-            <div class="sub-header-1">Author</div>
-            <div class="author-name">${post.username}</div>
-            <div class="isolate"></div>
-        </div>
 
+     <div class="two-button">
+        <button class="button" id="edit-btn">
+          <i class="bi bi-pencil aria-hidden=" true"></i>
+        </button>
   
-    <div class="media">
-      <ul>
-        <li>
-       <a href="https://www.facebook.com/"><i class="bi bi-facebook"></i></a>   
-        </li>
-        <li>
-      <a href="https://www.instagram.com"><i class="bi bi-instagram"></i></a>    
-        </li>
-        <li>
-          <a href="https://www.youtube.com"><i class="bi bi-youtube"></i></a>
-        </li>
-      </ul>
-    </div>
-    <div class="copyright">
-      <p>All copyright reserved by the author</p>
-    </div>
+        <button class="button" id="comment-btn">
+          <i class="bi bi-chat-text"></i>
+          </button>
+      </div>
+   
+  
+
+      <div class="author">
+        <div class="sub-header-1">Author</div>
+        <div class="author-name">${post.username}</div>
+        <div class="intro">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto excepturi impedit, ipsum, numquam
+                temporibus hic iste at, inventore quo perspiciatis laudantium saepe modi! Quos ipsum debitis et
+                voluptatem beatae sit.
+            </div>
+      </div>
+
+      <div class="isolate"></div>
        `;
   }
 

@@ -1,14 +1,6 @@
-let loginForm = document.querySelector("#login-form");
-//-- ensure all input are filled------
-function validateForm() {
-  let a = document.forms["Form"]["username"].value;
-  let b = document.forms["Form"]["password"].value;
-
-  if (!a || !b) {
-    alert("Please Fill All Required Fields");
-    return false;
-  }
-}
+document.querySelector("#password").addEventListener("change",(event)=>{
+  console.log(event.target.value)
+})
 
 //--login method----
 

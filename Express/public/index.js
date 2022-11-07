@@ -144,6 +144,8 @@ async function getPost() {
 
   renderPage(posts);
 
+  //delete btn//
+
   let deleteBtnList = document.querySelectorAll(".delete-btn");
   let contentBox = document.querySelector(".contentBox");
 
@@ -209,7 +211,7 @@ async function pagination() {
 
 //---------------choosing page data from database-----------
 
-buttonList.addEventListener("click", (event) => {
+buttonList.addEventListener("click", async (event) => {
   // console.log(event.target.innerHTML);
 
   contentIndex = (event.target.innerText - 1) * 8;
@@ -263,7 +265,7 @@ buttonList.addEventListener("click", (event) => {
       });
     });
   }
-  clickPage();
+  await clickPage();
 });
 
 // let pageBtn = document.querySelector("#page");
@@ -282,13 +284,11 @@ fetch("/is_admin")
   })
   .then((json) => {
     let adminEl = document.querySelector(".admin");
-
-    // if (json.role === 'admin') {
-    //   adminEl.textContent = 'Admin';
-    // }else if (json.role === 'member') {
-    //   adminEl.textContent = 'Member';
-    // }
-    adminEl.textContent = json.role === "admin" ? "Admin" : "Member";
+    if (json.role) {
+      adminEl.textContent = json.role === "admin" ? "Admin" : "Member";
+    } else {
+      adminEl.textContent = "Guess";
+    }
   })
   .catch((error) => ({ error: String(error) }));
 

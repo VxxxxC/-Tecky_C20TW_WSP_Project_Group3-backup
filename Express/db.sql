@@ -7,6 +7,10 @@ create user veper with password 'abc123' superuser;
 create database blog;
 
 create table users (
+<<<<<<< HEAD:Express/db.sql
+=======
+  id serial primary key,
+>>>>>>> master:db.sql
   username varchar(255) not null unique,
   password varchar(255) not null,
   created_at timestamp default current_timestamp,
@@ -14,8 +18,13 @@ create table users (
   is_admin boolean default false
 );
 
+<<<<<<< HEAD:Express/db.sql
 INSERT INTO users (id,username ,password ,created_at,updated_at,is_admin) VALUES (1,'mary','1223',default(CURRENT_TIMESTAMP),(CURRENT_TIMESTAMP),TRUE);
 INSERT INTO users (id,username ,password ,created_at,updated_at,is_admin) VALUES (2,'BEN','12243',(CURRENT_TIMESTAMP),(CURRENT_TIMESTAMP),TRUE);
+=======
+INSERT INTO users (id,username ,password ,created_at,updated_at,is_admin) VALUES (1,'mary','1223',(CURRENT_TIMESTAMP),(CURRENT_TIMESTAMP),TRUE);
+INSERT INTO users (id,username ,password ,created_at,updated_at,is_admin) VALUES (2,'BEN','12243',(CURRENT_TIMESTAMP),(CURRENT_TIMESTAMP),FALSE);
+>>>>>>> master:db.sql
 INSERT INTO users (id,username ,password ,created_at,updated_at,is_admin) VALUES (3,'peter','12253',(CURRENT_TIMESTAMP),(CURRENT_TIMESTAMP),FALSE);
 INSERT INTO users (id,username ,password ,created_at,updated_at,is_admin) VALUES (4,'user','1523',(CURRENT_TIMESTAMP),(CURRENT_TIMESTAMP),FALSE);
 

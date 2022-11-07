@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Content-pages</title>
 
+  <link href="//cdn.quilljs.com/1.3.6/quill.bubble.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
     integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -69,24 +70,21 @@
   <main>
     <!--content-->
     <div class="content">
-      <div class="title-holder"></div>
-      <!--post photo only-->
-      <!-- <div class="slider">
+      <div class="title-holder">Testing</div>
+      <!--  post photo only -->
+       <div class="slider">
         <div class="slider-items">
           <div class="item">
             <img src="1.jpeg">
           </div>
-        </div>
+        </div> 
 
-      </div> -->
+      </div> 
 
 
       <!--for post text only-->
       <div class="text">
         <div class="core">
-        <!-- Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia eum veniam iure incidunt blanditiis
-        rem! Odit soluta nihil asperiores est a, nesciunt perferendis mollitia doloribus nisi tenetur magnam,
-        vero itaque.
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia eum veniam iure incidunt blanditiis
         rem! Odit soluta nihil asperiores est a, nesciunt perferendis mollitia doloribus nisi tenetur magnam,
         vero itaque.
@@ -94,12 +92,23 @@
         rem! Odit soluta nihil asperiores est a, nesciunt perferendis mollitia doloribus nisi tenetur magnam,
         vero itaque.
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia eum veniam iure incidunt blanditiis
-        vero itaque. -->
+        rem! Odit soluta nihil asperiores est a, nesciunt perferendis mollitia doloribus nisi tenetur magnam,
+        vero itaque.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia eum veniam iure incidunt blanditiis
+        vero itaque.
       </div>
       </div>
-      <button class="edit-btn .float-right ">
-        <i class="bi bi-pencil aria-hidden=" true"></i>
-      </button>
+      <div class="two-button">
+        <button class="button" id="edit-btn">
+          <i class="bi bi-pencil aria-hidden=" true"></i>
+        </button>
+  
+        <button class="button" id="comment-btn">
+          <i class="bi bi-chat-text"></i>
+          </button>
+      </div>
+   
+ 
 
       <!--introduction of the author-->
       <div class="author">
@@ -107,31 +116,39 @@
         <!--author name from the database-->
         <div class="author-name"></div>
         <!--author introduction-->
-        <!-- <div class="intro">
+        <div class="intro">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto excepturi impedit, ipsum, numquam
                 temporibus hic iste at, inventore quo perspiciatis laudantium saepe modi! Quos ipsum debitis et
                 voluptatem beatae sit.
             </div>
-            -->
+      
+      </div>
+      <div class="isolate"></div>
+    <!--user-comment-->
+    <div class= "message">
+      <div class="comment-name">
+        comment as 
+      </div>
+      <div class="comment-content">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa at, optio accusamus asperiores laboriosam vitae mollitia velit dolore vel illum. Deleniti temporibus veniam voluptatem porro laudantium blanditiis optio similique quod
       </div>
 
-      <!-- comment
-        <div class="comment">
-            <form name="formName" method="post" action="" onSubmit="checkData();">   
+    </div>
+    <div class="isolate"></div>
+
+        <!-- comment!-->
+        <div class="comment_hide comment_show" id="comment-textarea" >
+            <form name="formName" method="post" action="/comment" >   
                 <textarea name="textarea" rows="10" cols="100" placeholder="Welcome to comment"></textarea>
-              </p>  <p>
+                <p>
                 <input name="Submit" type="submit" value="Submit">
               </p>
             </form>
-        </div>-->
+        </div>
       <div class="isolate"></div>
   </main>
 
-
-
-
-  <!-- <footer>
-
+<!-- <footer>
       <div class="media">
         <ul>
           <li>
@@ -145,9 +162,6 @@
           </li>
         </ul>
       </div>
-
-     
-
       <div class="copyright">
         <p>All copyright reserved by the author</p>
       </div>

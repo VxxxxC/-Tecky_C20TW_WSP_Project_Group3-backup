@@ -1,13 +1,3 @@
-function validateForm() {
-  let a = document.forms["Form"]["username"].value;
-  let b = document.forms["Form"]["password"].value;
-
-  if (!a || !b) {
-    alert("Please Fill All Required Fields");
-    return false;
-  }
-}
-
 let signupForm = document.querySelector("#sign-form");
 
 signupForm.addEventListener("submit", (e) => {
