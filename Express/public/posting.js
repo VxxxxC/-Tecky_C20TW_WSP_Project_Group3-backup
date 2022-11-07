@@ -113,7 +113,7 @@ function submit() {
 
       const res = await fetch("/post", {
         method: "POST",
-         headers: { "Content-Type": "multipart/form-data" },
+//         headers: { "Content-Type": "multipart/form-data" },
         body: formData,
       });
       const result = await res.json();
