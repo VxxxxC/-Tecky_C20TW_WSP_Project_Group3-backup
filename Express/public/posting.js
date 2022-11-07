@@ -113,7 +113,7 @@ function submit() {
 
       const res = await fetch("/post", {
         method: "POST",
-        // headers: { "Content-Type": "multipart/form-data" },
+         headers: { "Content-Type": "multipart/form-data" },
         body: formData,
       });
       const result = await res.json();
@@ -121,12 +121,25 @@ function submit() {
       console.log(result);
       if (res.ok == true) {
         alert("Submit successful sent!");
-        location.href = "/index.html";
+        loadingPage();
       } else {
         alert("Submit failed ! please try again..");
         return;
       }
     });
+}
+
+function loadingPage() {
+    let myWindow = window.open(
+            "/loading_page.html",
+            "myWindow",
+            "width=500, height=500"
+            );
+
+    setTimeout(() => {
+        myWindow.close();
+        location.href = "/index.html";
+        }, 1500);
 }
 
 //-------------------------Tags-------------------------
@@ -209,7 +222,7 @@ logoutForm.addEventListener("submit", (e) => {
         text: "Already logout!",
         footer: '<a href="login.html">Log in</a>',
       }).then(function () {
-        window.location.href = "/index.html";
+          loadingPage();
       });
     })
     .catch((error) => ({ error: String(error) }));

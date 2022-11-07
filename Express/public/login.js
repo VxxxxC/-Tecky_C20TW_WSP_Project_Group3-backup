@@ -38,7 +38,7 @@ loginForm.addEventListener("submit", (e) => {
           icon: "error",
           title: "Failed to auto login " ,
         });
-        // console.error('failed to check role:', json.error)
+         console.error('failed to check role:', json.error)
         return;
       }
       loadingPage();
