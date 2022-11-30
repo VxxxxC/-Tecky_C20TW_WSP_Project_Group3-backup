@@ -1,7 +1,8 @@
-# Virtual-Memories
+###### Academy Project
 
-### A simply blog project developed during in Academy 14 days project period : 
 
+#### A simple and clean blog that can store up your thoughs
+---
 - User Register page
 - User / Admin Login page
 - Create blog post with text, picture/GIF, hashtag
