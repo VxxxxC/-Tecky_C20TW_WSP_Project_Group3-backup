@@ -3,7 +3,6 @@
 // });
 // socket.emit("toServer", "client side at home page respond to backend server");
 
-const { getCommentRange } = require("typescript");
 
 //==========================fecth content from index to contentpaged================//
 let content = document.querySelector(".content");

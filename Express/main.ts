@@ -318,7 +318,7 @@ app.get("/main", async (req, res) => {
 
 // transfer post title , content, image from /post/ to content pages
 app.get("/post/:id", async (req, res) => {
-  // console.log(req.params.id);
+  console.log(req.params.id);
   let id = req.params.id;
   let result = await client.query(
     "select post.id as id,title,content,image,username from post inner join users on users.id = post.users_id where post.id = $1",
