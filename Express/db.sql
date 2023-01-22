@@ -14,10 +14,8 @@ create table users (
   is_admin boolean default false
 );
 
-INSERT INTO users (id,username ,password ,created_at,updated_at,is_admin) VALUES (1,'mary','1223',default(CURRENT_TIMESTAMP),(CURRENT_TIMESTAMP),TRUE);
-INSERT INTO users (id,username ,password ,created_at,updated_at,is_admin) VALUES (2,'BEN','12243',(CURRENT_TIMESTAMP),(CURRENT_TIMESTAMP),TRUE);
-INSERT INTO users (id,username ,password ,created_at,updated_at,is_admin) VALUES (3,'peter','12253',(CURRENT_TIMESTAMP),(CURRENT_TIMESTAMP),FALSE);
-INSERT INTO users (id,username ,password ,created_at,updated_at,is_admin) VALUES (4,'user','1523',(CURRENT_TIMESTAMP),(CURRENT_TIMESTAMP),FALSE);
+INSERT INTO users (id,username ,password ,created_at,updated_at,is_admin) VALUES (100,'veper','veper',(CURRENT_TIMESTAMP),(CURRENT_TIMESTAMP),TRUE);
+INSERT INTO users (id,username ,password ,created_at,updated_at,is_admin) VALUES (200,'may','may',(CURRENT_TIMESTAMP),(CURRENT_TIMESTAMP),TRUE);
 
 create table post (
   id serial primary key,

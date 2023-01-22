@@ -37,7 +37,7 @@ signupForm.addEventListener("submit", (e) => {
         // console.error('failed to check role:', json.error)
         return;
       }
-      loadingPage();
+      return loadingPage();
     })
     .catch((error) => ({ error: String(error) }));
 });

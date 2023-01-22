@@ -1,7 +1,4 @@
-document.querySelector("#password").addEventListener("change",(event)=>{
-  console.log(event.target.value)
-})
-
+const loginForm = document.querySelector("#login-form");
 //--login method----
 
 loginForm.addEventListener("submit", (e) => {

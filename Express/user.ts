@@ -1,12 +1,7 @@
-import express, { NextFunction, Request, Response } from "express";
-import { resolve } from "path";
+import express from "express";
 import { client } from "./db";
 import { catchError } from "./error";
-import { print } from "listening-on";
 import "./session";
-import { type } from "os";
-import fetch from 'node-fetch'
-import { adminGuard } from "./guard";
 // import { sessionMiddleware } from "./session";
 
 export let userRoutes = express.Router();
@@ -117,9 +112,7 @@ userRoutes.post("/login", (req, res) => {
         is_admin: result.rows[0].is_admin
       };
 
-      //     console.log(req.session.user)
 
-      //  res.json({id:result.rows[0].id})
       console.log(req.session.user);
 
       res.json({ message: 'Login successful!' })
@@ -133,9 +126,7 @@ userRoutes.post("/logout", (req, res) => {
     if (error) {
       console.error("logout", error);
     }
-    // res.redirect('/login')
-    // res.json({message:'Logout successful!'})
-    res.json({ role: "guest" })
+     res.json({message:'Logout successful!'})
   });
 });
 
