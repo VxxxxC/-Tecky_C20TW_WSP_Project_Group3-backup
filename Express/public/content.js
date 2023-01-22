@@ -3,7 +3,6 @@
 // });
 // socket.emit("toServer", "client side at home page respond to backend server");
 
-
 //==========================fecth content from index to contentpaged================//
 let content = document.querySelector(".content");
 
@@ -43,9 +42,7 @@ async function postContent() {
     <div class="sub-header-1">Author</div>
     <div class="author-name">${post.username}</div>
     <div class="intro">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto excepturi impedit, ipsum, numquam
-            temporibus hic iste at, inventore quo perspiciatis laudantium saepe modi! Quos ipsum debitis et
-            voluptatem beatae sit.
+
         </div>
   </div>
 
@@ -53,12 +50,10 @@ async function postContent() {
 
 <div class= "message">
   <div class="comment-name">
-    comment as JK
+
   </div>
   <div class="comment-content">
-  Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto excepturi impedit, ipsum, numquam
-  temporibus hic iste at, inventore quo perspiciatis laudantium saepe modi! Quos ipsum debitis et
-  voluptatem beatae sit.
+
   </div>
 
 </div>
@@ -90,17 +85,26 @@ async function postContent() {
    
   
 
-      <div class="author">
-        <div class="sub-header-1">Author</div>
-        <div class="author-name">${post.username}</div>
-        <div class="intro">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto excepturi impedit, ipsum, numquam
-                temporibus hic iste at, inventore quo perspiciatis laudantium saepe modi! Quos ipsum debitis et
-                voluptatem beatae sit.
-            </div>
-      </div>
+    <div class="author">
+    <div class="sub-header-1">Author</div>
+    <div class="author-name">${post.username}</div>
+    <div class="intro">
 
-      <div class="isolate"></div>
+        </div>
+  </div>
+
+  <div class="isolate"></div>
+
+<div class= "message">
+  <div class="comment-name">
+
+  </div>
+  <div class="comment-content">
+
+  </div>
+
+</div>
+<div class="isolate"></div>
        `;
   }
 
@@ -183,7 +187,7 @@ logoutForm.addEventListener("submit", (e) => {
         title: "Logout",
         text: "Already logout!",
         footer: '<a href="login.html">Log in</a>',
-      }).then(function () {
+      }).then(function() {
         window.location.href = "/index.html";
       });
     })
